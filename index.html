@@ -16,13 +16,139 @@
             background: #f5f5f5;
         }
 
-        /* Auth Screen */
-        .auth-container {
+        /* Landing Page */
+        .landing-container {
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
+        }
+
+        .navbar {
+            background: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-login {
+            background: none;
+            color: #667eea;
+            border: 1px solid #667eea;
+        }
+
+        .nav-login:hover {
+            background: #f0f0f0;
+        }
+
+        .nav-signup {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-signup:hover {
+            background: #5568d3;
+        }
+
+        .hero {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .hero-btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .hero-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .hero-primary:hover {
+            background: #5568d3;
+        }
+
+        .hero-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .hero-secondary:hover {
+            background: #f0f0f0;
+        }
+
+        /* Auth Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
         }
 
         .auth-box {
@@ -32,6 +158,18 @@
             width: 100%;
             max-width: 400px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
         }
 
         .auth-box h1 {
@@ -94,31 +232,12 @@
             background: #5568d3;
         }
 
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-            margin-top: 8px;
-        }
-
-        .btn-secondary:hover {
-            background: #e0e0e0;
-        }
-
         .error {
             color: #d32f2f;
             font-size: 13px;
             margin-top: 6px;
             padding: 8px 10px;
             background: #ffebee;
-            border-radius: 4px;
-        }
-
-        .success {
-            color: #388e3c;
-            font-size: 13px;
-            margin-top: 6px;
-            padding: 8px 10px;
-            background: #f1f8f4;
             border-radius: 4px;
         }
 
@@ -202,11 +321,11 @@
             overflow-y: auto;
         }
 
-        .color-options, .theme-options {
+        .color-options {
             margin-bottom: 24px;
         }
 
-        .color-options h3, .theme-options h3 {
+        .color-options h3 {
             margin-bottom: 12px;
             color: #333;
             font-size: 14px;
@@ -298,33 +417,37 @@
         .add-btn:hover {
             background: #5568d3;
         }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
 
-<!-- Auth Container -->
-<div class="auth-container" id="authContainer">
+<!-- Landing Page -->
+<div class="landing-container" id="landingContainer">
+    <div class="navbar">
+        <div class="logo">Atelier Résumé</div>
+        <div class="nav-buttons">
+            <button class="nav-btn nav-login" id="navLoginBtn">Log In</button>
+            <button class="nav-btn nav-signup" id="navSignupBtn">Sign Up</button>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Build Your Perfect Resume</h1>
+            <p>Create a professional resume in minutes. Choose your style, fill in your details, and download your resume instantly.</p>
+            <div class="hero-buttons">
+                <button class="hero-btn hero-primary" id="ctaSignupBtn">Get Started</button>
+                <button class="hero-btn hero-secondary" id="ctaLearnBtn">Learn More</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModal">
     <div class="auth-box">
+        <button class="close-modal" id="closeModalBtn">&times;</button>
+
         <!-- Signup Form -->
         <form id="signupForm" class="auth-form">
             <h1>Create Account</h1>
@@ -384,9 +507,7 @@
 <!-- Builder Container -->
 <div class="builder-container" id="builderContainer">
     <div class="sidebar">
-        <div class="builder-header">
-            <h2>Atelier Résumé</h2>
-        </div>
+        <div class="logo" style="margin-bottom: 1.5rem;">Atelier Résumé</div>
 
         <div class="color-options">
             <h3>Colors</h3>
@@ -403,7 +524,7 @@
         </div>
 
         <div class="download-btn" id="downloadBtn">📥 Download PDF</div>
-        <button class="logout-btn" id="logoutBtn">Logout</button>
+        <button class="logout-btn" id="logoutBtn" style="margin-top: 12px;">Logout</button>
     </div>
 
     <div class="main-content">
@@ -466,11 +587,42 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 // DOM Elements
-const authContainer = document.getElementById('authContainer');
+const landingContainer = document.getElementById('landingContainer');
+const authModal = document.getElementById('authModal');
 const builderContainer = document.getElementById('builderContainer');
 const signupForm = document.getElementById('signupForm');
 const loginForm = document.getElementById('loginForm');
 const logoutBtn = document.getElementById('logoutBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const navSignupBtn = document.getElementById('navSignupBtn');
+const navLoginBtn = document.getElementById('navLoginBtn');
+const ctaSignupBtn = document.getElementById('ctaSignupBtn');
+
+// Modal Controls
+function openAuthModal(formType = 'signup') {
+    authModal.classList.add('active');
+    if (formType === 'login') {
+        signupForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+    } else {
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+    }
+    document.querySelectorAll('.error').forEach(err => err.classList.add('hidden'));
+}
+
+function closeAuthModal() {
+    authModal.classList.remove('active');
+}
+
+closeModalBtn.addEventListener('click', closeAuthModal);
+navSignupBtn.addEventListener('click', () => openAuthModal('signup'));
+navLoginBtn.addEventListener('click', () => openAuthModal('login'));
+ctaSignupBtn.addEventListener('click', () => openAuthModal('signup'));
+
+authModal.addEventListener('click', (e) => {
+    if (e.target === authModal) closeAuthModal();
+});
 
 // Form Toggle
 document.querySelectorAll('.toggle-btn').forEach(btn => {
@@ -515,8 +667,8 @@ signupForm.addEventListener('submit', async (e) => {
             usedBy: email
         });
 
-        showSuccess('Account created! Redirecting...');
-        setTimeout(() => showBuilder(), 1000);
+        closeAuthModal();
+        showBuilder();
     } catch (error) {
         if (error.code === 'auth/email-already-in-use') {
             showError('signupEmailError', 'Email already in use');
@@ -538,8 +690,8 @@ loginForm.addEventListener('submit', async (e) => {
 
     try {
         await auth.signInWithEmailAndPassword(email, password);
-        showSuccess('Logged in! Redirecting...');
-        setTimeout(() => showBuilder(), 1000);
+        closeAuthModal();
+        showBuilder();
     } catch (error) {
         if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
             showError('loginEmailError', 'Invalid email or password');
@@ -552,7 +704,7 @@ loginForm.addEventListener('submit', async (e) => {
 // Logout Handler
 logoutBtn.addEventListener('click', async () => {
     await auth.signOut();
-    authContainer.style.display = 'flex';
+    landingContainer.style.display = 'flex';
     builderContainer.classList.remove('active');
     signupForm.classList.remove('hidden');
     loginForm.classList.add('hidden');
@@ -563,14 +715,14 @@ auth.onAuthStateChanged(user => {
     if (user) {
         showBuilder();
     } else {
-        authContainer.style.display = 'flex';
+        landingContainer.style.display = 'flex';
         builderContainer.classList.remove('active');
     }
 });
 
 // Show Builder
 function showBuilder() {
-    authContainer.style.display = 'none';
+    landingContainer.style.display = 'none';
     builderContainer.classList.add('active');
 }
 
@@ -579,16 +731,6 @@ function showError(elementId, message) {
     const el = document.getElementById(elementId);
     el.textContent = message;
     el.classList.remove('hidden');
-}
-
-function showSuccess(message) {
-    const el = document.createElement('div');
-    el.className = 'success';
-    el.textContent = message;
-    el.style.position = 'fixed';
-    el.style.top = '20px';
-    el.style.right = '20px';
-    document.body.appendChild(el);
 }
 
 function clearErrors() {
