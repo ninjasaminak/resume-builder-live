@@ -1,854 +1,648 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Atelier Résumé — Considered templates for serious careers</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script type="text/javascript">
-  (function(c) {
-    var script = document.createElement("script");
-    script.src = "https://js.memberful.com/embed.js";
-    script.onload = function() { Memberful.setup(c) };
-    document.head.appendChild(script);
-  })({
-    site: ["https://resumebuilder.memberful.com"]
-  });
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0a0a0b;
-    --bg-2:#0f0f11;
-    --surface:#131316;
-    --surface-2:#191920;
-    --surface-3:#1f1f27;
-    --border:#22222a;
-    --border-strong:#2c2c36;
-    --hairline:rgba(255,255,255,.06);
-    --text:#f4f1ea;
-    --text-dim:#9b9aa3;
-    --text-faint:#62616c;
-    --gold:#c8a24b;
-    --gold-2:#e6c98a;
-    --gold-deep:#8e6f25;
-    --gold-ink:#15100a;
-    --ivory:#f4f1ea;
-    --danger:#d96a6a;
-    --r:14px;
-    --r-sm:10px;
-    --serif:'Fraunces', ui-serif, Georgia, serif;
-    --sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --shadow-card:0 1px 0 rgba(255,255,255,.04) inset, 0 30px 60px -30px rgba(0,0,0,.7);
-    --shadow-lift:0 1px 0 rgba(255,255,255,.06) inset, 0 50px 90px -32px rgba(0,0,0,.85);
-    --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .035 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Résumé - Resume Builder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{background:var(--bg);color:var(--text);font-family:var(--sans);font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-  body{
-    min-height:100vh;position:relative;
-    background:
-      radial-gradient(1000px 520px at 85% -10%, rgba(200,162,75,.10), transparent 60%),
-      radial-gradient(800px 460px at -10% 8%, rgba(130,110,180,.05), transparent 60%),
-      var(--bg);
-  }
-  body::before{
-    content:"";position:fixed;inset:0;background-image:var(--grain);opacity:.55;pointer-events:none;z-index:1;mix-blend-mode:overlay;
-  }
-  ::selection{background:var(--gold);color:var(--gold-ink)}
-  a{color:inherit}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+        }
 
-  /* ───────── Header ───────── */
-  header{
-    position:sticky;top:0;z-index:100;
-    backdrop-filter:saturate(160%) blur(14px);
-    -webkit-backdrop-filter:saturate(160%) blur(14px);
-    background:rgba(10,10,11,.72);
-    border-bottom:1px solid var(--hairline);
-  }
-  .header-inner{
-    max-width:1320px;margin:0 auto;padding:18px 36px;
-    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
-  }
-  .logo{display:flex;align-items:center;gap:12px;font-weight:500;letter-spacing:-.01em}
-  .logo-mark{
-    width:30px;height:30px;border-radius:50%;
-    background:
-      radial-gradient(circle at 30% 30%, #f5dfa0 0%, var(--gold) 35%, var(--gold-deep) 90%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.5),
-      inset 0 -4px 8px rgba(0,0,0,.4),
-      0 6px 20px -6px rgba(200,162,75,.55);
-    position:relative;
-  }
-  .logo-mark::after{
-    content:"A";position:absolute;inset:0;display:grid;place-items:center;
-    font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold-ink);
-  }
-  .logo-text{font-size:15.5px;font-weight:500}
-  .logo-text em{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--gold-2);margin-left:5px;letter-spacing:.005em}
-  nav.top-links{display:flex;gap:34px;font-size:13px;color:var(--text-dim);justify-content:center}
-  nav.top-links a{text-decoration:none;transition:color .2s;position:relative}
-  nav.top-links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
-  nav.top-links a:hover{color:var(--text)}
-  nav.top-links a:hover::after{transform:scaleX(1)}
-  .header-actions{display:flex;gap:10px;align-items:center;justify-content:flex-end}
-  .header-btn{
-    padding:9px 18px;background:transparent;border:1px solid var(--border-strong);
-    border-radius:999px;color:var(--text);font-size:12.5px;cursor:pointer;
-    font-family:inherit;letter-spacing:.01em;transition:all .25s;
-  }
-  .header-btn:hover{border-color:var(--gold);color:var(--gold-2)}
-  .header-btn.primary{background:var(--ivory);color:#000;border-color:var(--ivory)}
-  .header-btn.primary:hover{background:#fff;color:#000}
+        /* Auth Screen */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
 
-  /* ───────── Hero ───────── */
-  .container{max-width:1320px;margin:0 auto;padding:96px 36px 96px;position:relative;z-index:2}
-  .hero{position:relative;margin-bottom:96px}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:10px;
-    font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);
-    padding:8px 16px;border:1px solid var(--hairline);border-radius:999px;
-    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0));
-    margin-bottom:36px;
-  }
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
-  h1.display{
-    font-family:var(--serif);font-weight:300;
-    font-size:clamp(54px,8.5vw,108px);line-height:.95;letter-spacing:-.035em;
-    margin-bottom:32px;max-width:16ch;
-    font-variation-settings:"opsz" 144,"SOFT" 30;
-  }
-  h1.display em{font-style:italic;color:var(--gold-2);font-weight:300}
-  .lede{color:var(--text-dim);font-size:18px;line-height:1.65;max-width:54ch;margin-bottom:8px;font-weight:300}
-  .hero-meta{
-    margin-top:56px;display:flex;gap:48px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--hairline);
-  }
-  .hero-meta div{display:flex;flex-direction:column;gap:4px}
-  .hero-meta .k{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-faint)}
-  .hero-meta .v{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--text);letter-spacing:-.01em}
-  .hero-meta .v em{font-style:italic;color:var(--gold-2)}
+        .auth-box {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
 
-  /* ───────── Pricing ───────── */
-  .tier-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:44px;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid var(--hairline)}
-  .tier-head .l{display:flex;flex-direction:column;gap:14px}
-  .tier-head .ix{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-faint);display:flex;align-items:center;gap:10px}
-  .tier-head .ix::before{content:"";width:24px;height:1px;background:var(--gold)}
-  .tier-head h2{font-family:var(--serif);font-weight:300;font-size:48px;letter-spacing:-.025em;line-height:1}
-  .tier-head h2 em{font-style:italic;color:var(--gold-2);font-weight:300}
-  .tier-head p{color:var(--text-dim);font-size:13px;max-width:36ch;text-align:right}
+        .auth-box h1 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 28px;
+        }
 
-  .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+        .auth-box p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
 
-  .pricing-card{
-    position:relative;background:var(--surface);
-    border:1px solid var(--hairline);border-radius:var(--r);
-    overflow:hidden;display:flex;flex-direction:column;
-    transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .4s;
-    box-shadow:var(--shadow-card);
-  }
-  .pricing-card::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-    background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 30%);
-  }
-  .pricing-card:hover{transform:translateY(-6px);border-color:var(--border-strong);box-shadow:var(--shadow-lift)}
-  .pricing-card.elite{
-    border-color:rgba(200,162,75,.35);
-    background:
-      radial-gradient(120% 60% at 50% 0%, rgba(200,162,75,.10), transparent 55%),
-      linear-gradient(180deg,#16110a 0%,#131316 60%);
-  }
-  .pricing-card.elite:hover{border-color:var(--gold)}
-  .pricing-card.elite::after{
-    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-    background:linear-gradient(180deg,transparent 0%,rgba(200,162,75,.06) 100%);
-  }
+        .form-group {
+            margin-bottom: 16px;
+        }
 
-  .tier-tag{
-    position:absolute;top:16px;left:16px;z-index:2;
-    font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);
-    padding:6px 12px;border:1px solid var(--hairline);border-radius:999px;
-    background:rgba(0,0,0,.45);backdrop-filter:blur(6px);
-  }
-  .pricing-card.elite .tier-tag{
-    color:var(--gold-2);border-color:rgba(200,162,75,.45);background:rgba(200,162,75,.10);
-  }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
 
-  /* Resume previews */
-  .resume-preview{
-    aspect-ratio:8.5/11;
-    margin:16px;border-radius:6px;overflow:hidden;
-    padding:18px;font-size:9px;line-height:1.55;
-    box-shadow:0 24px 50px -22px rgba(0,0,0,.8),0 0 0 1px rgba(0,0,0,.4);
-    position:relative;
-  }
-  .preview-professional{background:#f7f5f0;color:#16161a;font-family:Georgia,serif}
-  .preview-premium{background:#fff;color:#16161a;font-family:Helvetica,Arial,sans-serif}
-  .preview-luxury{
-    background:
-      radial-gradient(120% 60% at 100% 0%, rgba(201,168,76,.10), transparent 55%),
-      linear-gradient(180deg,#fbf8f1 0%,#f1ebdc 100%);
-    color:#1a1a1f;font-family:Georgia,serif;
-    border:1px solid rgba(201,168,76,.28);
-  }
-  .preview-luxury::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#c9a84c 30%,#c9a84c 70%,transparent)}
-  .preview-luxury .lux-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid rgba(31,41,55,.18);padding-bottom:8px;margin-bottom:10px}
-  .preview-luxury .lux-mono{font-family:Georgia,serif;font-style:italic;font-size:22px;color:#c9a84c;line-height:1;letter-spacing:.02em}
-  .preview-luxury .lux-role{font-size:7.5px;letter-spacing:.32em;text-transform:uppercase;color:#6b6357;margin-top:3px}
-  .preview-luxury .rp-contact{display:flex;justify-content:space-between;border-top:1px solid rgba(31,41,55,.08);padding-top:5px;margin-top:-4px}
-  .preview-elite{
-    background:
-      radial-gradient(140% 80% at 0% 0%, rgba(200,162,75,.10), transparent 50%),
-      linear-gradient(160deg,#0e0e12 0%,#1c1c24 100%);
-    color:#f3f1ec;font-family:Helvetica,Arial,sans-serif;
-    border:1px solid rgba(200,162,75,.22);
-  }
-  .preview-elite::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:1px;
-    background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  }
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
 
-  .rp-name{font-weight:700;font-size:13px;margin-bottom:2px;letter-spacing:.04em}
-  .preview-professional .rp-name,.preview-luxury .rp-name{font-family:Georgia,serif;font-weight:400;font-size:16px;letter-spacing:.08em}
-  .preview-elite .rp-name{color:var(--gold-2);font-weight:500;letter-spacing:.12em}
-  .rp-contact{font-size:8px;opacity:.6;margin-bottom:12px;letter-spacing:.04em}
-  .rp-section{font-weight:700;font-size:7.5px;text-transform:uppercase;letter-spacing:.22em;margin-top:10px;margin-bottom:5px;color:#444}
-  .preview-elite .rp-section{color:var(--gold);font-weight:600}
-  .preview-luxury .rp-section{color:#1f2937;border-bottom:1px solid rgba(201,168,76,.45);padding-bottom:3px;color:#8a6d22;letter-spacing:.26em}
-  .preview-luxury strong{font-weight:400;font-style:italic;font-size:9.5px}
-  .preview-premium .rp-section{color:#1e3a8a;border-bottom:1.5px solid #1e3a8a;padding-bottom:2px;display:inline-block}
-  .rp-row{display:flex;justify-content:space-between;gap:8px}
-  .rp-muted{opacity:.55;font-size:8px}
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
 
-  .pricing-info{
-    padding:22px 22px 24px;border-top:1px solid var(--hairline);
-    background:linear-gradient(180deg,transparent,rgba(0,0,0,.25));
-    flex:1;display:flex;flex-direction:column;position:relative;z-index:1;
-  }
-  .plan-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px}
-  .plan-name{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)}
-  .pricing-card.elite .plan-name{color:var(--gold-2)}
-  .plan-no{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--text-faint)}
-  .price{
-    font-family:var(--serif);font-size:52px;font-weight:300;line-height:1;letter-spacing:-.035em;
-    display:flex;align-items:baseline;gap:4px;margin-top:6px;
-    font-variation-settings:"opsz" 144;
-  }
-  .price .currency{font-size:20px;color:var(--text-dim);transform:translateY(-16px)}
-  .price .period{font-family:var(--sans);font-size:12.5px;color:var(--text-faint);font-weight:400;letter-spacing:0}
-  .plan-tagline{color:var(--text-dim);font-size:13px;margin:14px 0 20px;line-height:1.55;font-weight:300}
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
 
-  .btn-choose{
-    width:100%;padding:14px 18px;border:none;border-radius:10px;
-    background:var(--ivory);color:#000;font-family:inherit;font-size:13px;font-weight:600;
-    cursor:pointer;transition:transform .15s ease,background .2s,box-shadow .3s;
-    display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.01em;
-    box-shadow:0 16px 40px -14px rgba(0,0,0,.5);
-  }
-  .btn-choose:hover{background:#fff;box-shadow:0 20px 50px -16px rgba(255,255,255,.18)}
-  .btn-choose:active{transform:scale(.985)}
-  .btn-choose.elite{
-    background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 60%,var(--gold-deep) 100%);
-    color:var(--gold-ink);
-    box-shadow:0 16px 40px -12px rgba(200,162,75,.55),inset 0 1px 0 rgba(255,255,255,.5);
-  }
-  .btn-choose.elite:hover{filter:brightness(1.05)}
-  .btn-choose .arrow{transition:transform .25s}
-  .btn-choose:hover .arrow{transform:translateX(4px)}
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            margin-top: 10px;
+        }
 
-  .features-list{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:11px;padding-top:18px;border-top:1px solid var(--hairline)}
-  .features-list li{color:var(--text-dim);font-size:12.5px;display:flex;align-items:flex-start;gap:10px;line-height:1.45;font-weight:300}
-  .features-list li svg{flex:0 0 14px;margin-top:2px;color:var(--gold)}
+        .btn-primary:hover {
+            background: #5568d3;
+        }
 
-  /* Trust strip */
-  .trust{
-    margin-top:64px;padding:24px 28px;border:1px solid var(--hairline);border-radius:14px;
-    background:linear-gradient(180deg,var(--surface),rgba(19,19,22,.6));
-    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
-    color:var(--text-dim);font-size:13px;font-weight:300;
-  }
-  .trust .l{display:flex;align-items:center;gap:16px}
-  .trust .stars{color:var(--gold);letter-spacing:3px;font-size:14px}
-  .trust .sep{width:1px;height:18px;background:var(--hairline)}
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+            margin-top: 8px;
+        }
 
-  /* ───────── Builder ───────── */
-  #builderSection{display:none;padding-top:8px}
-  #builderSection.active{display:block}
-  .crumb{
-    display:inline-flex;align-items:center;gap:10px;color:var(--text-dim);
-    font-size:12.5px;cursor:pointer;background:none;border:none;font-family:inherit;
-    margin-bottom:32px;padding:8px 0;letter-spacing:.04em;transition:color .2s;
-  }
-  .crumb:hover{color:var(--gold-2)}
-  .builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
 
-  .panel{
-    background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r);
-    padding:36px;max-height:calc(100vh - 140px);overflow-y:auto;
-    scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent;
-    box-shadow:var(--shadow-card);
-  }
-  .panel::-webkit-scrollbar{width:8px}
-  .panel::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px}
+        .error {
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 6px;
+            padding: 8px 10px;
+            background: #ffebee;
+            border-radius: 4px;
+        }
 
-  .panel h2{font-family:var(--serif);font-weight:300;font-size:34px;letter-spacing:-.025em;margin-bottom:8px}
-  .panel h2 em{font-style:italic;color:var(--gold-2);font-weight:300}
-  .panel-sub{color:var(--text-dim);font-size:13px;margin-bottom:32px;font-weight:300}
+        .success {
+            color: #388e3c;
+            font-size: 13px;
+            margin-top: 6px;
+            padding: 8px 10px;
+            background: #f1f8f4;
+            border-radius: 4px;
+        }
 
-  .section-title{
-    display:flex;align-items:center;gap:14px;
-    font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-faint);
-    margin:36px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--hairline);
-  }
-  .section-title .num{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:26px;height:26px;border-radius:50%;border:1px solid var(--border-strong);
-    color:var(--gold-2);font-family:var(--serif);font-style:italic;font-size:13px;font-weight:400;
-    background:linear-gradient(180deg,rgba(200,162,75,.08),transparent);
-  }
-  .section-title:first-of-type{margin-top:0}
+        .toggle-form {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
 
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .form-group{margin-bottom:14px}
-  .form-group.full{grid-column:1/-1}
-  .form-group label{display:block;font-size:11px;color:var(--text-dim);margin-bottom:7px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
-  .form-group input,.form-group textarea{
-    width:100%;padding:12px 14px;background:var(--bg-2);
-    border:1px solid var(--hairline);border-radius:9px;color:var(--text);
-    font-family:inherit;font-size:13.5px;transition:all .2s;
-  }
-  .form-group input::placeholder,.form-group textarea::placeholder{color:#4d4d57;font-weight:300}
-  .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);background:var(--bg);box-shadow:0 0 0 4px rgba(200,162,75,.10)}
-  .form-group textarea{resize:vertical;min-height:88px;line-height:1.55}
+        .toggle-form button {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
 
-  .entry-card{
-    background:var(--bg-2);border:1px solid var(--hairline);border-radius:10px;
-    padding:18px;margin-bottom:12px;position:relative;
-  }
-  .entry-card .remove{
-    position:absolute;top:14px;right:14px;background:transparent;border:1px solid var(--hairline);
-    color:var(--text-faint);border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:inherit;
-    letter-spacing:.04em;transition:all .2s;
-  }
-  .entry-card .remove:hover{color:var(--danger);border-color:var(--danger)}
+        .hidden {
+            display: none;
+        }
 
-  .add-btn{
-    width:100%;padding:13px;background:transparent;
-    border:1px dashed var(--border-strong);color:var(--text-dim);
-    border-radius:10px;cursor:pointer;font-weight:400;font-size:13px;font-family:inherit;
-    transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;
-    letter-spacing:.04em;
-  }
-  .add-btn:hover{border-color:var(--gold);color:var(--gold-2);background:rgba(200,162,75,.04)}
+        /* Builder Screen */
+        .builder-container {
+            display: none;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
 
-  .download-bar{
-    margin-top:36px;padding-top:28px;border-top:1px solid var(--hairline);
-    display:flex;gap:10px;
-  }
-  .download-btn{
-    flex:1;padding:15px;
-    background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 60%,var(--gold-deep) 100%);
-    border:none;color:var(--gold-ink);
-    border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;
-    transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;
-    box-shadow:0 16px 40px -12px rgba(200,162,75,.55),inset 0 1px 0 rgba(255,255,255,.5);
-    letter-spacing:.02em;
-  }
-  .download-btn:hover{filter:brightness(1.05)}
+        .builder-container.active {
+            display: flex;
+        }
 
-  /* Preview panel */
-  .preview-wrap{position:sticky;top:104px}
-  .preview-toolbar{
-    display:flex;align-items:center;justify-content:space-between;gap:8px;
-    margin-bottom:16px;color:var(--text-faint);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
-  }
-  .preview-toolbar .dots{display:flex;gap:6px}
-  .preview-toolbar .dots span{width:7px;height:7px;border-radius:50%;background:var(--border-strong)}
-  .preview-toolbar .dots span:first-child{background:#d96a6a}
-  .preview-toolbar .dots span:nth-child(2){background:#d9b16a}
-  .preview-toolbar .dots span:nth-child(3){background:#7ab87a}
-  .preview-frame{
-    background:#fdfcf8;color:#16161a;border-radius:8px;
-    padding:56px 64px;font-family:Georgia,serif;font-size:13px;line-height:1.7;
-    min-height:1180px;
-    box-shadow:0 50px 110px -32px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.3);
-  }
-  .pv-name{font-family:Georgia,serif;font-weight:400;font-size:36px;letter-spacing:.06em;margin-bottom:8px}
-  .pv-contact{color:#5a5a5a;font-size:11.5px;letter-spacing:.08em;margin-bottom:28px;font-family:Helvetica,Arial,sans-serif;text-transform:uppercase}
-  .pv-divider{height:1px;background:#16161a;margin-bottom:28px}
-  .pv-section-title{font-family:Helvetica,Arial,sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;margin:24px 0 14px;color:#16161a}
-  .pv-section-title:first-child{margin-top:0}
-  .pv-job{margin-bottom:16px}
-  .pv-job-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:2px}
-  .pv-job-title{font-weight:700;font-size:13.5px;font-family:Helvetica,Arial,sans-serif}
-  .pv-job-when{color:#666;font-size:11.5px;font-family:Helvetica,Arial,sans-serif;letter-spacing:.04em}
-  .pv-job-co{color:#444;font-style:italic;font-size:12.5px;margin-bottom:6px}
-  .pv-job-desc{color:#2c2c2c;font-size:12.5px;font-family:Helvetica,Arial,sans-serif;line-height:1.65}
-  .pv-summary{color:#2c2c2c;font-size:13px;line-height:1.7}
-  .pv-skills{display:flex;flex-wrap:wrap;gap:6px}
-  .pv-skill{background:#efece3;color:#16161a;padding:5px 11px;border-radius:3px;font-size:11.5px;font-family:Helvetica,Arial,sans-serif;letter-spacing:.02em}
+        .sidebar {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+        }
 
-  /* Footer */
-  footer{
-    border-top:1px solid var(--hairline);margin-top:80px;padding:36px;color:var(--text-faint);
-    font-size:12px;text-align:center;letter-spacing:.06em;position:relative;z-index:2;
-  }
-  footer em{font-family:var(--serif);font-style:italic;color:var(--gold-2)}
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-  /* Responsive */
-  @media (max-width:1100px){
-    .pricing-grid{grid-template-columns:repeat(2,1fr)}
-    .builder-grid{grid-template-columns:1fr}
-    .preview-wrap{position:static}
-    .header-inner{grid-template-columns:1fr auto}
-    nav.top-links{display:none}
-  }
-  @media (max-width:680px){
-    .container{padding:56px 22px 64px}
-    .header-inner{padding:14px 22px}
-    .pricing-grid{grid-template-columns:1fr}
-    .form-row{grid-template-columns:1fr}
-    .preview-frame{padding:36px 30px}
-    h1.display{font-size:52px}
-    .tier-head h2{font-size:34px}
-    .hero-meta{gap:28px}
-    .hero-meta .v{font-size:22px}
-  }
-</style>
+        .builder-header {
+            background: white;
+            border-bottom: 1px solid #ddd;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .builder-header h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+
+        .editor-area {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .color-options, .theme-options {
+            margin-bottom: 24px;
+        }
+
+        .color-options h3, .theme-options h3 {
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .color-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .color-btn.active {
+            border-color: #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #333;
+        }
+
+        .preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 400px;
+        }
+
+        .download-btn {
+            margin-top: 16px;
+            padding: 12px 24px;
+            background: #388e3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .download-btn:hover {
+            background: #2e7d32;
+        }
+
+        .section-title {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        textarea.input-field {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        .add-btn {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .add-btn:hover {
+            background: #5568d3;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-mark"></div>
-      <div class="logo-text">Atelier<em>Résumé</em></div>
-    </div>
-    <nav class="top-links">
-      <a href="#pricing">Tiers</a>
-      <a href="#">Templates</a>
-      <a href="#">Examples</a>
-      <a href="#">Journal</a>
-      <a href="#">Help</a>
-    </nav>
-    <div class="header-actions">
-      <button class="header-btn" id="signinBtn" onclick="handleSignIn()">Sign in</button>
-      <button class="header-btn" id="logoutBtn" onclick="logout()" style="display:none">Log out</button>
-    </div>
-  </div>
-</header>
-
-<main class="container">
-
-  <!-- Pricing -->
-  <section id="pricingSection">
-    <div class="hero">
-      <div class="eyebrow"><span class="dot"></span> Est. 2019 · Trusted by 40,000+ professionals</div>
-      <h1 class="display">Résumés worth <em>reading.</em></h1>
-      <p class="lede">A small studio for considered career documents. Pick a tier, build in minutes, and export a recruiter-ready PDF set in editorial typography — quietly engineered to pass every ATS.</p>
-
-      <div class="hero-meta">
-        <div><span class="k">Templates</span><span class="v">240<em>+</em></span></div>
-        <div><span class="k">Average rating</span><span class="v">4.9<em>/5</em></span></div>
-        <div><span class="k">Reviews</span><span class="v">6,200<em>+</em></span></div>
-        <div><span class="k">Median build time</span><span class="v">11<em> min</em></span></div>
-      </div>
-    </div>
-
-    <div id="pricing" class="tier-head">
-      <div class="l">
-        <div class="ix">Section I · The Collection</div>
-        <h2>Choose your <em>tier</em></h2>
-      </div>
-      <p>Cancel anytime. Secure checkout via Memberful.</p>
-    </div>
-
-    <div class="pricing-grid">
-
-      <!-- Professional -->
-      <article class="pricing-card">
-        <span class="tier-tag">No. 01</span>
-        <div class="resume-preview preview-professional">
-          <div class="rp-name">JANE SMITH</div>
-          <div class="rp-contact">jane@email.com · (555) 123-4567 · Brooklyn, NY · linkedin.com/in/janesmith</div>
-          <div class="rp-section">Summary</div>
-          <div style="margin-bottom:4px">Full-stack developer with 6+ years building consumer web products. Focused on performance, accessibility, and clean architecture.</div>
-          <div class="rp-section">Experience</div>
-          <div class="rp-row"><strong>Senior Developer</strong><span class="rp-muted">2022 – Present</span></div>
-          <div class="rp-muted">Northwind Technologies · Brooklyn, NY</div>
-          <div style="margin:3px 0 6px">• Led migration of monolith to a typed service mesh, cutting p95 latency by 38%.<br>• Mentored 4 engineers; introduced design-review rituals adopted org-wide.<br>• Shipped checkout redesign worth $2.1M in incremental annual revenue.</div>
-          <div class="rp-row"><strong>Software Engineer</strong><span class="rp-muted">2019 – 2022</span></div>
-          <div class="rp-muted">Bluefin Labs · Remote</div>
-          <div style="margin:3px 0 6px">• Built realtime collaboration layer used by 40k weekly users.<br>• Owned CI/CD pipeline; reduced deploy time from 22 to 4 minutes.</div>
-          <div class="rp-row"><strong>Junior Developer</strong><span class="rp-muted">2018 – 2019</span></div>
-          <div class="rp-muted">Foxglove Studio</div>
-          <div class="rp-section">Education</div>
-          <div class="rp-row"><strong>BS Computer Science</strong><span class="rp-muted">2018</span></div>
-          <div class="rp-muted">New York University · Magna Cum Laude</div>
-          <div class="rp-section">Skills</div>
-          <div>TypeScript · React · Node.js · PostgreSQL · AWS · GraphQL · Docker · Kubernetes</div>
-        </div>
-        <div class="pricing-info">
-          <div class="plan-row">
-            <div class="plan-name">Professional</div>
-            <div class="plan-no">i</div>
-          </div>
-          <div class="price"><span class="currency">$</span>6<span class="period">/month</span></div>
-          <p class="plan-tagline">Clean, ATS-friendly templates for the early-career professional.</p>
-          <a href="https://resumebuilder.memberful.com/checkout?plan=professional" class="btn-choose">Begin subscription <span class="arrow">→</span></a>
-          <ul class="features-list">
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Résumé builder</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>PDF download</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>1 template</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Live preview</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Unlimited résumés</li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Premium -->
-      <article class="pricing-card">
-        <span class="tier-tag">No. 02</span>
-        <div class="resume-preview preview-premium">
-          <div class="rp-name" style="color:#1e3a8a">ALEX JOHNSON</div>
-          <div class="rp-contact">alex@email.com · (555) 123-4567 · New York · alexjohnson.dev</div>
-          <div class="rp-section">Profile</div>
-          <div style="margin-bottom:4px">Staff engineer specializing in distributed systems and developer experience. 8 years shipping infra used by millions.</div>
-          <div class="rp-section">Experience</div>
-          <div class="rp-row"><strong style="color:#1e3a8a">Staff Engineer</strong><span class="rp-muted">2021 – Present</span></div>
-          <div class="rp-muted">Tech Innovations Inc.</div>
-          <div style="margin:3px 0 6px">• Architected event-driven platform processing 4B events/day.<br>• Drove adoption of internal RFC process across 12 teams.<br>• Co-authored open-source SDK with 9k GitHub stars.</div>
-          <div class="rp-row"><strong style="color:#1e3a8a">Senior Engineer</strong><span class="rp-muted">2018 – 2021</span></div>
-          <div class="rp-muted">Vector Cloud</div>
-          <div style="margin:3px 0 6px">• Designed multi-region failover saving $1.4M in downtime annually.<br>• Built observability stack adopted as company standard.</div>
-          <div class="rp-row"><strong style="color:#1e3a8a">Software Engineer</strong><span class="rp-muted">2016 – 2018</span></div>
-          <div class="rp-muted">Helix Data Systems</div>
-          <div class="rp-section">Education</div>
-          <div class="rp-row"><strong>MS Computer Engineering</strong><span class="rp-muted">2016</span></div>
-          <div class="rp-muted">Carnegie Mellon University</div>
-          <div class="rp-section">Skills</div>
-          <div class="rp-muted">React · TypeScript · Go · Rust · Kafka · Kubernetes · Systems Design · gRPC</div>
-        </div>
-        <div class="pricing-info">
-          <div class="plan-row">
-            <div class="plan-name">Premium</div>
-            <div class="plan-no">ii</div>
-          </div>
-          <div class="price"><span class="currency">$</span>9<span class="period">/month</span></div>
-          <p class="plan-tagline">Modern layouts with refined typography for mid-career operators.</p>
-          <a href="https://resumebuilder.memberful.com/checkout?plan=premium" class="btn-choose">Begin subscription <span class="arrow">→</span></a>
-          <ul class="features-list">
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Résumé builder</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>PDF download</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Colour picker</li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Luxury -->
-      <article class="pricing-card">
-        <span class="tier-tag">No. 03</span>
-        <div class="resume-preview preview-luxury">
-          <div class="lux-head">
-            <div>
-              <div class="rp-name">MORGAN CHEN</div>
-              <div class="lux-role">Vice President · Product</div>
+<!-- Auth Container -->
+<div class="auth-container" id="authContainer">
+    <div class="auth-box">
+        <!-- Signup Form -->
+        <form id="signupForm" class="auth-form">
+            <h1>Create Account</h1>
+            <p>Start building your perfect resume</p>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="signupEmail" required>
+                <div id="signupEmailError" class="error hidden"></div>
             </div>
-            <div class="lux-mono">M·C</div>
-          </div>
-          <div class="rp-contact">
-            <span>morgan@email.com</span>
-            <span>(555) 987-6543</span>
-            <span>San Francisco</span>
-            <span>morganchen.co</span>
-          </div>
-          <div class="rp-section">Profile</div>
-          <div style="margin-bottom:4px">Strategic product leader with 12 years driving growth at category-defining companies. Expertise in zero-to-one launches and team building.</div>
-          <div class="rp-section">Experience</div>
-          <div class="rp-row"><strong>VP of Product</strong><span class="rp-muted">2020 – Present</span></div>
-          <div class="rp-muted">Lumen & Co. · San Francisco</div>
-          <div style="margin:3px 0 6px">• Scaled product org from 8 to 54 across three time zones.<br>• Launched flagship platform contributing $42M ARR in year one.<br>• Established quarterly strategy cadence adopted company-wide.</div>
-          <div class="rp-row"><strong>Director of Product</strong><span class="rp-muted">2016 – 2020</span></div>
-          <div class="rp-muted">Meridian Group</div>
-          <div style="margin:3px 0 6px">• Repositioned core SaaS product, lifting NRR from 102% to 134%.<br>• Built first design-research practice, now 11 people.</div>
-          <div class="rp-row"><strong>Senior PM</strong><span class="rp-muted">2013 – 2016</span></div>
-          <div class="rp-muted">Halcyon Software</div>
-          <div class="rp-section">Education</div>
-          <div class="rp-row"><strong>MBA</strong><span class="rp-muted">2013</span></div>
-          <div class="rp-muted">Stanford Graduate School of Business</div>
-          <div class="rp-section">Highlights</div>
-          <div>Led teams of 50+ · $10M+ revenue impact · 3 successful product launches</div>
-        </div>
-        <div class="pricing-info">
-          <div class="plan-row">
-            <div class="plan-name">Luxury</div>
-            <div class="plan-no">iii</div>
-          </div>
-          <div class="price"><span class="currency">$</span>12<span class="period">/month</span></div>
-          <p class="plan-tagline">Editorial-grade templates for senior leaders and specialists.</p>
-          <a href="https://resumebuilder.memberful.com/checkout?plan=luxury" class="btn-choose">Begin subscription <span class="arrow">→</span></a>
-          <ul class="features-list">
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Résumé builder</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>PDF download</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Advanced theme</li>
-          </ul>
-        </div>
-      </article>
 
-      <!-- Elite -->
-      <article class="pricing-card elite">
-        <span class="tier-tag">No. 04 · Elite</span>
-        <div class="resume-preview preview-elite">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-            <div style="width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#f5dfa0,#c8a24b 50%,#8e6f25 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 4px 12px -4px rgba(200,162,75,.6)"></div>
-            <div>
-              <div class="rp-name">CHRISTOPHER ELITE</div>
-              <div class="rp-muted" style="color:#a8a8b0">Chief Executive Officer</div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signupPassword" required>
+                <div id="signupPasswordError" class="error hidden"></div>
             </div>
-          </div>
-          <div class="rp-contact" style="color:#b8b8c0">christopher@elite.com · +1 (555) 123-4567 · New York · Board Member, MoMA</div>
-          <div class="rp-section">Executive Profile</div>
-          <div style="margin-bottom:4px">Transformational CEO with two successful exits and a track record of scaling enterprise platforms from concept to category leadership.</div>
-          <div class="rp-section">Experience</div>
-          <div class="rp-row"><strong style="color:#e8d9a8">Chief Executive Officer</strong><span class="rp-muted" style="color:#a8a8b0">2019 – Present</span></div>
-          <div class="rp-muted" style="color:#a8a8b0">Apex Global Holdings</div>
-          <div style="margin:3px 0 6px;color:#d8d6cf">• Scaled revenue from $18M to $112M ARR across four verticals.<br>• Closed $85M Series C led by Sequoia at $1.2B valuation.<br>• Built 200+ person organization spanning seven countries.</div>
-          <div class="rp-row"><strong style="color:#e8d9a8">President & COO</strong><span class="rp-muted" style="color:#a8a8b0">2014 – 2019</span></div>
-          <div class="rp-muted" style="color:#a8a8b0">Sterling Industries</div>
-          <div style="margin:3px 0 6px;color:#d8d6cf">• Led $340M acquisition integration, retaining 96% of key talent.<br>• Restructured operations producing $28M in annual cost savings.</div>
-          <div class="rp-row"><strong style="color:#e8d9a8">SVP, Strategy</strong><span class="rp-muted" style="color:#a8a8b0">2010 – 2014</span></div>
-          <div class="rp-muted" style="color:#a8a8b0">Monarch Capital Partners</div>
-          <div class="rp-section">Education</div>
-          <div class="rp-row"><strong style="color:#e8d9a8">MBA, Distinction</strong><span class="rp-muted" style="color:#a8a8b0">2010</span></div>
-          <div class="rp-muted" style="color:#a8a8b0">Harvard Business School · Baker Scholar</div>
-          <div class="rp-section">Recognition</div>
-          <div style="color:#d8d6cf">Forbes 40 Under 40 · EY Entrepreneur of the Year · WSJ CEO Council</div>
-        </div>
-        <div class="pricing-info">
-          <div class="plan-row">
-            <div class="plan-name">Elite</div>
-            <div class="plan-no" style="color:var(--gold-2)">iv</div>
-          </div>
-          <div class="price"><span class="currency">$</span>16<span class="period">/month</span></div>
-          <p class="plan-tagline">Bespoke executive templates crafted for board-level presentation.</p>
-          <a href="https://resumebuilder.memberful.com/checkout?plan=elite" class="btn-choose elite">Begin subscription <span class="arrow">→</span></a>
-          <ul class="features-list">
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Résumé builder</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>PDF download</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Premium design</li>
-            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Unlimited revisions & exports</li>
-          </ul>
-        </div>
-      </article>
 
+            <div class="form-group">
+                <label>Gumroad License Code</label>
+                <input type="text" id="licenseCode" placeholder="e.g., PROF-GUMROAD-001" required>
+                <div id="licenseCodeError" class="error hidden"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            
+            <div class="toggle-form">
+                Already have an account? <button type="button" class="toggle-btn" data-form="login">Log In</button>
+            </div>
+        </form>
+
+        <!-- Login Form (Hidden) -->
+        <form id="loginForm" class="auth-form hidden">
+            <h1>Welcome Back</h1>
+            <p>Log in to your resume builder</p>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" required>
+                <div id="loginEmailError" class="error hidden"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" required>
+                <div id="loginPasswordError" class="error hidden"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Log In</button>
+            
+            <div class="toggle-form">
+                Don't have an account? <button type="button" class="toggle-btn" data-form="signup">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Builder Container -->
+<div class="builder-container" id="builderContainer">
+    <div class="sidebar">
+        <div class="builder-header">
+            <h2>Atelier Résumé</h2>
+        </div>
+
+        <div class="color-options">
+            <h3>Colors</h3>
+            <div class="color-grid">
+                <button class="color-btn active" style="background: #667eea;" data-color="#667eea"></button>
+                <button class="color-btn" style="background: #e91e63;" data-color="#e91e63"></button>
+                <button class="color-btn" style="background: #ff9800;" data-color="#ff9800"></button>
+                <button class="color-btn" style="background: #1abc9c;" data-color="#1abc9c"></button>
+                <button class="color-btn" style="background: #9c27b0;" data-color="#9c27b0"></button>
+                <button class="color-btn" style="background: #f44336;" data-color="#f44336"></button>
+                <button class="color-btn" style="background: #2196f3;" data-color="#2196f3"></button>
+                <button class="color-btn" style="background: #333;" data-color="#333"></button>
+            </div>
+        </div>
+
+        <div class="download-btn" id="downloadBtn">📥 Download PDF</div>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
     </div>
 
-    <div class="trust">
-      <div class="l">
-        <span class="stars">★★★★★</span>
-        <span>4.9 average from 6,200+ reviews</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-        <span>Secure checkout</span><span class="sep"></span>
-        <span>Cancel anytime</span>
-      </div>
+    <div class="main-content">
+        <div class="builder-header">
+            <h2>Resume Builder</h2>
+        </div>
+
+        <div class="editor-area">
+            <div class="section-title">Your Information</div>
+            <input type="text" class="input-field" id="fullName" placeholder="Full Name">
+            <input type="email" class="input-field" id="email" placeholder="Email">
+            <input type="tel" class="input-field" id="phone" placeholder="Phone">
+            <input type="text" class="input-field" id="location" placeholder="City, State">
+
+            <div class="section-title">Professional Summary</div>
+            <textarea class="input-field" id="summary" placeholder="Write a brief professional summary..."></textarea>
+
+            <div class="section-title">Experience</div>
+            <input type="text" class="input-field" id="jobTitle" placeholder="Job Title">
+            <input type="text" class="input-field" id="company" placeholder="Company">
+            <input type="text" class="input-field" id="jobDates" placeholder="2020 - 2023">
+            <textarea class="input-field" id="jobDescription" placeholder="Describe your responsibilities..."></textarea>
+            <button class="add-btn">+ Add Experience</button>
+
+            <div class="preview">
+                <h2 id="previewName">Your Name</h2>
+                <p id="previewEmail">email@example.com</p>
+                <p id="previewPhone">Phone</p>
+                <hr style="margin: 16px 0;">
+                <h3>Professional Summary</h3>
+                <p id="previewSummary">Your professional summary will appear here...</p>
+                <h3 style="margin-top: 16px;">Experience</h3>
+                <p id="previewJobTitle"><strong>Job Title</strong> at Company</p>
+                <p id="previewJobDates">2020 - 2023</p>
+                <p id="previewJobDesc">Job description will appear here...</p>
+            </div>
+        </div>
     </div>
-  </section>
+</div>
 
-  <!-- Builder -->
-  <section id="builderSection">
-    <button class="crumb" onclick="backToPricing()">← Back to the collection</button>
-
-    <div class="builder-grid">
-      <!-- Form -->
-      <div class="panel">
-        <h2>Build your <em>résumé</em></h2>
-        <p class="panel-sub">Each field updates the document on the right in real time.</p>
-
-        <div class="section-title"><span class="num">i</span> Personal</div>
-        <div class="form-row">
-          <div class="form-group full"><label>Full name</label><input type="text" id="fullName" placeholder="Jane Smith" oninput="updatePreview()"></div>
-          <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="jane@example.com" oninput="updatePreview()"></div>
-          <div class="form-group"><label>Phone</label><input type="tel" id="phone" placeholder="(555) 123-4567" oninput="updatePreview()"></div>
-          <div class="form-group full"><label>Location</label><input type="text" id="location" placeholder="Brooklyn, NY" oninput="updatePreview()"></div>
-        </div>
-
-        <div class="section-title"><span class="num">ii</span> Summary</div>
-        <div class="form-group"><textarea id="summary" placeholder="A short paragraph that captures who you are and what you do best." oninput="updatePreview()"></textarea></div>
-
-        <div class="section-title"><span class="num">iii</span> Experience</div>
-        <div id="experienceList"></div>
-        <button class="add-btn" onclick="addExperience()">＋ Add experience</button>
-
-        <div class="section-title"><span class="num">iv</span> Education</div>
-        <div id="educationList"></div>
-        <button class="add-btn" onclick="addEducation()">＋ Add education</button>
-
-        <div class="section-title"><span class="num">v</span> Skills</div>
-        <div class="form-group"><textarea id="skills" placeholder="JavaScript, React, Systems Design, Leadership…" oninput="updatePreview()"></textarea></div>
-
-        <div class="download-bar">
-          <button class="download-btn" onclick="downloadResume()">↓ Download PDF</button>
-        </div>
-      </div>
-
-      <!-- Preview -->
-      <div class="preview-wrap">
-        <div class="preview-toolbar">
-          <span>Live preview · A4</span>
-          <div class="dots"><span></span><span></span><span></span></div>
-        </div>
-        <div id="preview" class="preview-frame">
-          <div class="pv-name" id="previewName">Your Name</div>
-          <div class="pv-contact" id="previewContact">email@example.com · (555) 123-4567 · Location</div>
-          <div class="pv-divider"></div>
-          <div id="previewContent"><p style="color:#888;font-style:italic;font-family:Georgia,serif">Begin filling out the form to see your résumé appear here.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  Atelier <em>Résumé</em> · Considered career documents · © 2026
-</footer>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
 
 <script>
-  let experienceCount = 0;
-  let educationCount = 0;
-  let currentTier = null;
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAp-IGJ-6HwjQT_RB5n9k16bc1W1izt3Bk",
+  authDomain: "resume-builder-a0f2.firebaseapp.com",
+  projectId: "resume-builder-a0f2",
+  storageBucket: "resume-builder-a0f2.firebasestorage.app",
+  messagingSenderId: "286535613863",
+  appId: "1:286535613863:web:e28d50c94e232a7ba05622",
+  measurementId: "G-4GVY3BRGYC"
+};
 
-  function handleSignIn(){ alert('Sign in flow goes here'); }
-  function logout(){ localStorage.clear(); backToPricing(); }
-  function backToPricing(){
-    document.getElementById('builderSection').classList.remove('active');
-    document.getElementById('pricingSection').style.display='block';
-    document.getElementById('logoutBtn').style.display='none';
-    document.getElementById('signinBtn').style.display='inline-block';
-    currentTier=null;
-  }
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
-  function addExperience(){
-    const id = experienceCount++;
-    const html = `
-      <div class="entry-card" id="exp-${id}">
-        <button class="remove" onclick="removeExperience(${id})">Remove</button>
-        <div class="form-row">
-          <div class="form-group full"><label>Job title</label><input type="text" data-exp-title="${id}" placeholder="Senior Developer" oninput="updatePreview()"></div>
-          <div class="form-group"><label>Company</label><input type="text" data-exp-company="${id}" placeholder="Tech Company" oninput="updatePreview()"></div>
-          <div class="form-group"><label>Duration</label><input type="text" data-exp-duration="${id}" placeholder="Jan 2020 – Present" oninput="updatePreview()"></div>
-          <div class="form-group full"><label>What did you accomplish?</label><textarea data-exp-desc="${id}" placeholder="Led a team of 5 engineers to ship…" oninput="updatePreview()"></textarea></div>
-        </div>
-      </div>`;
-    document.getElementById('experienceList').insertAdjacentHTML('beforeend', html);
-  }
-  function removeExperience(id){ document.getElementById(`exp-${id}`)?.remove(); updatePreview(); }
+// DOM Elements
+const authContainer = document.getElementById('authContainer');
+const builderContainer = document.getElementById('builderContainer');
+const signupForm = document.getElementById('signupForm');
+const loginForm = document.getElementById('loginForm');
+const logoutBtn = document.getElementById('logoutBtn');
 
-  function addEducation(){
-    const id = educationCount++;
-    const html = `
-      <div class="entry-card" id="edu-${id}">
-        <button class="remove" onclick="removeEducation(${id})">Remove</button>
-        <div class="form-row">
-          <div class="form-group full"><label>School / University</label><input type="text" data-edu-school="${id}" placeholder="University Name" oninput="updatePreview()"></div>
-          <div class="form-group"><label>Degree</label><input type="text" data-edu-degree="${id}" placeholder="Bachelor of Science" oninput="updatePreview()"></div>
-          <div class="form-group"><label>Graduation year</label><input type="text" data-edu-year="${id}" placeholder="2022" oninput="updatePreview()"></div>
-        </div>
-      </div>`;
-    document.getElementById('educationList').insertAdjacentHTML('beforeend', html);
-  }
-  function removeEducation(id){ document.getElementById(`edu-${id}`)?.remove(); updatePreview(); }
-
-  function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
-
-  function updatePreview(){
-    const name = document.getElementById('fullName').value || 'Your Name';
-    const email = document.getElementById('email').value || 'email@example.com';
-    const phone = document.getElementById('phone').value || '(555) 123-4567';
-    const location = document.getElementById('location').value || 'Location';
-    document.getElementById('previewName').textContent = name;
-    document.getElementById('previewContact').textContent = `${email} · ${phone} · ${location}`;
-
-    let html = '';
-    const summary = document.getElementById('summary').value;
-    if(summary){
-      html += `<div class="pv-section-title">Summary</div><div class="pv-summary">${esc(summary)}</div>`;
-    }
-
-    const expEls = document.querySelectorAll('[data-exp-title]');
-    let expHtml = '';
-    expEls.forEach(el=>{
-      const id = el.dataset.expTitle;
-      const title = el.value;
-      if(!title) return;
-      const co = document.querySelector(`[data-exp-company="${id}"]`).value;
-      const dur = document.querySelector(`[data-exp-duration="${id}"]`).value;
-      const desc = document.querySelector(`[data-exp-desc="${id}"]`).value;
-      expHtml += `
-        <div class="pv-job">
-          <div class="pv-job-head">
-            <div class="pv-job-title">${esc(title)}</div>
-            <div class="pv-job-when">${esc(dur)}</div>
-          </div>
-          <div class="pv-job-co">${esc(co)}</div>
-          ${desc?`<div class="pv-job-desc">${esc(desc)}</div>`:''}
-        </div>`;
+// Form Toggle
+document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        signupForm.classList.toggle('hidden');
+        loginForm.classList.toggle('hidden');
+        document.querySelectorAll('.error').forEach(err => err.classList.add('hidden'));
     });
-    if(expHtml) html += `<div class="pv-section-title">Experience</div>${expHtml}`;
+});
 
-    const eduEls = document.querySelectorAll('[data-edu-school]');
-    let eduHtml = '';
-    eduEls.forEach(el=>{
-      const id = el.dataset.eduSchool;
-      const school = el.value;
-      if(!school) return;
-      const deg = document.querySelector(`[data-edu-degree="${id}"]`).value;
-      const yr = document.querySelector(`[data-edu-year="${id}"]`).value;
-      eduHtml += `
-        <div class="pv-job">
-          <div class="pv-job-head">
-            <div class="pv-job-title">${esc(school)}</div>
-            <div class="pv-job-when">${esc(yr)}</div>
-          </div>
-          <div class="pv-job-co">${esc(deg)}</div>
-        </div>`;
+// Signup Handler
+signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const licenseCode = document.getElementById('licenseCode').value.trim().toUpperCase();
+
+    clearErrors();
+
+    try {
+        // Validate license code first
+        const licenseDoc = await db.collection('licenseCodes').where('code', '==', licenseCode).get();
+        
+        if (licenseDoc.empty) {
+            showError('licenseCodeError', 'Invalid license code');
+            return;
+        }
+
+        const licenseData = licenseDoc.docs[0].data();
+        if (licenseData.isUsed) {
+            showError('licenseCodeError', 'This license code has already been used');
+            return;
+        }
+
+        // Create account
+        const userCred = await auth.createUserWithEmailAndPassword(email, password);
+        
+        // Mark license as used
+        await db.collection('licenseCodes').doc(licenseDoc.docs[0].id).update({
+            isUsed: true,
+            usedBy: email
+        });
+
+        showSuccess('Account created! Redirecting...');
+        setTimeout(() => showBuilder(), 1000);
+    } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+            showError('signupEmailError', 'Email already in use');
+        } else if (error.code === 'auth/weak-password') {
+            showError('signupPasswordError', 'Password should be at least 6 characters');
+        } else {
+            showError('signupEmailError', error.message);
+        }
+    }
+});
+
+// Login Handler
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    clearErrors();
+
+    try {
+        await auth.signInWithEmailAndPassword(email, password);
+        showSuccess('Logged in! Redirecting...');
+        setTimeout(() => showBuilder(), 1000);
+    } catch (error) {
+        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+            showError('loginEmailError', 'Invalid email or password');
+        } else {
+            showError('loginEmailError', error.message);
+        }
+    }
+});
+
+// Logout Handler
+logoutBtn.addEventListener('click', async () => {
+    await auth.signOut();
+    authContainer.style.display = 'flex';
+    builderContainer.classList.remove('active');
+    signupForm.classList.remove('hidden');
+    loginForm.classList.add('hidden');
+});
+
+// Auth State Listener
+auth.onAuthStateChanged(user => {
+    if (user) {
+        showBuilder();
+    } else {
+        authContainer.style.display = 'flex';
+        builderContainer.classList.remove('active');
+    }
+});
+
+// Show Builder
+function showBuilder() {
+    authContainer.style.display = 'none';
+    builderContainer.classList.add('active');
+}
+
+// Error/Success Helpers
+function showError(elementId, message) {
+    const el = document.getElementById(elementId);
+    el.textContent = message;
+    el.classList.remove('hidden');
+}
+
+function showSuccess(message) {
+    const el = document.createElement('div');
+    el.className = 'success';
+    el.textContent = message;
+    el.style.position = 'fixed';
+    el.style.top = '20px';
+    el.style.right = '20px';
+    document.body.appendChild(el);
+}
+
+function clearErrors() {
+    document.querySelectorAll('.error').forEach(el => el.classList.add('hidden'));
+}
+
+// Color Picker
+document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const color = btn.dataset.color;
+        document.documentElement.style.setProperty('--primary-color', color);
     });
-    if(eduHtml) html += `<div class="pv-section-title">Education</div>${eduHtml}`;
+});
 
-    const skills = document.getElementById('skills').value;
-    if(skills){
-      const items = skills.split(',').map(s=>s.trim()).filter(Boolean);
-      html += `<div class="pv-section-title">Skills</div><div class="pv-skills">${items.map(s=>`<span class="pv-skill">${esc(s)}</span>`).join('')}</div>`;
-    }
+// Resume Input Listeners
+document.getElementById('fullName').addEventListener('input', (e) => {
+    document.getElementById('previewName').textContent = e.target.value || 'Your Name';
+});
 
-    document.getElementById('previewContent').innerHTML = html || '<p style="color:#888;font-style:italic;font-family:Georgia,serif">Begin filling out the form to see your résumé appear here.</p>';
-  }
+document.getElementById('email').addEventListener('input', (e) => {
+    document.getElementById('previewEmail').textContent = e.target.value || 'email@example.com';
+});
 
-  function downloadResume(){
-    const el = document.getElementById('preview');
-    const name = (document.getElementById('fullName').value||'resume').replace(/\s+/g,'_');
-    html2pdf().set({
-      margin:[10,10,10,10],
-      filename:`${name}.pdf`,
-      image:{type:'jpeg',quality:.98},
-      html2canvas:{scale:2,backgroundColor:'#ffffff'},
-      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-    }).from(el).save();
-  }
+document.getElementById('phone').addEventListener('input', (e) => {
+    document.getElementById('previewPhone').textContent = e.target.value || 'Phone';
+});
 
-  // Dev shortcut: ⌘B jumps to the builder
-  document.addEventListener('keydown',e=>{
-    if(e.key==='b' && e.metaKey){
-      document.getElementById('pricingSection').style.display='none';
-      document.getElementById('builderSection').classList.add('active');
-      document.getElementById('signinBtn').style.display='none';
-      document.getElementById('logoutBtn').style.display='inline-block';
-    }
-  });
+document.getElementById('summary').addEventListener('input', (e) => {
+    document.getElementById('previewSummary').textContent = e.target.value || 'Your professional summary will appear here...';
+});
+
+document.getElementById('jobTitle').addEventListener('input', (e) => {
+    document.getElementById('previewJobTitle').innerHTML = `<strong>${e.target.value || 'Job Title'}</strong> at ${document.getElementById('company').value || 'Company'}`;
+});
+
+document.getElementById('company').addEventListener('input', (e) => {
+    document.getElementById('previewJobTitle').innerHTML = `<strong>${document.getElementById('jobTitle').value || 'Job Title'}</strong> at ${e.target.value || 'Company'}`;
+});
+
+document.getElementById('jobDates').addEventListener('input', (e) => {
+    document.getElementById('previewJobDates').textContent = e.target.value || '2020 - 2023';
+});
+
+document.getElementById('jobDescription').addEventListener('input', (e) => {
+    document.getElementById('previewJobDesc').textContent = e.target.value || 'Job description will appear here...';
+});
+
+// Download PDF
+document.getElementById('downloadBtn').addEventListener('click', () => {
+    alert('PDF download feature coming soon! For now, use your browser\'s print to PDF feature.');
+});
 </script>
+
 </body>
 </html>
