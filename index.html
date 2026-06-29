@@ -302,17 +302,6 @@
             padding-top: 5px;
         }
 
-        .resume-line {
-            height: 2px;
-            background: #e0e0e0;
-            margin: 2px 0;
-            border-radius: 1px;
-        }
-
-        .resume-line.short {
-            width: 70%;
-        }
-
         .card-content {
             padding: 28px 20px;
         }
@@ -568,6 +557,17 @@
             overflow-y: auto;
         }
 
+        .tier-badge {
+            background: #ffd700;
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
         .main-content {
             flex: 1;
             display: flex;
@@ -599,6 +599,30 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 13px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 16px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+
+        .form-section h3 {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .add-btn {
+            background: #667eea;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
         }
 
         @media (max-width: 1024px) {
@@ -671,22 +695,16 @@
                     <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
                     <div class="resume-section">SUMMARY</div>
                     <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
-                    <div class="resume-section">EXPERIENCE</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px;">Senior Developer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2021 - Present</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">• Led migration to typed service mesh</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px;">Software Engineer</div>
-                    <div style="font-size: 8px; color: #999;">2019 - 2021</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PROFESSIONAL / I</div>
                     <div class="card-price">$<span class="card-price-period">6/month</span></div>
-                    <div class="card-desc">Clean, ATS-friendly templates for the early-career professional.</div>
+                    <div class="card-desc">Basic resume with name, email, phone, and professional summary.</div>
                     <a href="https://saminak.gumroad.com/l/ojoere" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Résumé builder</div>
+                        <div class="feature">Name & Contact</div>
+                        <div class="feature">Professional Summary</div>
                         <div class="feature">PDF download</div>
-                        <div class="feature">1 template</div>
                         <div class="feature">Live preview</div>
                     </div>
                 </div>
@@ -696,27 +714,22 @@
             <div class="pricing-card">
                 <div class="card-preview premium">
                     <div class="resume-header">ALEX JOHNSON</div>
-                    <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York<br>linkedin.com/in/alexjohnson</div>
-                    <div class="resume-section">CORE COMPETENCIES</div>
-                    <div style="font-size: 8px; color: #666; margin: 2px 0;">Distributed Systems • Cloud Architecture • Team Leadership</div>
+                    <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">Staff Engineer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2020 - Present | Tech Lead</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2020 - Present</div>
                     <div style="font-size: 8px; color: #666; margin: 1px 0;">• Architected platform processing 4B events/day</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">• Drove adoption across 12 teams</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">Senior Engineer</div>
-                    <div style="font-size: 8px; color: #999;">2018 - 2020 | Infrastructure</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PREMIUM / II</div>
                     <div class="card-price">$<span class="card-price-period">9/month</span></div>
-                    <div class="card-desc">Modern layouts with refined typography for mid-career operators.</div>
+                    <div class="card-desc">Professional tier + work experience and job descriptions.</div>
                     <a href="https://saminak.gumroad.com/l/nrdaz" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Résumé builder</div>
-                        <div class="feature">PDF download</div>
-                        <div class="feature">Colour picker</div>
-                        <div class="feature">Live preview</div>
+                        <div class="feature">Everything in Professional</div>
+                        <div class="feature">Work Experience</div>
+                        <div class="feature">Multiple positions</div>
+                        <div class="feature">Job descriptions</div>
                     </div>
                 </div>
             </div>
@@ -725,30 +738,24 @@
             <div class="pricing-card">
                 <div class="card-preview luxury">
                     <div class="resume-header">MORGAN CHEN</div>
-                    <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco, CA<br>linkedin.com/in/morganchen | morgan.com</div>
-                    <div class="resume-section">EXECUTIVE PROFILE</div>
-                    <div style="font-size: 9px; color: #333; line-height: 1.3; margin: 3px 0;">Visionary product leader driving $2.3M ARR. 10+ years scaling from 0→1.</div>
-                    <div class="resume-section">KEY ACHIEVEMENTS</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Grew product org 8→50 people, 3 time zones</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Launched flagship generating $2.3M ARR Y1</div>
+                    <div class="resume-subtext">morgan@email.com | San Francisco, CA</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">VP Product</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2019 - Present | Strategy & Growth</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">Director of Product</div>
-                    <div style="font-size: 8px; color: #999;">2016 - 2019 | Operations</div>
-                    <div class="resume-section">AWARDS</div>
-                    <div style="font-size: 8px; color: #666;">Forbes 30U30 • Product Leader of Year</div>
+                    <div class="resume-section">EDUCATION</div>
+                    <div style="font-size: 8px; color: #666;">Stanford University</div>
+                    <div class="resume-section">SKILLS</div>
+                    <div style="font-size: 8px; color: #666;">Leadership • Strategy</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">LUXURY / III</div>
                     <div class="card-price">$<span class="card-price-period">12/month</span></div>
-                    <div class="card-desc">Editorial-grade templates for senior leaders and specialists.</div>
+                    <div class="card-desc">Premium tier + education, skills, certifications, and awards.</div>
                     <a href="https://saminak.gumroad.com/l/eqnsrx" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Résumé builder</div>
-                        <div class="feature">PDF download</div>
-                        <div class="feature">Advanced theme</div>
-                        <div class="feature">Live preview</div>
+                        <div class="feature">Everything in Premium</div>
+                        <div class="feature">Education section</div>
+                        <div class="feature">Skills & competencies</div>
+                        <div class="feature">Awards & certifications</div>
                     </div>
                 </div>
             </div>
@@ -757,28 +764,24 @@
             <div class="pricing-card elite">
                 <div class="card-preview elite">
                     <div class="resume-header">CHRISTOPHER ELITE</div>
-                    <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York, NY<br>Board Director | 2x Founder | $150M ARR Portfolio</div>
-                    <div class="resume-section">EXECUTIVE SUMMARY</div>
-                    <div style="font-size: 9px; color: #333; line-height: 1.3; margin: 3px 0;">Transformational CEO scaling ventures from concept to category leadership. Built 200+ person org across 7 geographies generating $150M ARR.</div>
-                    <div class="resume-section">BOARD EXPERIENCE</div>
+                    <div class="resume-subtext">christopher@elite.com | New York, NY</div>
+                    <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">Chief Executive Officer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 1px;">2018 - Present | $15M→$150M ARR</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ $150M ARR across 4 strategic verticals</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Built 200+ org spanning 7 markets</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">Board Director</div>
-                    <div style="font-size: 8px; color: #999;">2015 - Present | Fortune 500</div>
+                    <div style="font-size: 8px; color: #999;">2018 - Present</div>
+                    <div class="resume-section">BOARD MEMBERSHIPS</div>
+                    <div style="font-size: 8px; color: #666;">Fortune 500 Company</div>
                     <div class="resume-section">HONORS</div>
-                    <div style="font-size: 8px; color: #666;">Ernst & Young Entrepreneur of Year • Wired 50</div>
+                    <div style="font-size: 8px; color: #666;">Ernst & Young Entrepreneur</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier elite">ELITE / IV</div>
                     <div class="card-price">$<span class="card-price-period">16/month</span></div>
-                    <div class="card-desc">Bespoke executive templates crafted for board-level presentation.</div>
+                    <div class="card-desc">Everything in Luxury + board experience and unlimited customization.</div>
                     <a href="https://saminak.gumroad.com/l/mdpcz" class="card-btn elite">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Résumé builder</div>
-                        <div class="feature">PDF download</div>
-                        <div class="feature">Premium design</div>
+                        <div class="feature">Everything in Luxury</div>
+                        <div class="feature">Board experience</div>
+                        <div class="feature">Multiple achievements</div>
                         <div class="feature">Unlimited revisions</div>
                     </div>
                 </div>
@@ -867,6 +870,8 @@
 <div class="builder-container" id="builderContainer">
     <div class="sidebar">
         <div style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">Atelier Résumé</div>
+        <div id="tierBadge" class="tier-badge"></div>
+        
         <div style="margin-bottom: 20px;">
             <h3 style="font-size: 12px; margin-bottom: 12px; color: #666;">COLORS</h3>
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
@@ -881,13 +886,8 @@
     </div>
     <div class="main-content">
         <div style="padding: 20px; background: white; border-bottom: 1px solid #ddd;">Resume Builder</div>
-        <div class="editor-area">
-            <h3>Your Information</h3>
-            <input type="text" class="input-field" placeholder="Full Name">
-            <input type="email" class="input-field" placeholder="Email">
-            <input type="tel" class="input-field" placeholder="Phone">
-            <h3 style="margin-top: 20px;">Summary</h3>
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;"></textarea>
+        <div class="editor-area" id="editorArea">
+            <!-- Form sections will be dynamically inserted based on tier -->
         </div>
     </div>
 </div>
@@ -910,14 +910,123 @@ const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+let currentUserTier = null;
+
 const landingPage = document.getElementById('landingPage');
 const authModal = document.getElementById('authModal');
 const builderContainer = document.getElementById('builderContainer');
+const editorArea = document.getElementById('editorArea');
+const tierBadge = document.getElementById('tierBadge');
 const signupForm = document.getElementById('signupForm');
 const signinForm = document.getElementById('signinForm');
 const signInBtn = document.getElementById('signInBtn');
 const closeModal = document.getElementById('closeModal');
 const logoutBtn = document.getElementById('logoutBtn');
+
+// Tier-based form templates
+const tierForms = {
+    Professional: `
+        <h3>Your Information</h3>
+        <input type="text" class="input-field" placeholder="Full Name" id="fullName">
+        <input type="email" class="input-field" placeholder="Email" id="email">
+        <input type="tel" class="input-field" placeholder="Phone" id="phone">
+        <h3 style="margin-top: 20px;">Professional Summary</h3>
+        <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="summary" placeholder="Write a brief summary of your professional background..."></textarea>
+    `,
+    Premium: `
+        <h3>Your Information</h3>
+        <input type="text" class="input-field" placeholder="Full Name" id="fullName">
+        <input type="email" class="input-field" placeholder="Email" id="email">
+        <input type="tel" class="input-field" placeholder="Phone" id="phone">
+        <h3 style="margin-top: 20px;">Professional Summary</h3>
+        <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="summary"></textarea>
+        
+        <div class="form-section">
+            <h3>Work Experience</h3>
+            <input type="text" class="input-field" placeholder="Job Title" id="jobTitle1">
+            <input type="text" class="input-field" placeholder="Company" id="company1">
+            <input type="text" class="input-field" placeholder="Years (e.g., 2020 - 2023)" id="years1">
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="jobDesc1" placeholder="Job description and achievements..."></textarea>
+        </div>
+    `,
+    Luxury: `
+        <h3>Your Information</h3>
+        <input type="text" class="input-field" placeholder="Full Name" id="fullName">
+        <input type="email" class="input-field" placeholder="Email" id="email">
+        <input type="tel" class="input-field" placeholder="Phone" id="phone">
+        <h3 style="margin-top: 20px;">Professional Summary</h3>
+        <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="summary"></textarea>
+        
+        <div class="form-section">
+            <h3>Work Experience</h3>
+            <input type="text" class="input-field" placeholder="Job Title" id="jobTitle1">
+            <input type="text" class="input-field" placeholder="Company" id="company1">
+            <input type="text" class="input-field" placeholder="Years" id="years1">
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="jobDesc1"></textarea>
+        </div>
+
+        <div class="form-section">
+            <h3>Education</h3>
+            <input type="text" class="input-field" placeholder="School/University" id="school">
+            <input type="text" class="input-field" placeholder="Degree" id="degree">
+            <input type="text" class="input-field" placeholder="Graduation Year" id="gradYear">
+        </div>
+
+        <div class="form-section">
+            <h3>Skills</h3>
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="skills" placeholder="Skills (comma separated)"></textarea>
+        </div>
+
+        <div class="form-section">
+            <h3>Awards & Certifications</h3>
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="awards" placeholder="Awards and certifications..."></textarea>
+        </div>
+    `,
+    Elite: `
+        <h3>Your Information</h3>
+        <input type="text" class="input-field" placeholder="Full Name" id="fullName">
+        <input type="email" class="input-field" placeholder="Email" id="email">
+        <input type="tel" class="input-field" placeholder="Phone" id="phone">
+        <h3 style="margin-top: 20px;">Professional Summary</h3>
+        <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="summary"></textarea>
+        
+        <div class="form-section">
+            <h3>Work Experience (Multiple)</h3>
+            <input type="text" class="input-field" placeholder="Job Title" id="jobTitle1">
+            <input type="text" class="input-field" placeholder="Company" id="company1">
+            <input type="text" class="input-field" placeholder="Years" id="years1">
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="jobDesc1"></textarea>
+            <input type="text" class="input-field" placeholder="Job Title (2nd)" id="jobTitle2">
+            <input type="text" class="input-field" placeholder="Company (2nd)" id="company2">
+        </div>
+
+        <div class="form-section">
+            <h3>Education</h3>
+            <input type="text" class="input-field" placeholder="School/University" id="school">
+            <input type="text" class="input-field" placeholder="Degree" id="degree">
+        </div>
+
+        <div class="form-section">
+            <h3>Skills</h3>
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="skills"></textarea>
+        </div>
+
+        <div class="form-section">
+            <h3>Board Experience & Memberships</h3>
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="boardExp" placeholder="Board positions and memberships..."></textarea>
+        </div>
+
+        <div class="form-section">
+            <h3>Awards & Honors</h3>
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="awards"></textarea>
+        </div>
+
+        <div class="form-section">
+            <h3>Key Achievements</h3>
+            <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="achievements" placeholder="Major milestones and achievements..."></textarea>
+        </div>
+    `
+};
 
 function openModal(form = 'signup') {
     authModal.classList.add('active');
@@ -957,8 +1066,12 @@ signupForm.addEventListener('submit', async (e) => {
         if (q.empty) throw new Error('Invalid code');
         if (q.docs[0].data().isUsed) throw new Error('Code already used');
 
+        const tier = q.docs[0].data().tier;
         await auth.createUserWithEmailAndPassword(email, password);
         await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
+        
+        currentUserTier = tier;
+        localStorage.setItem('userTier', tier);
         
         closeAuthModal();
         showBuilder();
@@ -984,37 +1097,114 @@ signinForm.addEventListener('submit', async (e) => {
 });
 
 auth.onAuthStateChanged(user => {
-    if (user) showBuilder();
-    else { landingPage.style.display = 'block'; builderContainer.classList.remove('active'); }
+    if (user) {
+        currentUserTier = localStorage.getItem('userTier') || 'Professional';
+        showBuilder();
+    } else {
+        landingPage.style.display = 'block';
+        builderContainer.classList.remove('active');
+    }
 });
 
 function showBuilder() {
     landingPage.style.display = 'none';
     builderContainer.classList.add('active');
+    tierBadge.textContent = `${currentUserTier.toUpperCase()} TIER`;
+    editorArea.innerHTML = tierForms[currentUserTier] || tierForms.Professional;
 }
 
 logoutBtn.addEventListener('click', () => {
     auth.signOut();
+    localStorage.removeItem('userTier');
     landingPage.style.display = 'block';
     builderContainer.classList.remove('active');
 });
 
-document.getElementById('downloadPdfBtn').addEventListener('click', () => {
-    const name = document.querySelector('input[placeholder="Full Name"]').value || 'Resume';
-    const email = document.querySelector('input[placeholder="Email"]').value || '';
-    const phone = document.querySelector('input[placeholder="Phone"]').value || '';
-    const summary = document.querySelector('textarea').value || '';
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'downloadPdfBtn') {
+        generatePDF();
+    }
+});
 
-    const element = document.createElement('div');
-    element.innerHTML = `
+function generatePDF() {
+    const name = document.getElementById('fullName')?.value || 'Resume';
+    const email = document.getElementById('email')?.value || '';
+    const phone = document.getElementById('phone')?.value || '';
+    const summary = document.getElementById('summary')?.value || '';
+    const jobTitle1 = document.getElementById('jobTitle1')?.value || '';
+    const company1 = document.getElementById('company1')?.value || '';
+    const years1 = document.getElementById('years1')?.value || '';
+    const jobDesc1 = document.getElementById('jobDesc1')?.value || '';
+    const school = document.getElementById('school')?.value || '';
+    const degree = document.getElementById('degree')?.value || '';
+    const skills = document.getElementById('skills')?.value || '';
+    const awards = document.getElementById('awards')?.value || '';
+    const boardExp = document.getElementById('boardExp')?.value || '';
+    const achievements = document.getElementById('achievements')?.value || '';
+
+    let pdfContent = `
         <div style="font-family: Arial, sans-serif; padding: 40px; max-width: 800px;">
             <h1 style="margin: 0; font-size: 28px;">${name}</h1>
             <p style="margin: 5px 0; color: #666;">${email} | ${phone}</p>
             <hr style="margin: 20px 0; border: none; border-top: 1px solid #ccc;">
-            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">PROFESSIONAL SUMMARY</h2>
-            <p style="line-height: 1.6; color: #555;">${summary || 'No summary provided'}</p>
-        </div>
     `;
+
+    if (summary) {
+        pdfContent += `
+            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">PROFESSIONAL SUMMARY</h2>
+            <p style="line-height: 1.6; color: #555;">${summary}</p>
+        `;
+    }
+
+    if (jobTitle1 || company1) {
+        pdfContent += `
+            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">EXPERIENCE</h2>
+            <p style="margin: 5px 0; font-weight: bold;">${jobTitle1}</p>
+            <p style="margin: 2px 0; color: #666;">${company1} | ${years1}</p>
+            <p style="margin: 5px 0; line-height: 1.6; color: #555;">${jobDesc1}</p>
+        `;
+    }
+
+    if (school || degree) {
+        pdfContent += `
+            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">EDUCATION</h2>
+            <p style="margin: 5px 0; font-weight: bold;">${degree}</p>
+            <p style="margin: 2px 0; color: #666;">${school}</p>
+        `;
+    }
+
+    if (skills) {
+        pdfContent += `
+            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">SKILLS</h2>
+            <p style="line-height: 1.6; color: #555;">${skills}</p>
+        `;
+    }
+
+    if (boardExp) {
+        pdfContent += `
+            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">BOARD EXPERIENCE</h2>
+            <p style="line-height: 1.6; color: #555;">${boardExp}</p>
+        `;
+    }
+
+    if (awards) {
+        pdfContent += `
+            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">AWARDS & CERTIFICATIONS</h2>
+            <p style="line-height: 1.6; color: #555;">${awards}</p>
+        `;
+    }
+
+    if (achievements) {
+        pdfContent += `
+            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">KEY ACHIEVEMENTS</h2>
+            <p style="line-height: 1.6; color: #555;">${achievements}</p>
+        `;
+    }
+
+    pdfContent += `</div>`;
+
+    const element = document.createElement('div');
+    element.innerHTML = pdfContent;
 
     const opt = {
         margin: 10,
@@ -1025,7 +1215,7 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     };
 
     html2pdf().set(opt).from(element).save();
-});
+}
 </script>
 
 </body>
