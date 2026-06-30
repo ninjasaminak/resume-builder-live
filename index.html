@@ -1250,35 +1250,30 @@
                     </div>
                 </div>
 
-                <!-- Experience - Premium+ -->
+                <!-- Certifications - Premium+ -->
                 <div class="form-section tier-premium" id="experienceSection">
-                    <div class="section-title">Work Experience</div>
+                    <div class="section-title">Certifications</div>
                     
                     <div class="builder-form-group">
-                        <label>Job Title</label>
-                        <input type="text" id="jobTitle" placeholder="Senior Developer">
+                        <label>Certificate Name</label>
+                        <input type="text" id="jobTitle" placeholder="AWS Certified Solutions Architect">
                     </div>
 
                     <div class="builder-form-group">
-                        <label>Company</label>
-                        <input type="text" id="company" placeholder="Tech Company Inc.">
+                        <label>Issuing Organization</label>
+                        <input type="text" id="company" placeholder="Amazon Web Services">
                     </div>
 
                     <div class="builder-form-group">
-                        <label>Duration</label>
-                        <input type="text" id="duration" placeholder="2020 - Present">
-                    </div>
-
-                    <div class="builder-form-group">
-                        <label>Description</label>
-                        <textarea id="jobDesc" placeholder="Key responsibilities and achievements..."></textarea>
+                        <label>Date Obtained</label>
+                        <input type="text" id="duration" placeholder="January 2024">
                     </div>
                 </div>
 
                 <div class="form-section hidden tier-lock" id="experienceLock">
                     <div class="tier-lock">
-                        <strong>🔒 Work Experience</strong><br>
-                        <span style="font-size: 12px;">Available in Premium tier and above. Upgrade to add experience.</span>
+                        <strong>🔒 Certifications</strong><br>
+                        <span style="font-size: 12px;">Available in Premium tier and above. Upgrade to add certifications.</span>
                     </div>
                 </div>
 
@@ -1368,11 +1363,10 @@
                 </div>
 
                 <div id="previewExperienceSection" class="hidden">
-                    <div class="resume-section-title">Experience</div>
+                    <div class="resume-section-title">Certifications</div>
                     <div class="resume-item">
-                        <div class="resume-item-title" id="previewJobTitle">Job Title</div>
-                        <div class="resume-item-subtitle" id="previewCompanyDuration">Company • Date</div>
-                        <div class="resume-item-desc" id="previewJobDesc"></div>
+                        <div class="resume-item-title" id="previewJobTitle">Certificate Name</div>
+                        <div class="resume-item-subtitle" id="previewCompanyDuration">Organization • Date</div>
                     </div>
                 </div>
 
@@ -1485,6 +1479,9 @@ function showBuilder() {
     landingPage.style.display = 'none';
     builderPage.classList.add('active');
 }
+
+// Start with landing page
+showLanding();
 
 // AUTH MODAL
 const signupForm = document.getElementById('signupForm');
@@ -1615,9 +1612,8 @@ function updatePreview() {
     }
 
     if (jobTitleInput.value || companyInput.value || durationInput.value) {
-        previewJobTitle.textContent = jobTitleInput.value || 'Job Title';
-        previewCompanyDuration.textContent = (companyInput.value || 'Company') + ' • ' + (durationInput.value || 'Date');
-        previewJobDesc.textContent = jobDescInput.value;
+        previewJobTitle.textContent = jobTitleInput.value || 'Certificate Name';
+        previewCompanyDuration.textContent = (companyInput.value || 'Organization') + ' • ' + (durationInput.value || 'Date');
         previewExperienceSection.classList.remove('hidden');
     } else {
         previewExperienceSection.classList.add('hidden');
