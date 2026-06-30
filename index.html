@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atelier Résumé - Premium Resume Builder</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,7 +15,11 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+        }
+
+        /* ========== LANDING PAGE STYLES ========== */
+        .landing-page {
             background: #000;
             color: #fff;
         }
@@ -49,22 +55,21 @@
             font-size: 18px;
         }
 
-        nav.nav-menu {
+        .nav-menu {
             display: flex;
             gap: 50px;
             flex: 1;
             margin-left: 100px;
         }
 
-        nav.nav-menu a {
+        .nav-menu a {
             color: #aaa;
             text-decoration: none;
             font-size: 14px;
             cursor: pointer;
-            transition: color 0.2s;
         }
 
-        nav.nav-menu a:hover {
+        .nav-menu a:hover {
             color: #fff;
         }
 
@@ -81,7 +86,6 @@
 
         .sign-in-btn:hover {
             border-color: #fff;
-            color: #ffd700;
         }
 
         /* Hero Section */
@@ -213,12 +217,6 @@
             border: 1px solid #333;
             border-radius: 8px;
             overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(255, 215, 0, 0.1);
         }
 
         .pricing-card.elite {
@@ -367,17 +365,10 @@
 
         .card-btn:hover {
             background: #f0f0f0;
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .card-btn.elite {
             background: #ffd700;
-            color: #000;
-        }
-
-        .card-btn.elite:hover {
-            background: #ffed4e;
         }
 
         .card-features {
@@ -438,7 +429,7 @@
         }
 
         /* Footer */
-        footer {
+        .footer {
             padding: 40px 60px;
             text-align: center;
             border-top: 1px solid #333;
@@ -483,11 +474,6 @@
             font-size: 28px;
             cursor: pointer;
             color: #aaa;
-            transition: color 0.2s;
-        }
-
-        .close-modal:hover {
-            color: #fff;
         }
 
         .auth-box h1 {
@@ -521,13 +507,11 @@
             border-radius: 4px;
             color: #fff;
             font-size: 14px;
-            transition: all 0.2s;
         }
 
         .form-group input:focus {
             outline: none;
             border-color: #ffd700;
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
         }
 
         .btn-submit {
@@ -540,12 +524,6 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 12px;
-            transition: all 0.2s;
-        }
-
-        .btn-submit:hover {
-            background: #ffed4e;
-            transform: scale(1.02);
         }
 
         .error {
@@ -567,57 +545,226 @@
             color: #ffd700;
             cursor: pointer;
             text-decoration: underline;
-            transition: color 0.2s;
-        }
-
-        .toggle-form button:hover {
-            color: #ffed4e;
         }
 
         .hidden {
             display: none;
         }
 
-        /* Builder */
-        .builder-container {
+        /* ========== BUILDER PAGE STYLES ========== */
+        .builder-page {
+            background: #f8f9fa;
+            color: #2c3e50;
             display: none;
-            min-height: 100vh;
-            background: #f5f5f5;
-            flex-direction: row;
         }
 
-        .builder-container.active {
-            display: flex;
+        .builder-page.active {
+            display: block;
         }
 
-        .sidebar {
-            width: 280px;
+        /* Builder Header */
+        .builder-header {
             background: white;
-            padding: 20px;
-            border-right: 1px solid #ddd;
-            overflow-y: auto;
+            border-bottom: 1px solid #e0e6ed;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
-        .sidebar h3 {
+        .builder-header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .builder-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .builder-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .tier-badge {
+            background: #f0f4f8;
+            border-radius: 20px;
+            padding: 6px 14px;
             font-size: 12px;
-            margin-bottom: 12px;
-            color: #666;
+            font-weight: 600;
+            color: #5a6c7d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .color-grid {
+        .builder-header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-info {
+            text-align: right;
+            font-size: 13px;
+        }
+
+        .user-email {
+            color: #5a6c7d;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        /* Builder Container */
+        .builder-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 60px);
+            gap: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        /* Form Panel */
+        .form-panel {
+            background: white;
+            border-radius: 12px;
+            overflow-y: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .form-header {
+            padding: 24px;
+            border-bottom: 2px solid #f0f4f8;
+            background: #fafbfc;
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            font-size: 13px;
+            color: #5a6c7d;
+        }
+
+        .form-content {
+            padding: 24px;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #5a6c7d;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 14px;
+            background: #ffd700;
+            border-radius: 2px;
+        }
+
+        .builder-form-group {
+            margin-bottom: 16px;
+        }
+
+        .builder-form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #2c3e50;
+        }
+
+        .builder-form-group input,
+        .builder-form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1dce6;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+            color: #2c3e50;
+            background: #fafbfc;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .builder-form-group input:focus,
+        .builder-form-group textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+
+        .builder-form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .color-picker {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 12px;
             margin-bottom: 20px;
         }
 
         .color-btn {
-            width: 50px;
-            height: 50px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
+            width: 100%;
+            aspect-ratio: 1;
+            border: 3px solid transparent;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
 
         .color-btn:hover {
@@ -625,79 +772,158 @@
         }
 
         .color-btn.active {
-            border-color: #333;
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #1a1a1a;
         }
 
-        .main-content {
-            flex: 1;
+        .color-btn.blue { background: #667eea; }
+        .color-btn.pink { background: #e91e63; }
+        .color-btn.orange { background: #ff9800; }
+        .color-btn.teal { background: #1abc9c; }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e0e6ed;
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .editor-area {
-            flex: 1;
-            padding: 24px;
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a1a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f0f4f8;
+            color: #5a6c7d;
+            border: 1px solid #d1dce6;
+        }
+
+        .btn-secondary:hover {
+            background: #e6eef7;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
             overflow-y: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
         }
 
-        .editor-area h3 {
-            font-size: 14px;
-            margin-bottom: 12px;
-            margin-top: 20px;
+        .resume-preview {
+            background: white;
+            padding: 40px;
+            font-family: 'Garamond', 'Georgia', serif;
+            color: #1a1a1a;
+            line-height: 1.6;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
         }
 
-        .editor-area h3:first-child {
-            margin-top: 0;
+        .resume-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid;
+            padding-bottom: 16px;
         }
 
-        .logout-btn {
-            padding: 8px 16px;
-            background: #d32f2f;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            width: 100%;
-            transition: all 0.2s;
-        }
-
-        .logout-btn:hover {
-            background: #b71c1c;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 10px;
+        .resume-name {
+            font-size: 24px;
+            font-weight: 700;
             margin-bottom: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 13px;
-            transition: all 0.2s;
+            letter-spacing: -0.5px;
         }
 
-        .input-field:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        .resume-contact {
+            font-size: 11px;
+            color: #5a6c7d;
+            letter-spacing: 0.5px;
         }
 
-        .download-pdf-btn {
-            width: 100%;
-            padding: 10px;
-            background: #388e3c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            cursor: pointer;
+        .resume-section-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .resume-item {
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+
+        .resume-item-title {
             font-weight: 600;
-            transition: all 0.2s;
+            margin-bottom: 2px;
         }
 
-        .download-pdf-btn:hover {
-            background: #2e7d32;
+        .resume-item-subtitle {
+            font-size: 11px;
+            color: #5a6c7d;
+            font-style: italic;
+        }
+
+        .resume-item-desc {
+            font-size: 11px;
+            color: #404040;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .tier-lock {
+            background: #fef3e2;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 13px;
+            color: #92400e;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f0f4f8;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c9d3df;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b0b8c4;
         }
 
         @media (max-width: 1024px) {
@@ -705,218 +931,176 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 20px;
-                flex-direction: column;
-                gap: 20px;
+            .builder-container {
+                grid-template-columns: 1fr;
             }
 
-            nav.nav-menu {
-                margin-left: 0;
-                gap: 20px;
-            }
-
-            .hero {
-                padding: 40px 20px;
-            }
-
-            .hero-title {
-                font-size: 48px;
-            }
-
-            .rating-section {
-                flex-direction: column;
-                gap: 20px;
+            .preview-panel {
+                position: relative;
+                top: 0;
+                height: auto;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- Landing Page -->
-<main id="landingPage">
-    <!-- Header -->
-    <header class="header">
+<!-- LANDING PAGE -->
+<div id="landingPage" class="landing-page">
+    <div class="header">
         <div class="logo">
             <div class="logo-icon">A</div>
             <span>Atelier Résumé</span>
         </div>
-        <nav class="nav-menu">
-            <a href="#tiers">Tiers</a>
-            <a href="#templates">Templates</a>
-            <a href="#examples">Examples</a>
-            <a href="#journal">Journal</a>
-            <a href="#help">Help</a>
-        </nav>
+        <div class="nav-menu">
+            <a>Tiers</a>
+            <a>Templates</a>
+            <a>Examples</a>
+            <a>Journal</a>
+            <a>Help</a>
+        </div>
         <button class="sign-in-btn" id="signInBtn">Sign in</button>
-    </header>
+    </div>
 
-    <!-- Hero -->
-    <section class="hero">
+    <div class="hero">
         <div class="hero-tag">EST. 2019 - TRUSTED BY 40,000+ PROFESSIONALS</div>
         <h1 class="hero-title">Résumés worth <span class="gold">reading.</span></h1>
         <p class="hero-desc">A small studio for considered career documents. Pick a tier, build in minutes, and export a recruiter-ready PDF set in editorial typography — quietly engineered to pass every ATS.</p>
-    </section>
+    </div>
 
-    <!-- Stats -->
-    <section class="stats">
-        <article class="stat-item">
+    <div class="stats">
+        <div class="stat-item">
             <div class="stat-number">240+</div>
             <div class="stat-label">Templates</div>
-        </article>
-        <article class="stat-item">
+        </div>
+        <div class="stat-item">
             <div class="stat-number">4.9/5</div>
             <div class="stat-label">Average Rating</div>
-        </article>
-        <article class="stat-item">
+        </div>
+        <div class="stat-item">
             <div class="stat-number">6,200+</div>
             <div class="stat-label">Reviews</div>
-        </article>
-        <article class="stat-item">
+        </div>
+        <div class="stat-item">
             <div class="stat-number">11 min</div>
             <div class="stat-label">Median Build Time</div>
-        </article>
-    </section>
+        </div>
+    </div>
 
-    <!-- Section Intro -->
     <div class="section-intro">
         <div class="section-label">SECTION I · THE COLLECTION</div>
         <h2 class="section-title">Choose your <span class="gold">tier</span></h2>
     </div>
 
-    <!-- Pricing -->
-    <section class="pricing-section">
+    <div class="pricing-section">
         <div class="pricing-grid">
             <!-- Professional -->
-            <article class="pricing-card">
+            <div class="pricing-card">
                 <div class="card-preview professional">
                     <div class="resume-header">JANE SMITH</div>
                     <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
                     <div class="resume-section">SUMMARY</div>
                     <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
-                    <div class="resume-section">EXPERIENCE</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px;">Senior Developer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2021 - Present</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">• Led migration to typed service mesh</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px;">Software Engineer</div>
-                    <div style="font-size: 8px; color: #999;">2019 - 2021</div>
+                    <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">⊘ Experience, education, skills locked</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PROFESSIONAL / I</div>
                     <div class="card-price">$<span class="card-price-period">6/month</span></div>
                     <div class="card-desc">Clean, ATS-friendly templates for the early-career professional.</div>
-                    <a href="https://saminak.gumroad.com/l/ojoere" class="card-btn">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/ojoere" target="_blank" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Résumé builder</div>
+                        <div class="feature">Name, email, phone</div>
+                        <div class="feature">Professional summary</div>
                         <div class="feature">PDF download</div>
-                        <div class="feature">1 template</div>
                         <div class="feature">Live preview</div>
                     </div>
                 </div>
-            </article>
+            </div>
 
             <!-- Premium -->
-            <article class="pricing-card">
+            <div class="pricing-card">
                 <div class="card-preview premium">
                     <div class="resume-header">ALEX JOHNSON</div>
-                    <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York<br>linkedin.com/in/alexjohnson</div>
-                    <div class="resume-section">CORE COMPETENCIES</div>
-                    <div style="font-size: 8px; color: #666; margin: 2px 0;">Distributed Systems • Cloud Architecture • Team Leadership</div>
+                    <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">Staff Engineer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2020 - Present | Tech Lead</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">• Architected platform processing 4B events/day</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">• Drove adoption across 12 teams</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">Senior Engineer</div>
-                    <div style="font-size: 8px; color: #999;">2018 - 2020 | Infrastructure</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2020 - Present</div>
+                    <div style="font-size: 8px; color: #666;">Built and scaled distributed systems.</div>
+                    <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">⊘ Education, skills locked</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PREMIUM / II</div>
                     <div class="card-price">$<span class="card-price-period">9/month</span></div>
                     <div class="card-desc">Modern layouts with refined typography for mid-career operators.</div>
-                    <a href="https://saminak.gumroad.com/l/nrdaz" class="card-btn">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/nrdaz" target="_blank" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Résumé builder</div>
-                        <div class="feature">PDF download</div>
+                        <div class="feature">Everything from Professional</div>
+                        <div class="feature">Work experience section</div>
                         <div class="feature">Colour picker</div>
                         <div class="feature">Live preview</div>
                     </div>
                 </div>
-            </article>
+            </div>
 
             <!-- Luxury -->
-            <article class="pricing-card">
+            <div class="pricing-card">
                 <div class="card-preview luxury">
                     <div class="resume-header">MORGAN CHEN</div>
-                    <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco, CA<br>linkedin.com/in/morganchen | morgan.com</div>
-                    <div class="resume-section">EXECUTIVE PROFILE</div>
-                    <div style="font-size: 9px; color: #333; line-height: 1.3; margin: 3px 0;">Visionary product leader driving $2.3M ARR. 10+ years scaling from 0→1.</div>
-                    <div class="resume-section">KEY ACHIEVEMENTS</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Grew product org 8→50 people, 3 time zones</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Launched flagship generating $2.3M ARR Y1</div>
+                    <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco, CA</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">VP Product</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2019 - Present | Strategy & Growth</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">Director of Product</div>
-                    <div style="font-size: 8px; color: #999;">2016 - 2019 | Operations</div>
-                    <div class="resume-section">AWARDS</div>
-                    <div style="font-size: 8px; color: #666;">Forbes 30U30 • Product Leader of Year</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2019 - Present</div>
+                    <div class="resume-section">EDUCATION</div>
+                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">Bachelor of Science</div>
+                    <div style="font-size: 8px; color: #999;">Stanford University • 2015</div>
+                    <div class="resume-section">SKILLS</div>
+                    <div style="font-size: 9px; color: #666;">Product Strategy • Leadership • Data Analysis</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">LUXURY / III</div>
                     <div class="card-price">$<span class="card-price-period">12/month</span></div>
                     <div class="card-desc">Editorial-grade templates for senior leaders and specialists.</div>
-                    <a href="https://saminak.gumroad.com/l/eqnsrx" class="card-btn">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/eqnsrx" target="_blank" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Résumé builder</div>
-                        <div class="feature">PDF download</div>
-                        <div class="feature">Advanced theme</div>
-                        <div class="feature">Live preview</div>
+                        <div class="feature">Everything from Premium</div>
+                        <div class="feature">Education section</div>
+                        <div class="feature">Skills & expertise</div>
+                        <div class="feature">Advanced themes</div>
                     </div>
                 </div>
-            </article>
+            </div>
 
             <!-- Elite -->
-            <article class="pricing-card elite">
+            <div class="pricing-card elite">
                 <div class="card-preview elite">
                     <div class="resume-header">CHRISTOPHER ELITE</div>
-                    <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York, NY<br>Board Director | 2x Founder | $150M ARR Portfolio</div>
-                    <div class="resume-section">EXECUTIVE SUMMARY</div>
-                    <div style="font-size: 9px; color: #333; line-height: 1.3; margin: 3px 0;">Transformational CEO scaling ventures from concept to category leadership. Built 200+ person org across 7 geographies generating $150M ARR.</div>
-                    <div class="resume-section">BOARD EXPERIENCE</div>
+                    <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York, NY</div>
+                    <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">Chief Executive Officer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 1px;">2018 - Present | $15M→$150M ARR</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ $150M ARR across 4 strategic verticals</div>
-                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Built 200+ org spanning 7 markets</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">Board Director</div>
-                    <div style="font-size: 8px; color: #999;">2015 - Present | Fortune 500</div>
-                    <div class="resume-section">HONORS</div>
-                    <div style="font-size: 8px; color: #666;">Ernst & Young Entrepreneur of Year • Wired 50</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2018 - Present</div>
+                    <div class="resume-section">EDUCATION</div>
+                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">MBA</div>
+                    <div style="font-size: 8px; color: #999;">Harvard Business School • 2012</div>
+                    <div class="resume-section">SKILLS & HONORS</div>
+                    <div style="font-size: 9px; color: #666;">Executive Leadership • 2x Founder • Strategic Vision</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier elite">ELITE / IV</div>
                     <div class="card-price">$<span class="card-price-period">16/month</span></div>
                     <div class="card-desc">Bespoke executive templates crafted for board-level presentation.</div>
-                    <a href="https://saminak.gumroad.com/l/mdpcz" class="card-btn elite">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/mdpcz" target="_blank" class="card-btn elite">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Résumé builder</div>
-                        <div class="feature">PDF download</div>
-                        <div class="feature">Premium design</div>
-                        <div class="feature">Unlimited revisions</div>
+                        <div class="feature">Everything from Luxury</div>
+                        <div class="feature">All fields unlocked</div>
+                        <div class="feature">Premium design system</div>
+                        <div class="feature">Priority support</div>
                     </div>
                 </div>
-            </article>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Rating Section -->
-    <section class="rating-section">
+    <div class="rating-section">
         <div class="rating-left">
             <div class="stars">★ ★ ★ ★ ★</div>
             <div class="rating-text">4.9 average from 6,200+ reviews</div>
@@ -925,13 +1109,12 @@
             <span>Secure checkout</span>
             <span>Cancel anytime</span>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer>
+    <div class="footer">
         Atelier Résumé · Considered career documents · © 2025
-    </footer>
-</main>
+    </div>
+</div>
 
 <!-- Auth Modal -->
 <div class="modal-overlay" id="authModal">
@@ -943,20 +1126,20 @@
             <p>Start building your perfect resume</p>
             
             <div class="form-group">
-                <label for="signupEmail">Email</label>
+                <label>Email</label>
                 <input type="email" id="signupEmail" required>
                 <div id="signupEmailError" class="error hidden"></div>
             </div>
 
             <div class="form-group">
-                <label for="signupPassword">Password</label>
+                <label>Password</label>
                 <input type="password" id="signupPassword" required>
                 <div id="signupPasswordError" class="error hidden"></div>
             </div>
 
             <div class="form-group">
-                <label for="licenseCode">Gumroad License Code</label>
-                <input type="text" id="licenseCode" placeholder="e.g., LUX-TEST-001" required>
+                <label>Gumroad License Code</label>
+                <input type="text" id="licenseCode" placeholder="e.g., PROF-GUMROAD-001" required>
                 <div id="licenseCodeError" class="error hidden"></div>
             </div>
 
@@ -972,13 +1155,13 @@
             <p>Log in to your resume builder</p>
             
             <div class="form-group">
-                <label for="signinEmail">Email</label>
+                <label>Email</label>
                 <input type="email" id="signinEmail" required>
                 <div id="signinEmailError" class="error hidden"></div>
             </div>
 
             <div class="form-group">
-                <label for="signinPassword">Password</label>
+                <label>Password</label>
                 <input type="password" id="signinPassword" required>
                 <div id="signinPasswordError" class="error hidden"></div>
             </div>
@@ -992,61 +1175,311 @@
     </div>
 </div>
 
-<!-- Builder -->
-<div class="builder-container" id="builderContainer">
-    <aside class="sidebar">
-        <div style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">Atelier Résumé</div>
-        <div style="margin-bottom: 20px;">
-            <h3>COLORS</h3>
-            <div class="color-grid">
-                <button class="color-btn active" style="background: #667eea;"></button>
-                <button class="color-btn" style="background: #e91e63;"></button>
-                <button class="color-btn" style="background: #ff9800;"></button>
-                <button class="color-btn" style="background: #1abc9c;"></button>
+<!-- BUILDER PAGE -->
+<div id="builderPage" class="builder-page">
+    <div class="builder-header">
+        <div class="builder-header-left">
+            <div class="builder-logo">
+                <div class="builder-logo-icon">A</div>
+                <span>Atelier Résumé</span>
+            </div>
+            <div class="tier-badge" id="tierBadge">Professional</div>
+        </div>
+        <div class="builder-header-right">
+            <div class="user-info">
+                <div id="userEmail" class="user-email">user@example.com</div>
+            </div>
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <div class="builder-container">
+        <!-- Form Panel -->
+        <div class="form-panel">
+            <div class="form-header">
+                <div class="form-title">Build Your Resume</div>
+                <div class="form-subtitle">Add your information to get started</div>
+            </div>
+
+            <div class="form-content">
+                <!-- Personal Section -->
+                <div class="form-section">
+                    <div class="section-title">Personal Information</div>
+                    
+                    <div class="builder-form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="fullName" placeholder="Jane Smith" required>
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Email Address *</label>
+                        <input type="email" id="email" placeholder="jane@example.com" required>
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="phone" placeholder="(555) 123-4567" required>
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Location</label>
+                        <input type="text" id="location" placeholder="Brooklyn, NY">
+                    </div>
+                </div>
+
+                <!-- Professional Summary -->
+                <div class="form-section">
+                    <div class="section-title">Professional Summary</div>
+                    
+                    <div class="builder-form-group">
+                        <label>Summary</label>
+                        <textarea id="summary" placeholder="A brief overview of your professional background and goals..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Experience - Premium+ -->
+                <div class="form-section hidden tier-premium" id="experienceSection">
+                    <div class="section-title">Work Experience</div>
+                    
+                    <div class="builder-form-group">
+                        <label>Job Title</label>
+                        <input type="text" id="jobTitle" placeholder="Senior Developer">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Company</label>
+                        <input type="text" id="company" placeholder="Tech Company Inc.">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Duration</label>
+                        <input type="text" id="duration" placeholder="2020 - Present">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Description</label>
+                        <textarea id="jobDesc" placeholder="Key responsibilities and achievements..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section hidden tier-lock" id="experienceLock">
+                    <div class="tier-lock">
+                        <strong>🔒 Work Experience</strong><br>
+                        <span style="font-size: 12px;">Available in Premium tier and above. Upgrade to add experience.</span>
+                    </div>
+                </div>
+
+                <!-- Education - Luxury+ -->
+                <div class="form-section hidden tier-luxury" id="educationSection">
+                    <div class="section-title">Education</div>
+                    
+                    <div class="builder-form-group">
+                        <label>Degree</label>
+                        <input type="text" id="degree" placeholder="Bachelor of Science">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>School</label>
+                        <input type="text" id="school" placeholder="University Name">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Year</label>
+                        <input type="text" id="graduationYear" placeholder="2019">
+                    </div>
+                </div>
+
+                <div class="form-section hidden tier-lock" id="educationLock">
+                    <div class="tier-lock">
+                        <strong>🔒 Education</strong><br>
+                        <span style="font-size: 12px;">Available in Luxury tier and above. Upgrade to add education.</span>
+                    </div>
+                </div>
+
+                <!-- Skills - Luxury+ -->
+                <div class="form-section hidden tier-luxury" id="skillsSection">
+                    <div class="section-title">Skills & Expertise</div>
+                    
+                    <div class="builder-form-group">
+                        <label>Skills (comma separated)</label>
+                        <textarea id="skills" placeholder="Leadership, Product Strategy, Data Analysis, Team Building"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section hidden tier-lock" id="skillsLock">
+                    <div class="tier-lock">
+                        <strong>🔒 Skills & Expertise</strong><br>
+                        <span style="font-size: 12px;">Available in Luxury tier and above. Upgrade to add skills.</span>
+                    </div>
+                </div>
+
+                <!-- Color Picker -->
+                <div class="form-section">
+                    <div class="section-title">Design</div>
+                    <p style="font-size: 12px; color: #5a6c7d; margin-bottom: 12px;">Choose your resume accent color:</p>
+                    <div class="color-picker">
+                        <button class="color-btn blue active" data-color="#667eea"></button>
+                        <button class="color-btn pink" data-color="#e91e63"></button>
+                        <button class="color-btn orange" data-color="#ff9800"></button>
+                        <button class="color-btn teal" data-color="#1abc9c"></button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="downloadPdfBtn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="btn btn-secondary" id="previewBtn">
+                        <i class="fas fa-eye"></i> Full Preview
+                    </button>
+                </div>
             </div>
         </div>
-        <button class="download-pdf-btn">📥 Download PDF</button>
-        <button class="logout-btn" id="logoutBtn">Logout</button>
-    </aside>
-    <div class="main-content">
-        <div style="padding: 20px; background: white; border-bottom: 1px solid #ddd; font-weight: 600;">Resume Builder</div>
-        <div class="editor-area">
-            <h3>Your Information</h3>
-            <input type="text" class="input-field" placeholder="Full Name">
-            <input type="email" class="input-field" placeholder="Email">
-            <input type="tel" class="input-field" placeholder="Phone">
-            <h3>Summary</h3>
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;"></textarea>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <div class="resume-preview" id="resumePreview">
+                <div class="resume-header" id="resumeHeaderAccent">
+                    <div class="resume-name" id="previewName">Your Name</div>
+                    <div class="resume-contact">
+                        <span id="previewEmail">your@email.com</span> • 
+                        <span id="previewPhone">(555) 123-4567</span> • 
+                        <span id="previewLocation">City, State</span>
+                    </div>
+                </div>
+
+                <div id="previewSummarySection" class="hidden">
+                    <div class="resume-section-title">Professional Summary</div>
+                    <div id="previewSummary" style="font-size: 12px; color: #404040; line-height: 1.5;"></div>
+                </div>
+
+                <div id="previewExperienceSection" class="hidden">
+                    <div class="resume-section-title">Experience</div>
+                    <div class="resume-item">
+                        <div class="resume-item-title" id="previewJobTitle">Job Title</div>
+                        <div class="resume-item-subtitle" id="previewCompanyDuration">Company • Date</div>
+                        <div class="resume-item-desc" id="previewJobDesc"></div>
+                    </div>
+                </div>
+
+                <div id="previewEducationSection" class="hidden">
+                    <div class="resume-section-title">Education</div>
+                    <div class="resume-item">
+                        <div class="resume-item-title" id="previewDegree">Degree</div>
+                        <div class="resume-item-subtitle" id="previewSchoolYear">School • Year</div>
+                    </div>
+                </div>
+
+                <div id="previewSkillsSection" class="hidden">
+                    <div class="resume-section-title">Skills</div>
+                    <div id="previewSkills" style="font-size: 12px; color: #404040; line-height: 1.6;"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
 
 <script>
 const firebaseConfig = {
-  apiKey: "AIzaSyAp-IGJ-6HwjQT_RB5n9k16bc1W1izt3Bk",
-  authDomain: "resume-builder-a0f2.firebaseapp.com",
-  projectId: "resume-builder-a0f2",
-  storageBucket: "resume-builder-a0f2.firebasestorage.app",
-  messagingSenderId: "286535613863",
-  appId: "1:286535613863:web:e28d50c94e232a7ba05622"
+  apiKey: "AIzaSyAp-1Gj-6HWiQT_RB5n9k16bc1WT1zt3Bk",
+  authDomain: "resume-builder-a0fe2.firebaseapp.com",
+  projectId: "resume-builder-a0fe2",
+  storageBucket: "resume-builder-a0fe2.firebasestorage.app",
+  messagingSenderId: "286535613063",
+  appId: "1:286535613063:web:e28d50c94e232a7ba05622"
 };
 
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+// PAGE STATE
 const landingPage = document.getElementById('landingPage');
+const builderPage = document.getElementById('builderPage');
 const authModal = document.getElementById('authModal');
-const builderContainer = document.getElementById('builderContainer');
+
+// TIER LOGIC
+const tierHierarchy = {
+    professional: 0,
+    premium: 1,
+    luxury: 2,
+    elite: 3
+};
+
+const tierNames = {
+    professional: 'Professional',
+    premium: 'Premium',
+    luxury: 'Luxury',
+    elite: 'Elite'
+};
+
+let currentTier = 'professional';
+let currentColor = '#667eea';
+
+// Get user tier from Firestore
+async function getUserTier(email) {
+    try {
+        const snapshot = await db.collection('licenseCodes').where('usedBy', '==', email).get();
+        if (!snapshot.empty) {
+            return snapshot.docs[0].data().tier || 'professional';
+        }
+        return 'professional';
+    } catch (e) {
+        console.error('Error fetching tier:', e);
+        return 'professional';
+    }
+}
+
+// Show tier content
+function showTierContent(tier) {
+    currentTier = tier;
+    
+    document.querySelectorAll('[class*="tier-"]').forEach(el => {
+        el.classList.add('hidden');
+    });
+
+    if (tierHierarchy[tier] >= tierHierarchy.premium) {
+        document.querySelectorAll('.tier-premium').forEach(el => el.classList.remove('hidden'));
+        document.getElementById('experienceLock').classList.add('hidden');
+    } else {
+        document.getElementById('experienceLock').classList.remove('hidden');
+    }
+
+    if (tierHierarchy[tier] >= tierHierarchy.luxury) {
+        document.querySelectorAll('.tier-luxury').forEach(el => el.classList.remove('hidden'));
+        document.getElementById('educationLock').classList.add('hidden');
+        document.getElementById('skillsLock').classList.add('hidden');
+    } else {
+        document.getElementById('educationLock').classList.remove('hidden');
+        document.getElementById('skillsLock').classList.remove('hidden');
+    }
+
+    document.getElementById('tierBadge').textContent = tierNames[tier];
+}
+
+// Show pages
+function showLanding() {
+    landingPage.style.display = 'block';
+    builderPage.classList.remove('active');
+}
+
+function showBuilder() {
+    landingPage.style.display = 'none';
+    builderPage.classList.add('active');
+}
+
+// AUTH MODAL
 const signupForm = document.getElementById('signupForm');
 const signinForm = document.getElementById('signinForm');
 const signInBtn = document.getElementById('signInBtn');
 const closeModal = document.getElementById('closeModal');
-const logoutBtn = document.getElementById('logoutBtn');
 
 function openModal(form = 'signup') {
     authModal.classList.add('active');
@@ -1075,6 +1508,7 @@ document.querySelectorAll('.toggle-btn').forEach(btn => {
     });
 });
 
+// SIGNUP
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = document.getElementById('signupEmail').value.trim();
@@ -1082,95 +1516,156 @@ signupForm.addEventListener('submit', async (e) => {
     const code = document.getElementById('licenseCode').value.trim().toUpperCase();
 
     try {
-        // Clear previous errors
-        document.getElementById('signupEmailError').classList.add('hidden');
-        document.getElementById('signupPasswordError').classList.add('hidden');
-        document.getElementById('licenseCodeError').classList.add('hidden');
-
-        if (password.length < 6) {
-            throw new Error('Password must be at least 6 characters');
-        }
-
-        // Check if license code exists and hasn't been used
         const q = await db.collection('licenseCodes').where('code', '==', code).get();
-        if (q.empty) {
-            throw new Error('Invalid license code');
-        }
-        if (q.docs[0].data().isUsed) {
-            throw new Error('This code has already been used');
-        }
+        if (q.empty) throw new Error('Invalid code');
+        if (q.docs[0].data().isUsed) throw new Error('Code already used');
 
-        // Create user
         await auth.createUserWithEmailAndPassword(email, password);
-        
-        // Mark code as used
-        await db.collection('licenseCodes').doc(q.docs[0].id).update({ 
-            isUsed: true, 
-            usedBy: email,
-            usedAt: new Date()
-        });
+        await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
         
         closeAuthModal();
-        showBuilder();
     } catch (e) {
-        if (e.code === 'auth/email-already-in-use') {
-            document.getElementById('signupEmailError').textContent = 'Email already in use';
-            document.getElementById('signupEmailError').classList.remove('hidden');
-        } else if (e.code === 'auth/invalid-email') {
-            document.getElementById('signupEmailError').textContent = 'Invalid email address';
-            document.getElementById('signupEmailError').classList.remove('hidden');
-        } else if (e.message.includes('license')) {
-            document.getElementById('licenseCodeError').textContent = e.message;
-            document.getElementById('licenseCodeError').classList.remove('hidden');
-        } else {
-            document.getElementById('signupPasswordError').textContent = e.message;
-            document.getElementById('signupPasswordError').classList.remove('hidden');
-        }
+        document.getElementById('licenseCodeError').textContent = e.message;
+        document.getElementById('licenseCodeError').classList.remove('hidden');
     }
 });
 
+// SIGNIN
 signinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     try {
-        // Clear previous errors
-        document.getElementById('signinEmailError').classList.add('hidden');
-        document.getElementById('signinPasswordError').classList.add('hidden');
-
         await auth.signInWithEmailAndPassword(
             document.getElementById('signinEmail').value.trim(),
             document.getElementById('signinPassword').value
         );
         closeAuthModal();
-        showBuilder();
     } catch (e) {
-        if (e.code === 'auth/user-not-found' || e.code === 'auth/wrong-password') {
-            document.getElementById('signinEmailError').textContent = 'Invalid email or password';
-            document.getElementById('signinEmailError').classList.remove('hidden');
-        } else {
-            document.getElementById('signinPasswordError').textContent = e.message;
-            document.getElementById('signinPasswordError').classList.remove('hidden');
-        }
+        document.getElementById('signinEmailError').textContent = e.message;
+        document.getElementById('signinEmailError').classList.remove('hidden');
     }
 });
 
-auth.onAuthStateChanged(user => {
-    if (user) showBuilder();
-    else { 
-        landingPage.style.display = 'block'; 
-        builderContainer.classList.remove('active'); 
+// AUTH STATE
+auth.onAuthStateChanged(async user => {
+    if (user) {
+        document.getElementById('userEmail').textContent = user.email;
+        const tier = await getUserTier(user.email);
+        showTierContent(tier);
+        showBuilder();
+    } else {
+        showLanding();
     }
 });
 
-function showBuilder() {
-    landingPage.style.display = 'none';
-    builderContainer.classList.add('active');
+// BUILDER LOGIC
+const fullNameInput = document.getElementById('fullName');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const locationInput = document.getElementById('location');
+const summaryInput = document.getElementById('summary');
+const jobTitleInput = document.getElementById('jobTitle');
+const companyInput = document.getElementById('company');
+const durationInput = document.getElementById('duration');
+const jobDescInput = document.getElementById('jobDesc');
+const degreeInput = document.getElementById('degree');
+const schoolInput = document.getElementById('school');
+const graduationYearInput = document.getElementById('graduationYear');
+const skillsInput = document.getElementById('skills');
+
+const resumeHeaderAccent = document.getElementById('resumeHeaderAccent');
+const previewName = document.getElementById('previewName');
+const previewEmail = document.getElementById('previewEmail');
+const previewPhone = document.getElementById('previewPhone');
+const previewLocation = document.getElementById('previewLocation');
+const previewSummary = document.getElementById('previewSummary');
+const previewJobTitle = document.getElementById('previewJobTitle');
+const previewCompanyDuration = document.getElementById('previewCompanyDuration');
+const previewJobDesc = document.getElementById('previewJobDesc');
+const previewDegree = document.getElementById('previewDegree');
+const previewSchoolYear = document.getElementById('previewSchoolYear');
+const previewSkills = document.getElementById('previewSkills');
+
+const previewSummarySection = document.getElementById('previewSummarySection');
+const previewExperienceSection = document.getElementById('previewExperienceSection');
+const previewEducationSection = document.getElementById('previewEducationSection');
+const previewSkillsSection = document.getElementById('previewSkillsSection');
+
+function updatePreview() {
+    previewName.textContent = fullNameInput.value || 'Your Name';
+    previewEmail.textContent = emailInput.value || 'your@email.com';
+    previewPhone.textContent = phoneInput.value || '(555) 123-4567';
+    previewLocation.textContent = locationInput.value || 'City, State';
+
+    if (summaryInput.value) {
+        previewSummary.textContent = summaryInput.value;
+        previewSummarySection.classList.remove('hidden');
+    } else {
+        previewSummarySection.classList.add('hidden');
+    }
+
+    if (jobTitleInput.value || companyInput.value || durationInput.value) {
+        previewJobTitle.textContent = jobTitleInput.value || 'Job Title';
+        previewCompanyDuration.textContent = (companyInput.value || 'Company') + ' • ' + (durationInput.value || 'Date');
+        previewJobDesc.textContent = jobDescInput.value;
+        previewExperienceSection.classList.remove('hidden');
+    } else {
+        previewExperienceSection.classList.add('hidden');
+    }
+
+    if (degreeInput.value || schoolInput.value) {
+        previewDegree.textContent = degreeInput.value || 'Degree';
+        previewSchoolYear.textContent = (schoolInput.value || 'School') + ' • ' + (graduationYearInput.value || 'Year');
+        previewEducationSection.classList.remove('hidden');
+    } else {
+        previewEducationSection.classList.add('hidden');
+    }
+
+    if (skillsInput.value) {
+        previewSkills.textContent = skillsInput.value.split(',').map(s => s.trim()).join(' • ');
+        previewSkillsSection.classList.remove('hidden');
+    } else {
+        previewSkillsSection.classList.add('hidden');
+    }
 }
 
-logoutBtn.addEventListener('click', () => {
-    auth.signOut();
-    landingPage.style.display = 'block';
-    builderContainer.classList.remove('active');
+// Color picker
+document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentColor = btn.dataset.color;
+        resumeHeaderAccent.style.borderColor = currentColor;
+    });
 });
+
+// PDF Download
+document.getElementById('downloadPdfBtn').addEventListener('click', () => {
+    const element = document.getElementById('resumePreview');
+    const opt = {
+        margin: 10,
+        filename: (fullNameInput.value || 'Resume') + '.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+    };
+    html2pdf().set(opt).from(element).save();
+});
+
+// Live updates
+[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, 
+ jobTitleInput, companyInput, durationInput, jobDescInput, 
+ degreeInput, schoolInput, graduationYearInput, skillsInput].forEach(input => {
+    input.addEventListener('input', updatePreview);
+});
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    auth.signOut();
+});
+
+// Initial
+updatePreview();
+resumeHeaderAccent.style.borderColor = currentColor;
 </script>
 
 </body>
