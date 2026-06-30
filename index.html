@@ -683,10 +683,15 @@
 
         .form-section {
             margin-bottom: 32px;
+            padding: 0;
         }
 
         .form-section:last-child {
             margin-bottom: 0;
+        }
+
+        .form-section.hidden {
+            display: none;
         }
 
         .section-title {
@@ -699,6 +704,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-top: 0;
         }
 
         .section-title::before {
@@ -725,14 +731,19 @@
         .builder-form-group input,
         .builder-form-group textarea {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px;
             border: 1px solid #d1dce6;
             border-radius: 6px;
             font-size: 13px;
             font-family: inherit;
             color: #2c3e50;
-            background: #fafbfc;
+            background: #ffffff;
             transition: border-color 0.2s, background 0.2s;
+        }
+
+        .builder-form-group input::placeholder,
+        .builder-form-group textarea::placeholder {
+            color: #9ca3af;
         }
 
         .builder-form-group input:focus,
@@ -1240,7 +1251,7 @@
                 </div>
 
                 <!-- Experience - Premium+ -->
-                <div class="form-section hidden tier-premium" id="experienceSection">
+                <div class="form-section tier-premium" id="experienceSection">
                     <div class="section-title">Work Experience</div>
                     
                     <div class="builder-form-group">
@@ -1272,7 +1283,7 @@
                 </div>
 
                 <!-- Education - Luxury+ -->
-                <div class="form-section hidden tier-luxury" id="educationSection">
+                <div class="form-section tier-luxury hidden" id="educationSection">
                     <div class="section-title">Education</div>
                     
                     <div class="builder-form-group">
@@ -1299,7 +1310,7 @@
                 </div>
 
                 <!-- Skills - Luxury+ -->
-                <div class="form-section hidden tier-luxury" id="skillsSection">
+                <div class="form-section tier-luxury hidden" id="skillsSection">
                     <div class="section-title">Skills & Expertise</div>
                     
                     <div class="builder-form-group">
