@@ -956,7 +956,7 @@
 
             <div class="form-group">
                 <label for="licenseCode">Gumroad License Code</label>
-                <input type="text" id="licenseCode" placeholder="e.g., PROF-GUMROAD-001" required>
+                <input type="text" id="licenseCode" placeholder="e.g., LUX-TEST-001" required>
                 <div id="licenseCodeError" class="error hidden"></div>
             </div>
 
@@ -1082,24 +1082,60 @@ signupForm.addEventListener('submit', async (e) => {
     const code = document.getElementById('licenseCode').value.trim().toUpperCase();
 
     try {
-        const q = await db.collection('licenseCodes').where('code', '==', code).get();
-        if (q.empty) throw new Error('Invalid code');
-        if (q.docs[0].data().isUsed) throw new Error('Code already used');
+        // Clear previous errors
+        document.getElementById('signupEmailError').classList.add('hidden');
+        document.getElementById('signupPasswordError').classList.add('hidden');
+        document.getElementById('licenseCodeError').classList.add('hidden');
 
+        if (password.length < 6) {
+            throw new Error('Password must be at least 6 characters');
+        }
+
+        // Check if license code exists and hasn't been used
+        const q = await db.collection('licenseCodes').where('code', '==', code).get();
+        if (q.empty) {
+            throw new Error('Invalid license code');
+        }
+        if (q.docs[0].data().isUsed) {
+            throw new Error('This code has already been used');
+        }
+
+        // Create user
         await auth.createUserWithEmailAndPassword(email, password);
-        await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
+        
+        // Mark code as used
+        await db.collection('licenseCodes').doc(q.docs[0].id).update({ 
+            isUsed: true, 
+            usedBy: email,
+            usedAt: new Date()
+        });
         
         closeAuthModal();
         showBuilder();
     } catch (e) {
-        document.getElementById('licenseCodeError').textContent = e.message;
-        document.getElementById('licenseCodeError').classList.remove('hidden');
+        if (e.code === 'auth/email-already-in-use') {
+            document.getElementById('signupEmailError').textContent = 'Email already in use';
+            document.getElementById('signupEmailError').classList.remove('hidden');
+        } else if (e.code === 'auth/invalid-email') {
+            document.getElementById('signupEmailError').textContent = 'Invalid email address';
+            document.getElementById('signupEmailError').classList.remove('hidden');
+        } else if (e.message.includes('license')) {
+            document.getElementById('licenseCodeError').textContent = e.message;
+            document.getElementById('licenseCodeError').classList.remove('hidden');
+        } else {
+            document.getElementById('signupPasswordError').textContent = e.message;
+            document.getElementById('signupPasswordError').classList.remove('hidden');
+        }
     }
 });
 
 signinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     try {
+        // Clear previous errors
+        document.getElementById('signinEmailError').classList.add('hidden');
+        document.getElementById('signinPasswordError').classList.add('hidden');
+
         await auth.signInWithEmailAndPassword(
             document.getElementById('signinEmail').value.trim(),
             document.getElementById('signinPassword').value
@@ -1107,8 +1143,13 @@ signinForm.addEventListener('submit', async (e) => {
         closeAuthModal();
         showBuilder();
     } catch (e) {
-        document.getElementById('signinEmailError').textContent = e.message;
-        document.getElementById('signinEmailError').classList.remove('hidden');
+        if (e.code === 'auth/user-not-found' || e.code === 'auth/wrong-password') {
+            document.getElementById('signinEmailError').textContent = 'Invalid email or password';
+            document.getElementById('signinEmailError').classList.remove('hidden');
+        } else {
+            document.getElementById('signinPasswordError').textContent = e.message;
+            document.getElementById('signinPasswordError').classList.remove('hidden');
+        }
     }
 });
 
