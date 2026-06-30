@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atelier Résumé - Premium Resume Builder</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -50,21 +49,22 @@
             font-size: 18px;
         }
 
-        .nav-menu {
+        nav.nav-menu {
             display: flex;
             gap: 50px;
             flex: 1;
             margin-left: 100px;
         }
 
-        .nav-menu a {
+        nav.nav-menu a {
             color: #aaa;
             text-decoration: none;
             font-size: 14px;
             cursor: pointer;
+            transition: color 0.2s;
         }
 
-        .nav-menu a:hover {
+        nav.nav-menu a:hover {
             color: #fff;
         }
 
@@ -76,10 +76,12 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
+            transition: all 0.2s;
         }
 
         .sign-in-btn:hover {
             border-color: #fff;
+            color: #ffd700;
         }
 
         /* Hero Section */
@@ -211,6 +213,12 @@
             border: 1px solid #333;
             border-radius: 8px;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(255, 215, 0, 0.1);
         }
 
         .pricing-card.elite {
@@ -262,9 +270,6 @@
             font-size: 13px;
             margin-bottom: 2px;
             letter-spacing: 0.5px;
-        }
-
-        .resume-header {
             color: #222;
         }
 
@@ -300,6 +305,17 @@
             text-transform: uppercase;
             border-top: 1px solid #e0e0e0;
             padding-top: 5px;
+        }
+
+        .resume-line {
+            height: 2px;
+            background: #e0e0e0;
+            margin: 2px 0;
+            border-radius: 1px;
+        }
+
+        .resume-line.short {
+            width: 70%;
         }
 
         .card-content {
@@ -351,10 +367,17 @@
 
         .card-btn:hover {
             background: #f0f0f0;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .card-btn.elite {
             background: #ffd700;
+            color: #000;
+        }
+
+        .card-btn.elite:hover {
+            background: #ffed4e;
         }
 
         .card-features {
@@ -415,7 +438,7 @@
         }
 
         /* Footer */
-        .footer {
+        footer {
             padding: 40px 60px;
             text-align: center;
             border-top: 1px solid #333;
@@ -460,6 +483,11 @@
             font-size: 28px;
             cursor: pointer;
             color: #aaa;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #fff;
         }
 
         .auth-box h1 {
@@ -493,11 +521,13 @@
             border-radius: 4px;
             color: #fff;
             font-size: 14px;
+            transition: all 0.2s;
         }
 
         .form-group input:focus {
             outline: none;
             border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
         }
 
         .btn-submit {
@@ -510,6 +540,12 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 12px;
+            transition: all 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #ffed4e;
+            transform: scale(1.02);
         }
 
         .error {
@@ -531,6 +567,11 @@
             color: #ffd700;
             cursor: pointer;
             text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        .toggle-form button:hover {
+            color: #ffed4e;
         }
 
         .hidden {
@@ -557,15 +598,34 @@
             overflow-y: auto;
         }
 
-        .tier-badge {
-            background: #ffd700;
-            color: #000;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-align: center;
+        .sidebar h3 {
             font-size: 12px;
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .color-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .color-btn.active {
+            border-color: #333;
         }
 
         .main-content {
@@ -580,6 +640,16 @@
             overflow-y: auto;
         }
 
+        .editor-area h3 {
+            font-size: 14px;
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        .editor-area h3:first-child {
+            margin-top: 0;
+        }
+
         .logout-btn {
             padding: 8px 16px;
             background: #d32f2f;
@@ -590,6 +660,11 @@
             font-size: 13px;
             font-weight: 600;
             width: 100%;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #b71c1c;
         }
 
         .input-field {
@@ -599,35 +674,65 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 13px;
+            transition: all 0.2s;
         }
 
-        .form-section {
-            margin-bottom: 30px;
-            padding: 16px;
-            background: #fafafa;
-            border-radius: 4px;
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .form-section h3 {
-            font-size: 14px;
-            margin-bottom: 12px;
-            color: #333;
-        }
-
-        .add-btn {
-            background: #667eea;
+        .download-pdf-btn {
+            width: 100%;
+            padding: 10px;
+            background: #388e3c;
             color: white;
-            padding: 8px 12px;
             border: none;
             border-radius: 4px;
+            margin-bottom: 10px;
             cursor: pointer;
-            font-size: 12px;
-            margin-top: 10px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .download-pdf-btn:hover {
+            background: #2e7d32;
         }
 
         @media (max-width: 1024px) {
             .pricing-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav.nav-menu {
+                margin-left: 0;
+                gap: 20px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .rating-section {
+                flex-direction: column;
+                gap: 20px;
             }
         }
     </style>
@@ -635,49 +740,49 @@
 <body>
 
 <!-- Landing Page -->
-<div id="landingPage">
+<main id="landingPage">
     <!-- Header -->
-    <div class="header">
+    <header class="header">
         <div class="logo">
             <div class="logo-icon">A</div>
             <span>Atelier Résumé</span>
         </div>
-        <div class="nav-menu">
-            <a>Tiers</a>
-            <a>Templates</a>
-            <a>Examples</a>
-            <a>Journal</a>
-            <a>Help</a>
-        </div>
+        <nav class="nav-menu">
+            <a href="#tiers">Tiers</a>
+            <a href="#templates">Templates</a>
+            <a href="#examples">Examples</a>
+            <a href="#journal">Journal</a>
+            <a href="#help">Help</a>
+        </nav>
         <button class="sign-in-btn" id="signInBtn">Sign in</button>
-    </div>
+    </header>
 
     <!-- Hero -->
-    <div class="hero">
+    <section class="hero">
         <div class="hero-tag">EST. 2019 - TRUSTED BY 40,000+ PROFESSIONALS</div>
         <h1 class="hero-title">Résumés worth <span class="gold">reading.</span></h1>
         <p class="hero-desc">A small studio for considered career documents. Pick a tier, build in minutes, and export a recruiter-ready PDF set in editorial typography — quietly engineered to pass every ATS.</p>
-    </div>
+    </section>
 
     <!-- Stats -->
-    <div class="stats">
-        <div class="stat-item">
+    <section class="stats">
+        <article class="stat-item">
             <div class="stat-number">240+</div>
             <div class="stat-label">Templates</div>
-        </div>
-        <div class="stat-item">
+        </article>
+        <article class="stat-item">
             <div class="stat-number">4.9/5</div>
             <div class="stat-label">Average Rating</div>
-        </div>
-        <div class="stat-item">
+        </article>
+        <article class="stat-item">
             <div class="stat-number">6,200+</div>
             <div class="stat-label">Reviews</div>
-        </div>
-        <div class="stat-item">
+        </article>
+        <article class="stat-item">
             <div class="stat-number">11 min</div>
             <div class="stat-label">Median Build Time</div>
-        </div>
-    </div>
+        </article>
+    </section>
 
     <!-- Section Intro -->
     <div class="section-intro">
@@ -686,111 +791,132 @@
     </div>
 
     <!-- Pricing -->
-    <div class="pricing-section">
+    <section class="pricing-section">
         <div class="pricing-grid">
             <!-- Professional -->
-            <div class="pricing-card">
+            <article class="pricing-card">
                 <div class="card-preview professional">
                     <div class="resume-header">JANE SMITH</div>
                     <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
                     <div class="resume-section">SUMMARY</div>
                     <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
+                    <div class="resume-section">EXPERIENCE</div>
+                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px;">Senior Developer</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2021 - Present</div>
+                    <div style="font-size: 8px; color: #666; margin: 1px 0;">• Led migration to typed service mesh</div>
+                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px;">Software Engineer</div>
+                    <div style="font-size: 8px; color: #999;">2019 - 2021</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PROFESSIONAL / I</div>
                     <div class="card-price">$<span class="card-price-period">6/month</span></div>
-                    <div class="card-desc">Basic resume with name, email, phone, and professional summary.</div>
+                    <div class="card-desc">Clean, ATS-friendly templates for the early-career professional.</div>
                     <a href="https://saminak.gumroad.com/l/ojoere" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Name & Contact</div>
-                        <div class="feature">Professional Summary</div>
+                        <div class="feature">Résumé builder</div>
                         <div class="feature">PDF download</div>
+                        <div class="feature">1 template</div>
                         <div class="feature">Live preview</div>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <!-- Premium -->
-            <div class="pricing-card">
+            <article class="pricing-card">
                 <div class="card-preview premium">
                     <div class="resume-header">ALEX JOHNSON</div>
-                    <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York</div>
+                    <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York<br>linkedin.com/in/alexjohnson</div>
+                    <div class="resume-section">CORE COMPETENCIES</div>
+                    <div style="font-size: 8px; color: #666; margin: 2px 0;">Distributed Systems • Cloud Architecture • Team Leadership</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">Staff Engineer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2020 - Present</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2020 - Present | Tech Lead</div>
                     <div style="font-size: 8px; color: #666; margin: 1px 0;">• Architected platform processing 4B events/day</div>
+                    <div style="font-size: 8px; color: #666; margin: 1px 0;">• Drove adoption across 12 teams</div>
+                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">Senior Engineer</div>
+                    <div style="font-size: 8px; color: #999;">2018 - 2020 | Infrastructure</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PREMIUM / II</div>
                     <div class="card-price">$<span class="card-price-period">9/month</span></div>
-                    <div class="card-desc">Professional tier + work experience and job descriptions.</div>
+                    <div class="card-desc">Modern layouts with refined typography for mid-career operators.</div>
                     <a href="https://saminak.gumroad.com/l/nrdaz" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Everything in Professional</div>
-                        <div class="feature">Work Experience</div>
-                        <div class="feature">Multiple positions</div>
-                        <div class="feature">Job descriptions</div>
+                        <div class="feature">Résumé builder</div>
+                        <div class="feature">PDF download</div>
+                        <div class="feature">Colour picker</div>
+                        <div class="feature">Live preview</div>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <!-- Luxury -->
-            <div class="pricing-card">
+            <article class="pricing-card">
                 <div class="card-preview luxury">
                     <div class="resume-header">MORGAN CHEN</div>
-                    <div class="resume-subtext">morgan@email.com | San Francisco, CA</div>
+                    <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco, CA<br>linkedin.com/in/morganchen | morgan.com</div>
+                    <div class="resume-section">EXECUTIVE PROFILE</div>
+                    <div style="font-size: 9px; color: #333; line-height: 1.3; margin: 3px 0;">Visionary product leader driving $2.3M ARR. 10+ years scaling from 0→1.</div>
+                    <div class="resume-section">KEY ACHIEVEMENTS</div>
+                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Grew product org 8→50 people, 3 time zones</div>
+                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Launched flagship generating $2.3M ARR Y1</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">VP Product</div>
-                    <div class="resume-section">EDUCATION</div>
-                    <div style="font-size: 8px; color: #666;">Stanford University</div>
-                    <div class="resume-section">SKILLS</div>
-                    <div style="font-size: 8px; color: #666;">Leadership • Strategy</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2019 - Present | Strategy & Growth</div>
+                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">Director of Product</div>
+                    <div style="font-size: 8px; color: #999;">2016 - 2019 | Operations</div>
+                    <div class="resume-section">AWARDS</div>
+                    <div style="font-size: 8px; color: #666;">Forbes 30U30 • Product Leader of Year</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">LUXURY / III</div>
                     <div class="card-price">$<span class="card-price-period">12/month</span></div>
-                    <div class="card-desc">Premium tier + education, skills, certifications, and awards.</div>
+                    <div class="card-desc">Editorial-grade templates for senior leaders and specialists.</div>
                     <a href="https://saminak.gumroad.com/l/eqnsrx" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Everything in Premium</div>
-                        <div class="feature">Education section</div>
-                        <div class="feature">Skills & competencies</div>
-                        <div class="feature">Awards & certifications</div>
+                        <div class="feature">Résumé builder</div>
+                        <div class="feature">PDF download</div>
+                        <div class="feature">Advanced theme</div>
+                        <div class="feature">Live preview</div>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <!-- Elite -->
-            <div class="pricing-card elite">
+            <article class="pricing-card elite">
                 <div class="card-preview elite">
                     <div class="resume-header">CHRISTOPHER ELITE</div>
-                    <div class="resume-subtext">christopher@elite.com | New York, NY</div>
-                    <div class="resume-section">EXPERIENCE</div>
+                    <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York, NY<br>Board Director | 2x Founder | $150M ARR Portfolio</div>
+                    <div class="resume-section">EXECUTIVE SUMMARY</div>
+                    <div style="font-size: 9px; color: #333; line-height: 1.3; margin: 3px 0;">Transformational CEO scaling ventures from concept to category leadership. Built 200+ person org across 7 geographies generating $150M ARR.</div>
+                    <div class="resume-section">BOARD EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">Chief Executive Officer</div>
-                    <div style="font-size: 8px; color: #999;">2018 - Present</div>
-                    <div class="resume-section">BOARD MEMBERSHIPS</div>
-                    <div style="font-size: 8px; color: #666;">Fortune 500 Company</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 1px;">2018 - Present | $15M→$150M ARR</div>
+                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ $150M ARR across 4 strategic verticals</div>
+                    <div style="font-size: 8px; color: #666; margin: 1px 0;">✦ Built 200+ org spanning 7 markets</div>
+                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">Board Director</div>
+                    <div style="font-size: 8px; color: #999;">2015 - Present | Fortune 500</div>
                     <div class="resume-section">HONORS</div>
-                    <div style="font-size: 8px; color: #666;">Ernst & Young Entrepreneur</div>
+                    <div style="font-size: 8px; color: #666;">Ernst & Young Entrepreneur of Year • Wired 50</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier elite">ELITE / IV</div>
                     <div class="card-price">$<span class="card-price-period">16/month</span></div>
-                    <div class="card-desc">Everything in Luxury + board experience and unlimited customization.</div>
+                    <div class="card-desc">Bespoke executive templates crafted for board-level presentation.</div>
                     <a href="https://saminak.gumroad.com/l/mdpcz" class="card-btn elite">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Everything in Luxury</div>
-                        <div class="feature">Board experience</div>
-                        <div class="feature">Multiple achievements</div>
+                        <div class="feature">Résumé builder</div>
+                        <div class="feature">PDF download</div>
+                        <div class="feature">Premium design</div>
                         <div class="feature">Unlimited revisions</div>
                     </div>
                 </div>
-            </div>
+            </article>
         </div>
-    </div>
+    </section>
 
     <!-- Rating Section -->
-    <div class="rating-section">
+    <section class="rating-section">
         <div class="rating-left">
             <div class="stars">★ ★ ★ ★ ★</div>
             <div class="rating-text">4.9 average from 6,200+ reviews</div>
@@ -799,13 +925,13 @@
             <span>Secure checkout</span>
             <span>Cancel anytime</span>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
-    <div class="footer">
+    <footer>
         Atelier Résumé · Considered career documents · © 2025
-    </div>
-</div>
+    </footer>
+</main>
 
 <!-- Auth Modal -->
 <div class="modal-overlay" id="authModal">
@@ -817,19 +943,19 @@
             <p>Start building your perfect resume</p>
             
             <div class="form-group">
-                <label>Email</label>
+                <label for="signupEmail">Email</label>
                 <input type="email" id="signupEmail" required>
                 <div id="signupEmailError" class="error hidden"></div>
             </div>
 
             <div class="form-group">
-                <label>Password</label>
+                <label for="signupPassword">Password</label>
                 <input type="password" id="signupPassword" required>
                 <div id="signupPasswordError" class="error hidden"></div>
             </div>
 
             <div class="form-group">
-                <label>Gumroad License Code</label>
+                <label for="licenseCode">Gumroad License Code</label>
                 <input type="text" id="licenseCode" placeholder="e.g., PROF-GUMROAD-001" required>
                 <div id="licenseCodeError" class="error hidden"></div>
             </div>
@@ -846,13 +972,13 @@
             <p>Log in to your resume builder</p>
             
             <div class="form-group">
-                <label>Email</label>
+                <label for="signinEmail">Email</label>
                 <input type="email" id="signinEmail" required>
                 <div id="signinEmailError" class="error hidden"></div>
             </div>
 
             <div class="form-group">
-                <label>Password</label>
+                <label for="signinPassword">Password</label>
                 <input type="password" id="signinPassword" required>
                 <div id="signinPasswordError" class="error hidden"></div>
             </div>
@@ -868,165 +994,59 @@
 
 <!-- Builder -->
 <div class="builder-container" id="builderContainer">
-    <div class="sidebar">
+    <aside class="sidebar">
         <div style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">Atelier Résumé</div>
-        <div id="tierBadge" class="tier-badge"></div>
-        
         <div style="margin-bottom: 20px;">
-            <h3 style="font-size: 12px; margin-bottom: 12px; color: #666;">COLORS</h3>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
-                <button style="width: 50px; height: 50px; background: #667eea; border: 2px solid #667eea; border-radius: 4px; cursor: pointer;"></button>
-                <button style="width: 50px; height: 50px; background: #e91e63; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
-                <button style="width: 50px; height: 50px; background: #ff9800; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
-                <button style="width: 50px; height: 50px; background: #1abc9c; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+            <h3>COLORS</h3>
+            <div class="color-grid">
+                <button class="color-btn active" style="background: #667eea;"></button>
+                <button class="color-btn" style="background: #e91e63;"></button>
+                <button class="color-btn" style="background: #ff9800;"></button>
+                <button class="color-btn" style="background: #1abc9c;"></button>
             </div>
         </div>
-        <button id="downloadPdfBtn" style="width: 100%; padding: 10px; background: #388e3c; color: white; border: none; border-radius: 4px; margin-bottom: 10px; cursor: pointer;">📥 Download PDF</button>
+        <button class="download-pdf-btn">📥 Download PDF</button>
         <button class="logout-btn" id="logoutBtn">Logout</button>
-    </div>
+    </aside>
     <div class="main-content">
-        <div style="padding: 20px; background: white; border-bottom: 1px solid #ddd;">Resume Builder</div>
-        <div class="editor-area" id="editorArea">
-            <!-- Form sections will be dynamically inserted based on tier -->
+        <div style="padding: 20px; background: white; border-bottom: 1px solid #ddd; font-weight: 600;">Resume Builder</div>
+        <div class="editor-area">
+            <h3>Your Information</h3>
+            <input type="text" class="input-field" placeholder="Full Name">
+            <input type="email" class="input-field" placeholder="Email">
+            <input type="tel" class="input-field" placeholder="Phone">
+            <h3>Summary</h3>
+            <textarea class="input-field" style="resize: vertical; min-height: 80px;"></textarea>
         </div>
     </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
 
 <script>
 const firebaseConfig = {
-  apiKey: "AIzaSyAp-1Gj-6HWiQT_RB5n9k16bc1WT1zt3Bk",
-  authDomain: "resume-builder-a0fe2.firebaseapp.com",
-  projectId: "resume-builder-a0fe2",
-  storageBucket: "resume-builder-a0fe2.firebasestorage.app",
-  messagingSenderId: "286535613063",
-  appId: "1:286535613063:web:e28d50c94e232a7ba05622"
+  apiKey: "AIzaSyAp-IGJ-6HwjQT_RB5n9k16bc1W1izt3Bk",
+  authDomain: "resume-builder-a0f2.firebaseapp.com",
+  projectId: "resume-builder-a0f2",
+  storageBucket: "resume-builder-a0f2.firebasestorage.app",
+  messagingSenderId: "286535613863",
+  appId: "1:286535613863:web:e28d50c94e232a7ba05622"
 };
 
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-let currentUserTier = null;
-
 const landingPage = document.getElementById('landingPage');
 const authModal = document.getElementById('authModal');
 const builderContainer = document.getElementById('builderContainer');
-const editorArea = document.getElementById('editorArea');
-const tierBadge = document.getElementById('tierBadge');
 const signupForm = document.getElementById('signupForm');
 const signinForm = document.getElementById('signinForm');
 const signInBtn = document.getElementById('signInBtn');
 const closeModal = document.getElementById('closeModal');
 const logoutBtn = document.getElementById('logoutBtn');
-
-// Tier-based form templates
-const tierForms = {
-    Professional: `
-        <h3>Your Information</h3>
-        <input type="text" class="input-field" placeholder="Full Name" id="fullName">
-        <input type="email" class="input-field" placeholder="Email" id="email">
-        <input type="tel" class="input-field" placeholder="Phone" id="phone">
-        <h3 style="margin-top: 20px;">Professional Summary</h3>
-        <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="summary" placeholder="Write a brief summary of your professional background..."></textarea>
-    `,
-    Premium: `
-        <h3>Your Information</h3>
-        <input type="text" class="input-field" placeholder="Full Name" id="fullName">
-        <input type="email" class="input-field" placeholder="Email" id="email">
-        <input type="tel" class="input-field" placeholder="Phone" id="phone">
-        <h3 style="margin-top: 20px;">Professional Summary</h3>
-        <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="summary"></textarea>
-        
-        <div class="form-section">
-            <h3>Work Experience</h3>
-            <input type="text" class="input-field" placeholder="Job Title" id="jobTitle1">
-            <input type="text" class="input-field" placeholder="Company" id="company1">
-            <input type="text" class="input-field" placeholder="Years (e.g., 2020 - 2023)" id="years1">
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="jobDesc1" placeholder="Job description and achievements..."></textarea>
-        </div>
-    `,
-    Luxury: `
-        <h3>Your Information</h3>
-        <input type="text" class="input-field" placeholder="Full Name" id="fullName">
-        <input type="email" class="input-field" placeholder="Email" id="email">
-        <input type="tel" class="input-field" placeholder="Phone" id="phone">
-        <h3 style="margin-top: 20px;">Professional Summary</h3>
-        <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="summary"></textarea>
-        
-        <div class="form-section">
-            <h3>Work Experience</h3>
-            <input type="text" class="input-field" placeholder="Job Title" id="jobTitle1">
-            <input type="text" class="input-field" placeholder="Company" id="company1">
-            <input type="text" class="input-field" placeholder="Years" id="years1">
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="jobDesc1"></textarea>
-        </div>
-
-        <div class="form-section">
-            <h3>Education</h3>
-            <input type="text" class="input-field" placeholder="School/University" id="school">
-            <input type="text" class="input-field" placeholder="Degree" id="degree">
-            <input type="text" class="input-field" placeholder="Graduation Year" id="gradYear">
-        </div>
-
-        <div class="form-section">
-            <h3>Skills</h3>
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="skills" placeholder="Skills (comma separated)"></textarea>
-        </div>
-
-        <div class="form-section">
-            <h3>Awards & Certifications</h3>
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="awards" placeholder="Awards and certifications..."></textarea>
-        </div>
-    `,
-    Elite: `
-        <h3>Your Information</h3>
-        <input type="text" class="input-field" placeholder="Full Name" id="fullName">
-        <input type="email" class="input-field" placeholder="Email" id="email">
-        <input type="tel" class="input-field" placeholder="Phone" id="phone">
-        <h3 style="margin-top: 20px;">Professional Summary</h3>
-        <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="summary"></textarea>
-        
-        <div class="form-section">
-            <h3>Work Experience (Multiple)</h3>
-            <input type="text" class="input-field" placeholder="Job Title" id="jobTitle1">
-            <input type="text" class="input-field" placeholder="Company" id="company1">
-            <input type="text" class="input-field" placeholder="Years" id="years1">
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="jobDesc1"></textarea>
-            <input type="text" class="input-field" placeholder="Job Title (2nd)" id="jobTitle2">
-            <input type="text" class="input-field" placeholder="Company (2nd)" id="company2">
-        </div>
-
-        <div class="form-section">
-            <h3>Education</h3>
-            <input type="text" class="input-field" placeholder="School/University" id="school">
-            <input type="text" class="input-field" placeholder="Degree" id="degree">
-        </div>
-
-        <div class="form-section">
-            <h3>Skills</h3>
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="skills"></textarea>
-        </div>
-
-        <div class="form-section">
-            <h3>Board Experience & Memberships</h3>
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="boardExp" placeholder="Board positions and memberships..."></textarea>
-        </div>
-
-        <div class="form-section">
-            <h3>Awards & Honors</h3>
-            <textarea class="input-field" style="resize: vertical; min-height: 80px;" id="awards"></textarea>
-        </div>
-
-        <div class="form-section">
-            <h3>Key Achievements</h3>
-            <textarea class="input-field" style="resize: vertical; min-height: 100px;" id="achievements" placeholder="Major milestones and achievements..."></textarea>
-        </div>
-    `
-};
 
 function openModal(form = 'signup') {
     authModal.classList.add('active');
@@ -1066,12 +1086,8 @@ signupForm.addEventListener('submit', async (e) => {
         if (q.empty) throw new Error('Invalid code');
         if (q.docs[0].data().isUsed) throw new Error('Code already used');
 
-        const tier = q.docs[0].data().tier;
         await auth.createUserWithEmailAndPassword(email, password);
         await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
-        
-        currentUserTier = tier;
-        localStorage.setItem('userTier', tier);
         
         closeAuthModal();
         showBuilder();
@@ -1097,125 +1113,23 @@ signinForm.addEventListener('submit', async (e) => {
 });
 
 auth.onAuthStateChanged(user => {
-    if (user) {
-        currentUserTier = localStorage.getItem('userTier') || 'Professional';
-        showBuilder();
-    } else {
-        landingPage.style.display = 'block';
-        builderContainer.classList.remove('active');
+    if (user) showBuilder();
+    else { 
+        landingPage.style.display = 'block'; 
+        builderContainer.classList.remove('active'); 
     }
 });
 
 function showBuilder() {
     landingPage.style.display = 'none';
     builderContainer.classList.add('active');
-    tierBadge.textContent = `${currentUserTier.toUpperCase()} TIER`;
-    editorArea.innerHTML = tierForms[currentUserTier] || tierForms.Professional;
 }
 
 logoutBtn.addEventListener('click', () => {
     auth.signOut();
-    localStorage.removeItem('userTier');
     landingPage.style.display = 'block';
     builderContainer.classList.remove('active');
 });
-
-document.addEventListener('click', (e) => {
-    if (e.target.id === 'downloadPdfBtn') {
-        generatePDF();
-    }
-});
-
-function generatePDF() {
-    const name = document.getElementById('fullName')?.value || 'Resume';
-    const email = document.getElementById('email')?.value || '';
-    const phone = document.getElementById('phone')?.value || '';
-    const summary = document.getElementById('summary')?.value || '';
-    const jobTitle1 = document.getElementById('jobTitle1')?.value || '';
-    const company1 = document.getElementById('company1')?.value || '';
-    const years1 = document.getElementById('years1')?.value || '';
-    const jobDesc1 = document.getElementById('jobDesc1')?.value || '';
-    const school = document.getElementById('school')?.value || '';
-    const degree = document.getElementById('degree')?.value || '';
-    const skills = document.getElementById('skills')?.value || '';
-    const awards = document.getElementById('awards')?.value || '';
-    const boardExp = document.getElementById('boardExp')?.value || '';
-    const achievements = document.getElementById('achievements')?.value || '';
-
-    let pdfContent = `
-        <div style="font-family: Arial, sans-serif; padding: 40px; max-width: 800px;">
-            <h1 style="margin: 0; font-size: 28px;">${name}</h1>
-            <p style="margin: 5px 0; color: #666;">${email} | ${phone}</p>
-            <hr style="margin: 20px 0; border: none; border-top: 1px solid #ccc;">
-    `;
-
-    if (summary) {
-        pdfContent += `
-            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">PROFESSIONAL SUMMARY</h2>
-            <p style="line-height: 1.6; color: #555;">${summary}</p>
-        `;
-    }
-
-    if (jobTitle1 || company1) {
-        pdfContent += `
-            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">EXPERIENCE</h2>
-            <p style="margin: 5px 0; font-weight: bold;">${jobTitle1}</p>
-            <p style="margin: 2px 0; color: #666;">${company1} | ${years1}</p>
-            <p style="margin: 5px 0; line-height: 1.6; color: #555;">${jobDesc1}</p>
-        `;
-    }
-
-    if (school || degree) {
-        pdfContent += `
-            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">EDUCATION</h2>
-            <p style="margin: 5px 0; font-weight: bold;">${degree}</p>
-            <p style="margin: 2px 0; color: #666;">${school}</p>
-        `;
-    }
-
-    if (skills) {
-        pdfContent += `
-            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">SKILLS</h2>
-            <p style="line-height: 1.6; color: #555;">${skills}</p>
-        `;
-    }
-
-    if (boardExp) {
-        pdfContent += `
-            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">BOARD EXPERIENCE</h2>
-            <p style="line-height: 1.6; color: #555;">${boardExp}</p>
-        `;
-    }
-
-    if (awards) {
-        pdfContent += `
-            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">AWARDS & CERTIFICATIONS</h2>
-            <p style="line-height: 1.6; color: #555;">${awards}</p>
-        `;
-    }
-
-    if (achievements) {
-        pdfContent += `
-            <h2 style="font-size: 14px; margin: 20px 0 10px; color: #333;">KEY ACHIEVEMENTS</h2>
-            <p style="line-height: 1.6; color: #555;">${achievements}</p>
-        `;
-    }
-
-    pdfContent += `</div>`;
-
-    const element = document.createElement('div');
-    element.innerHTML = pdfContent;
-
-    const opt = {
-        margin: 10,
-        filename: `${name.replace(/\s+/g, '_')}_Resume.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-    };
-
-    html2pdf().set(opt).from(element).save();
-}
 </script>
 
 </body>
