@@ -263,7 +263,7 @@
             background: #ffa500;
         }
 
-        .resume-header {
+        .card-resume-header {
             font-weight: 700;
             font-size: 13px;
             margin-bottom: 2px;
@@ -271,19 +271,19 @@
             color: #222;
         }
 
-        .card-preview.professional .resume-header {
+        .card-preview.professional .card-resume-header {
             color: #667eea;
         }
 
-        .card-preview.premium .resume-header {
+        .card-preview.premium .card-resume-header {
             color: #f5576c;
         }
 
-        .card-preview.luxury .resume-header {
+        .card-preview.luxury .card-resume-header {
             color: #4facfe;
         }
 
-        .card-preview.elite .resume-header {
+        .card-preview.elite .card-resume-header {
             color: #ffa500;
         }
 
@@ -361,6 +361,9 @@
             font-size: 13px;
             margin-bottom: 20px;
             transition: all 0.2s;
+            display: block;
+            text-align: center;
+            text-decoration: none;
         }
 
         .card-btn:hover {
@@ -524,6 +527,11 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 12px;
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .error {
@@ -857,7 +865,7 @@
             border-radius: 8px;
         }
 
-        .resume-header {
+        .builder-resume-header {
             text-align: center;
             margin-bottom: 20px;
             border-bottom: 3px solid;
@@ -911,12 +919,60 @@
         }
 
         .tier-lock {
-            background: #fef3e2;
+            background: linear-gradient(135deg, #fff9ec 0%, #fef3e2 100%);
             border: 1px solid #fcd34d;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .tier-lock-icon {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
             border-radius: 8px;
-            padding: 16px;
+            background: #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: #1a1a1a;
+        }
+
+        .tier-lock-body {
+            flex: 1;
+        }
+
+        .tier-lock-title {
             font-size: 13px;
+            font-weight: 700;
+            color: #7c4a03;
+            margin-bottom: 4px;
+        }
+
+        .tier-lock-desc {
+            font-size: 12px;
             color: #92400e;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .tier-lock-btn {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #1a1a1a;
+            background: #ffd700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: transform 0.15s;
+        }
+
+        .tier-lock-btn:hover {
+            transform: translateY(-1px);
         }
 
         ::-webkit-scrollbar {
@@ -950,6 +1006,58 @@
                 position: relative;
                 top: 0;
                 height: auto;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 16px 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .hero-title {
+                font-size: 38px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                padding: 40px 20px;
+            }
+
+            .section-intro {
+                padding: 50px 20px 20px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .pricing-section {
+                padding: 20px 20px 50px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rating-section {
+                flex-direction: column;
+                gap: 16px;
+                padding: 30px 20px;
+                text-align: center;
+            }
+
+            .rating-right {
+                flex-direction: column;
+                gap: 8px;
             }
         }
     </style>
@@ -1008,7 +1116,7 @@
             <!-- Professional -->
             <div class="pricing-card">
                 <div class="card-preview professional">
-                    <div class="resume-header">JANE SMITH</div>
+                    <div class="card-resume-header">JANE SMITH</div>
                     <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
                     <div class="resume-section">SUMMARY</div>
                     <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
@@ -1018,7 +1126,7 @@
                     <div class="card-tier">PROFESSIONAL / I</div>
                     <div class="card-price">$<span class="card-price-period">6/month</span></div>
                     <div class="card-desc">Clean, ATS-friendly templates for the early-career professional.</div>
-                    <a href="https://saminak.gumroad.com/l/ojoere" target="_blank" class="card-btn">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/ojoere" target="_blank" rel="noopener" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Name, email, phone</div>
                         <div class="feature">Professional summary</div>
@@ -1031,7 +1139,7 @@
             <!-- Premium -->
             <div class="pricing-card">
                 <div class="card-preview premium">
-                    <div class="resume-header">ALEX JOHNSON</div>
+                    <div class="card-resume-header">ALEX JOHNSON</div>
                     <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">Staff Engineer</div>
@@ -1043,7 +1151,7 @@
                     <div class="card-tier">PREMIUM / II</div>
                     <div class="card-price">$<span class="card-price-period">9/month</span></div>
                     <div class="card-desc">Modern layouts with refined typography for mid-career operators.</div>
-                    <a href="https://saminak.gumroad.com/l/nrdaz" target="_blank" class="card-btn">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/nrdaz" target="_blank" rel="noopener" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Professional</div>
                         <div class="feature">Work experience section</div>
@@ -1056,7 +1164,7 @@
             <!-- Luxury -->
             <div class="pricing-card">
                 <div class="card-preview luxury">
-                    <div class="resume-header">MORGAN CHEN</div>
+                    <div class="card-resume-header">MORGAN CHEN</div>
                     <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco, CA</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">VP Product</div>
@@ -1071,7 +1179,7 @@
                     <div class="card-tier">LUXURY / III</div>
                     <div class="card-price">$<span class="card-price-period">12/month</span></div>
                     <div class="card-desc">Editorial-grade templates for senior leaders and specialists.</div>
-                    <a href="https://saminak.gumroad.com/l/eqnsrx" target="_blank" class="card-btn">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/eqnsrx" target="_blank" rel="noopener" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Premium</div>
                         <div class="feature">Education section</div>
@@ -1084,7 +1192,7 @@
             <!-- Elite -->
             <div class="pricing-card elite">
                 <div class="card-preview elite">
-                    <div class="resume-header">CHRISTOPHER ELITE</div>
+                    <div class="card-resume-header">CHRISTOPHER ELITE</div>
                     <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York, NY</div>
                     <div class="resume-section">EXPERIENCE</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">Chief Executive Officer</div>
@@ -1099,7 +1207,7 @@
                     <div class="card-tier elite">ELITE / IV</div>
                     <div class="card-price">$<span class="card-price-period">16/month</span></div>
                     <div class="card-desc">Bespoke executive templates crafted for board-level presentation.</div>
-                    <a href="https://saminak.gumroad.com/l/mdpcz" target="_blank" class="card-btn elite">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/mdpcz" target="_blank" rel="noopener" class="card-btn elite">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Luxury</div>
                         <div class="feature">All fields unlocked</div>
@@ -1144,7 +1252,7 @@
 
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="signupPassword" required>
+                <input type="password" id="signupPassword" required minlength="6">
                 <div id="signupPasswordError" class="error hidden"></div>
             </div>
 
@@ -1238,6 +1346,11 @@
                         <label>Location</label>
                         <input type="text" id="location" placeholder="Brooklyn, NY">
                     </div>
+
+                    <div class="builder-form-group">
+                        <label>LinkedIn / Portfolio URL</label>
+                        <input type="text" id="linkedIn" placeholder="linkedin.com/in/janesmith">
+                    </div>
                 </div>
 
                 <!-- Professional Summary -->
@@ -1251,11 +1364,11 @@
                 </div>
 
                 <!-- Certifications - Premium+ -->
-                <div class="form-section tier-premium" id="experienceSection">
-                    <div class="section-title">Certifications</div>
-                    
+                <div class="form-section tier-premium hidden" id="experienceSection">
+                    <div class="section-title">Certifications & Awards</div>
+
                     <div class="builder-form-group">
-                        <label>Certificate Name</label>
+                        <label>Certificate / Award Name</label>
                         <input type="text" id="jobTitle" placeholder="AWS Certified Solutions Architect">
                     </div>
 
@@ -1265,15 +1378,19 @@
                     </div>
 
                     <div class="builder-form-group">
-                        <label>Date Obtained</label>
-                        <input type="text" id="duration" placeholder="January 2024">
+                        <label>Date</label>
+                        <input type="text" id="duration" placeholder="2023">
                     </div>
                 </div>
 
-                <div class="form-section hidden tier-lock" id="experienceLock">
+                <div class="form-section hidden tier-lock-wrap" id="experienceLock">
                     <div class="tier-lock">
-                        <strong>🔒 Certifications</strong><br>
-                        <span style="font-size: 12px;">Available in Premium tier and above. Upgrade to add certifications.</span>
+                        <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
+                        <div class="tier-lock-body">
+                            <div class="tier-lock-title">Certifications & Awards</div>
+                            <div class="tier-lock-desc">Show off certifications, licenses, and honors. Available on Premium and above.</div>
+                            <a href="#" class="tier-lock-btn" onclick="document.getElementById('signInBtn')?.click();return false;">Upgrade to Premium →</a>
+                        </div>
                     </div>
                 </div>
 
@@ -1297,10 +1414,14 @@
                     </div>
                 </div>
 
-                <div class="form-section hidden tier-lock" id="educationLock">
+                <div class="form-section hidden tier-lock-wrap" id="educationLock">
                     <div class="tier-lock">
-                        <strong>🔒 Education</strong><br>
-                        <span style="font-size: 12px;">Available in Luxury tier and above. Upgrade to add education.</span>
+                        <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
+                        <div class="tier-lock-body">
+                            <div class="tier-lock-title">Education</div>
+                            <div class="tier-lock-desc">Add your degree, school, and graduation year. Available on Luxury and above.</div>
+                            <a href="#" class="tier-lock-btn" onclick="document.getElementById('signInBtn')?.click();return false;">Upgrade to Luxury →</a>
+                        </div>
                     </div>
                 </div>
 
@@ -1312,12 +1433,21 @@
                         <label>Skills (comma separated)</label>
                         <textarea id="skills" placeholder="Leadership, Product Strategy, Data Analysis, Team Building"></textarea>
                     </div>
+
+                    <div class="builder-form-group">
+                        <label>Languages (comma separated)</label>
+                        <input type="text" id="languages" placeholder="English (Native), Spanish (Fluent)">
+                    </div>
                 </div>
 
-                <div class="form-section hidden tier-lock" id="skillsLock">
+                <div class="form-section hidden tier-lock-wrap" id="skillsLock">
                     <div class="tier-lock">
-                        <strong>🔒 Skills & Expertise</strong><br>
-                        <span style="font-size: 12px;">Available in Luxury tier and above. Upgrade to add skills.</span>
+                        <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
+                        <div class="tier-lock-body">
+                            <div class="tier-lock-title">Skills & Expertise</div>
+                            <div class="tier-lock-desc">List your core skills and areas of expertise. Available on Luxury and above.</div>
+                            <a href="#" class="tier-lock-btn" onclick="document.getElementById('signInBtn')?.click();return false;">Upgrade to Luxury →</a>
+                        </div>
                     </div>
                 </div>
 
@@ -1326,10 +1456,10 @@
                     <div class="section-title">Design</div>
                     <p style="font-size: 12px; color: #5a6c7d; margin-bottom: 12px;">Choose your resume accent color:</p>
                     <div class="color-picker">
-                        <button class="color-btn blue active" data-color="#667eea"></button>
-                        <button class="color-btn pink" data-color="#e91e63"></button>
-                        <button class="color-btn orange" data-color="#ff9800"></button>
-                        <button class="color-btn teal" data-color="#1abc9c"></button>
+                        <button class="color-btn blue active" data-color="#667eea" aria-label="Blue accent"></button>
+                        <button class="color-btn pink" data-color="#e91e63" aria-label="Pink accent"></button>
+                        <button class="color-btn orange" data-color="#ff9800" aria-label="Orange accent"></button>
+                        <button class="color-btn teal" data-color="#1abc9c" aria-label="Teal accent"></button>
                     </div>
                 </div>
 
@@ -1348,12 +1478,15 @@
         <!-- Preview Panel -->
         <div class="preview-panel">
             <div class="resume-preview" id="resumePreview">
-                <div class="resume-header" id="resumeHeaderAccent">
+                <div class="builder-resume-header" id="resumeHeaderAccent">
                     <div class="resume-name" id="previewName">Your Name</div>
                     <div class="resume-contact">
                         <span id="previewEmail">your@email.com</span> • 
                         <span id="previewPhone">(555) 123-4567</span> • 
                         <span id="previewLocation">City, State</span>
+                    </div>
+                    <div class="resume-contact" id="previewLinkedInWrap" style="margin-top: 3px;">
+                        <span id="previewLinkedIn"></span>
                     </div>
                 </div>
 
@@ -1381,6 +1514,11 @@
                 <div id="previewSkillsSection" class="hidden">
                     <div class="resume-section-title">Skills</div>
                     <div id="previewSkills" style="font-size: 12px; color: #404040; line-height: 1.6;"></div>
+                </div>
+
+                <div id="previewLanguagesSection" class="hidden">
+                    <div class="resume-section-title">Languages</div>
+                    <div id="previewLanguages" style="font-size: 12px; color: #404040; line-height: 1.6;"></div>
                 </div>
             </div>
         </div>
@@ -1516,16 +1654,35 @@ document.querySelectorAll('.toggle-btn').forEach(btn => {
     });
 });
 
+// Clear errors helper
+function clearError(id) {
+    const el = document.getElementById(id);
+    el.textContent = '';
+    el.classList.add('hidden');
+}
+
+function showError(id, message) {
+    const el = document.getElementById(id);
+    el.textContent = message;
+    el.classList.remove('hidden');
+}
+
 // SIGNUP
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    clearError('licenseCodeError');
+
     const email = document.getElementById('signupEmail').value.trim();
     const password = document.getElementById('signupPassword').value;
     const code = document.getElementById('licenseCode').value.trim().toUpperCase();
+    const submitBtn = signupForm.querySelector('.btn-submit');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Creating account...';
 
     try {
         const q = await db.collection('licenseCodes').where('code', '==', code).get();
-        if (q.empty) throw new Error('Invalid code');
+        if (q.empty) throw new Error('Invalid license code');
         if (q.docs[0].data().isUsed) throw new Error('Code already used');
 
         await auth.createUserWithEmailAndPassword(email, password);
@@ -1533,14 +1690,22 @@ signupForm.addEventListener('submit', async (e) => {
         
         closeAuthModal();
     } catch (e) {
-        document.getElementById('licenseCodeError').textContent = e.message;
-        document.getElementById('licenseCodeError').classList.remove('hidden');
+        showError('licenseCodeError', e.message);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign Up';
     }
 });
 
 // SIGNIN
 signinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    clearError('signinEmailError');
+
+    const submitBtn = signinForm.querySelector('.btn-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Signing in...';
+
     try {
         await auth.signInWithEmailAndPassword(
             document.getElementById('signinEmail').value.trim(),
@@ -1548,8 +1713,10 @@ signinForm.addEventListener('submit', async (e) => {
         );
         closeAuthModal();
     } catch (e) {
-        document.getElementById('signinEmailError').textContent = e.message;
-        document.getElementById('signinEmailError').classList.remove('hidden');
+        showError('signinEmailError', e.message);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In';
     }
 });
 
@@ -1570,15 +1737,16 @@ const fullNameInput = document.getElementById('fullName');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
 const locationInput = document.getElementById('location');
+const linkedInInput = document.getElementById('linkedIn');
 const summaryInput = document.getElementById('summary');
 const jobTitleInput = document.getElementById('jobTitle');
 const companyInput = document.getElementById('company');
 const durationInput = document.getElementById('duration');
-const jobDescInput = document.getElementById('jobDesc');
 const degreeInput = document.getElementById('degree');
 const schoolInput = document.getElementById('school');
 const graduationYearInput = document.getElementById('graduationYear');
 const skillsInput = document.getElementById('skills');
+const languagesInput = document.getElementById('languages');
 
 const resumeHeaderAccent = document.getElementById('resumeHeaderAccent');
 const previewName = document.getElementById('previewName');
@@ -1588,21 +1756,31 @@ const previewLocation = document.getElementById('previewLocation');
 const previewSummary = document.getElementById('previewSummary');
 const previewJobTitle = document.getElementById('previewJobTitle');
 const previewCompanyDuration = document.getElementById('previewCompanyDuration');
-const previewJobDesc = document.getElementById('previewJobDesc');
 const previewDegree = document.getElementById('previewDegree');
 const previewSchoolYear = document.getElementById('previewSchoolYear');
 const previewSkills = document.getElementById('previewSkills');
+const previewLinkedIn = document.getElementById('previewLinkedIn');
+const previewLinkedInWrap = document.getElementById('previewLinkedInWrap');
+const previewLanguages = document.getElementById('previewLanguages');
 
 const previewSummarySection = document.getElementById('previewSummarySection');
 const previewExperienceSection = document.getElementById('previewExperienceSection');
 const previewEducationSection = document.getElementById('previewEducationSection');
 const previewSkillsSection = document.getElementById('previewSkillsSection');
+const previewLanguagesSection = document.getElementById('previewLanguagesSection');
 
 function updatePreview() {
     previewName.textContent = fullNameInput.value || 'Your Name';
     previewEmail.textContent = emailInput.value || 'your@email.com';
     previewPhone.textContent = phoneInput.value || '(555) 123-4567';
     previewLocation.textContent = locationInput.value || 'City, State';
+
+    if (linkedInInput.value) {
+        previewLinkedIn.textContent = linkedInInput.value;
+        previewLinkedInWrap.classList.remove('hidden');
+    } else {
+        previewLinkedInWrap.classList.add('hidden');
+    }
 
     if (summaryInput.value) {
         previewSummary.textContent = summaryInput.value;
@@ -1628,10 +1806,17 @@ function updatePreview() {
     }
 
     if (skillsInput.value) {
-        previewSkills.textContent = skillsInput.value.split(',').map(s => s.trim()).join(' • ');
+        previewSkills.textContent = skillsInput.value.split(',').map(s => s.trim()).filter(Boolean).join(' • ');
         previewSkillsSection.classList.remove('hidden');
     } else {
         previewSkillsSection.classList.add('hidden');
+    }
+
+    if (languagesInput.value) {
+        previewLanguages.textContent = languagesInput.value.split(',').map(s => s.trim()).filter(Boolean).join(' • ');
+        previewLanguagesSection.classList.remove('hidden');
+    } else {
+        previewLanguagesSection.classList.add('hidden');
     }
 }
 
@@ -1658,16 +1843,20 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     html2pdf().set(opt).from(element).save();
 });
 
-// Live updates
-[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, 
- jobTitleInput, companyInput, durationInput, jobDescInput, 
- degreeInput, schoolInput, graduationYearInput, skillsInput].forEach(input => {
+// Live updates — only attach to inputs that actually exist on the page
+[fullNameInput, emailInput, phoneInput, locationInput, linkedInInput, summaryInput,
+ jobTitleInput, companyInput, durationInput,
+ degreeInput, schoolInput, graduationYearInput, skillsInput, languagesInput]
+ .filter(Boolean)
+ .forEach(input => {
     input.addEventListener('input', updatePreview);
 });
 
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', () => {
-    auth.signOut();
+    auth.signOut().then(() => {
+        location.reload();
+    });
 });
 
 // Initial
