@@ -1571,7 +1571,8 @@ async function getUserTier(email) {
     try {
         const snapshot = await db.collection('licenseCodes').where('usedBy', '==', email).get();
         if (!snapshot.empty) {
-            return snapshot.docs[0].data().tier || 'professional';
+            const rawTier = snapshot.docs[0].data().tier || 'professional';
+            return rawTier.toLowerCase().trim();
         }
         return 'professional';
     } catch (e) {
