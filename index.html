@@ -1036,14 +1036,6 @@
                 padding: 50px 20px 20px;
             }
 
-            .section-title {
-                font-size: 32px;
-            }
-
-            .pricing-section {
-                padding: 20px 20px 50px;
-            }
-
             .pricing-grid {
                 grid-template-columns: 1fr;
             }
@@ -1053,11 +1045,6 @@
                 gap: 16px;
                 padding: 30px 20px;
                 text-align: center;
-            }
-
-            .rating-right {
-                flex-direction: column;
-                gap: 8px;
             }
         }
     </style>
@@ -1120,7 +1107,7 @@
                     <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
                     <div class="resume-section">SUMMARY</div>
                     <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
-                    <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">⊘ Experience, education, skills locked</div>
+                    <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">⊘ Certifications, education, skills locked</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PROFESSIONAL / I</div>
@@ -1141,10 +1128,9 @@
                 <div class="card-preview premium">
                     <div class="card-resume-header">ALEX JOHNSON</div>
                     <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York</div>
-                    <div class="resume-section">EXPERIENCE</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">Staff Engineer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2020 - Present</div>
-                    <div style="font-size: 8px; color: #666;">Built and scaled distributed systems.</div>
+                    <div class="resume-section">CERTIFICATIONS</div>
+                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">AWS Certified Architect</div>
+                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2023</div>
                     <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">⊘ Education, skills locked</div>
                 </div>
                 <div class="card-content">
@@ -1154,7 +1140,7 @@
                     <a href="https://saminak.gumroad.com/l/nrdaz" target="_blank" rel="noopener" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Professional</div>
-                        <div class="feature">Work experience section</div>
+                        <div class="feature">Certifications & awards</div>
                         <div class="feature">Colour picker</div>
                         <div class="feature">Live preview</div>
                     </div>
@@ -1166,9 +1152,6 @@
                 <div class="card-preview luxury">
                     <div class="card-resume-header">MORGAN CHEN</div>
                     <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco, CA</div>
-                    <div class="resume-section">EXPERIENCE</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">VP Product</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2019 - Present</div>
                     <div class="resume-section">EDUCATION</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">Bachelor of Science</div>
                     <div style="font-size: 8px; color: #999;">Stanford University • 2015</div>
@@ -1194,9 +1177,6 @@
                 <div class="card-preview elite">
                     <div class="card-resume-header">CHRISTOPHER ELITE</div>
                     <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York, NY</div>
-                    <div class="resume-section">EXPERIENCE</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">Chief Executive Officer</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2018 - Present</div>
                     <div class="resume-section">EDUCATION</div>
                     <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">MBA</div>
                     <div style="font-size: 8px; color: #999;">Harvard Business School • 2012</div>
@@ -1346,11 +1326,6 @@
                         <label>Location</label>
                         <input type="text" id="location" placeholder="Brooklyn, NY">
                     </div>
-
-                    <div class="builder-form-group">
-                        <label>LinkedIn / Portfolio URL</label>
-                        <input type="text" id="linkedIn" placeholder="linkedin.com/in/janesmith">
-                    </div>
                 </div>
 
                 <!-- Professional Summary -->
@@ -1363,32 +1338,13 @@
                     </div>
                 </div>
 
-                <!-- Certifications - Premium+ -->
-                <div class="form-section tier-premium hidden" id="experienceSection">
-                    <div class="section-title">Certifications & Awards</div>
-
-                    <div class="builder-form-group">
-                        <label>Certificate / Award Name</label>
-                        <input type="text" id="jobTitle" placeholder="AWS Certified Solutions Architect">
-                    </div>
-
-                    <div class="builder-form-group">
-                        <label>Issuing Organization</label>
-                        <input type="text" id="company" placeholder="Amazon Web Services">
-                    </div>
-
-                    <div class="builder-form-group">
-                        <label>Date</label>
-                        <input type="text" id="duration" placeholder="2023">
-                    </div>
-                </div>
-
-                <div class="form-section hidden tier-lock-wrap" id="experienceLock">
+                <!-- Certifications - Premium+ (NO INPUT FIELDS) -->
+                <div class="form-section hidden" id="experienceLock">
                     <div class="tier-lock">
                         <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
                         <div class="tier-lock-body">
                             <div class="tier-lock-title">Certifications & Awards</div>
-                            <div class="tier-lock-desc">Show off certifications, licenses, and honors. Available on Premium and above.</div>
+                            <div class="tier-lock-desc">Unlock certifications, licenses, and honors. Available on Premium and above.</div>
                             <a href="#" class="tier-lock-btn" onclick="document.getElementById('signInBtn')?.click();return false;">Upgrade to Premium →</a>
                         </div>
                     </div>
@@ -1414,7 +1370,7 @@
                     </div>
                 </div>
 
-                <div class="form-section hidden tier-lock-wrap" id="educationLock">
+                <div class="form-section hidden" id="educationLock">
                     <div class="tier-lock">
                         <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
                         <div class="tier-lock-body">
@@ -1433,14 +1389,9 @@
                         <label>Skills (comma separated)</label>
                         <textarea id="skills" placeholder="Leadership, Product Strategy, Data Analysis, Team Building"></textarea>
                     </div>
-
-                    <div class="builder-form-group">
-                        <label>Languages (comma separated)</label>
-                        <input type="text" id="languages" placeholder="English (Native), Spanish (Fluent)">
-                    </div>
                 </div>
 
-                <div class="form-section hidden tier-lock-wrap" id="skillsLock">
+                <div class="form-section hidden" id="skillsLock">
                     <div class="tier-lock">
                         <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
                         <div class="tier-lock-body">
@@ -1456,10 +1407,10 @@
                     <div class="section-title">Design</div>
                     <p style="font-size: 12px; color: #5a6c7d; margin-bottom: 12px;">Choose your resume accent color:</p>
                     <div class="color-picker">
-                        <button class="color-btn blue active" data-color="#667eea" aria-label="Blue accent"></button>
-                        <button class="color-btn pink" data-color="#e91e63" aria-label="Pink accent"></button>
-                        <button class="color-btn orange" data-color="#ff9800" aria-label="Orange accent"></button>
-                        <button class="color-btn teal" data-color="#1abc9c" aria-label="Teal accent"></button>
+                        <button class="color-btn blue active" data-color="#667eea" type="button"></button>
+                        <button class="color-btn pink" data-color="#e91e63" type="button"></button>
+                        <button class="color-btn orange" data-color="#ff9800" type="button"></button>
+                        <button class="color-btn teal" data-color="#1abc9c" type="button"></button>
                     </div>
                 </div>
 
@@ -1485,22 +1436,11 @@
                         <span id="previewPhone">(555) 123-4567</span> • 
                         <span id="previewLocation">City, State</span>
                     </div>
-                    <div class="resume-contact" id="previewLinkedInWrap" style="margin-top: 3px;">
-                        <span id="previewLinkedIn"></span>
-                    </div>
                 </div>
 
                 <div id="previewSummarySection" class="hidden">
                     <div class="resume-section-title">Professional Summary</div>
                     <div id="previewSummary" style="font-size: 12px; color: #404040; line-height: 1.5;"></div>
-                </div>
-
-                <div id="previewExperienceSection" class="hidden">
-                    <div class="resume-section-title">Certifications</div>
-                    <div class="resume-item">
-                        <div class="resume-item-title" id="previewJobTitle">Certificate Name</div>
-                        <div class="resume-item-subtitle" id="previewCompanyDuration">Organization • Date</div>
-                    </div>
                 </div>
 
                 <div id="previewEducationSection" class="hidden">
@@ -1514,11 +1454,6 @@
                 <div id="previewSkillsSection" class="hidden">
                     <div class="resume-section-title">Skills</div>
                     <div id="previewSkills" style="font-size: 12px; color: #404040; line-height: 1.6;"></div>
-                </div>
-
-                <div id="previewLanguagesSection" class="hidden">
-                    <div class="resume-section-title">Languages</div>
-                    <div id="previewLanguages" style="font-size: 12px; color: #404040; line-height: 1.6;"></div>
                 </div>
             </div>
         </div>
@@ -1549,19 +1484,8 @@ const builderPage = document.getElementById('builderPage');
 const authModal = document.getElementById('authModal');
 
 // TIER LOGIC
-const tierHierarchy = {
-    professional: 0,
-    premium: 1,
-    luxury: 2,
-    elite: 3
-};
-
-const tierNames = {
-    professional: 'Professional',
-    premium: 'Premium',
-    luxury: 'Luxury',
-    elite: 'Elite'
-};
+const tierHierarchy = { professional: 0, premium: 1, luxury: 2, elite: 3 };
+const tierNames = { professional: 'Professional', premium: 'Premium', luxury: 'Luxury', elite: 'Elite' };
 
 let currentTier = 'professional';
 let currentColor = '#667eea';
@@ -1571,8 +1495,7 @@ async function getUserTier(email) {
     try {
         const snapshot = await db.collection('licenseCodes').where('usedBy', '==', email).get();
         if (!snapshot.empty) {
-            const rawTier = snapshot.docs[0].data().tier || 'professional';
-            return rawTier.toLowerCase().trim();
+            return (snapshot.docs[0].data().tier || 'professional').toLowerCase().trim();
         }
         return 'professional';
     } catch (e) {
@@ -1585,22 +1508,20 @@ async function getUserTier(email) {
 function showTierContent(tier) {
     currentTier = tier;
     
-    document.querySelectorAll('[class*="tier-"]').forEach(el => {
-        el.classList.add('hidden');
-    });
-
+    // Certifications (Premium+)
     if (tierHierarchy[tier] >= tierHierarchy.premium) {
-        document.querySelectorAll('.tier-premium').forEach(el => el.classList.remove('hidden'));
         document.getElementById('experienceLock').classList.add('hidden');
     } else {
         document.getElementById('experienceLock').classList.remove('hidden');
     }
 
+    // Education & Skills (Luxury+)
     if (tierHierarchy[tier] >= tierHierarchy.luxury) {
         document.querySelectorAll('.tier-luxury').forEach(el => el.classList.remove('hidden'));
         document.getElementById('educationLock').classList.add('hidden');
         document.getElementById('skillsLock').classList.add('hidden');
     } else {
+        document.querySelectorAll('.tier-luxury').forEach(el => el.classList.add('hidden'));
         document.getElementById('educationLock').classList.remove('hidden');
         document.getElementById('skillsLock').classList.remove('hidden');
     }
@@ -1608,7 +1529,6 @@ function showTierContent(tier) {
     document.getElementById('tierBadge').textContent = tierNames[tier];
 }
 
-// Show pages
 function showLanding() {
     landingPage.style.display = 'block';
     builderPage.classList.remove('active');
@@ -1619,7 +1539,6 @@ function showBuilder() {
     builderPage.classList.add('active');
 }
 
-// Start with landing page
 showLanding();
 
 // AUTH MODAL
@@ -1655,17 +1574,20 @@ document.querySelectorAll('.toggle-btn').forEach(btn => {
     });
 });
 
-// Clear errors helper
 function clearError(id) {
     const el = document.getElementById(id);
-    el.textContent = '';
-    el.classList.add('hidden');
+    if (el) {
+        el.textContent = '';
+        el.classList.add('hidden');
+    }
 }
 
 function showError(id, message) {
     const el = document.getElementById(id);
-    el.textContent = message;
-    el.classList.remove('hidden');
+    if (el) {
+        el.textContent = message;
+        el.classList.remove('hidden');
+    }
 }
 
 // SIGNUP
@@ -1733,42 +1655,31 @@ auth.onAuthStateChanged(async user => {
     }
 });
 
-// BUILDER LOGIC
+// FORM INPUTS
 const fullNameInput = document.getElementById('fullName');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
 const locationInput = document.getElementById('location');
-const linkedInInput = document.getElementById('linkedIn');
 const summaryInput = document.getElementById('summary');
-const jobTitleInput = document.getElementById('jobTitle');
-const companyInput = document.getElementById('company');
-const durationInput = document.getElementById('duration');
 const degreeInput = document.getElementById('degree');
 const schoolInput = document.getElementById('school');
 const graduationYearInput = document.getElementById('graduationYear');
 const skillsInput = document.getElementById('skills');
-const languagesInput = document.getElementById('languages');
 
+// PREVIEW ELEMENTS
 const resumeHeaderAccent = document.getElementById('resumeHeaderAccent');
 const previewName = document.getElementById('previewName');
 const previewEmail = document.getElementById('previewEmail');
 const previewPhone = document.getElementById('previewPhone');
 const previewLocation = document.getElementById('previewLocation');
 const previewSummary = document.getElementById('previewSummary');
-const previewJobTitle = document.getElementById('previewJobTitle');
-const previewCompanyDuration = document.getElementById('previewCompanyDuration');
 const previewDegree = document.getElementById('previewDegree');
 const previewSchoolYear = document.getElementById('previewSchoolYear');
 const previewSkills = document.getElementById('previewSkills');
-const previewLinkedIn = document.getElementById('previewLinkedIn');
-const previewLinkedInWrap = document.getElementById('previewLinkedInWrap');
-const previewLanguages = document.getElementById('previewLanguages');
 
 const previewSummarySection = document.getElementById('previewSummarySection');
-const previewExperienceSection = document.getElementById('previewExperienceSection');
 const previewEducationSection = document.getElementById('previewEducationSection');
 const previewSkillsSection = document.getElementById('previewSkillsSection');
-const previewLanguagesSection = document.getElementById('previewLanguagesSection');
 
 function updatePreview() {
     previewName.textContent = fullNameInput.value || 'Your Name';
@@ -1776,26 +1687,11 @@ function updatePreview() {
     previewPhone.textContent = phoneInput.value || '(555) 123-4567';
     previewLocation.textContent = locationInput.value || 'City, State';
 
-    if (linkedInInput.value) {
-        previewLinkedIn.textContent = linkedInInput.value;
-        previewLinkedInWrap.classList.remove('hidden');
-    } else {
-        previewLinkedInWrap.classList.add('hidden');
-    }
-
     if (summaryInput.value) {
         previewSummary.textContent = summaryInput.value;
         previewSummarySection.classList.remove('hidden');
     } else {
         previewSummarySection.classList.add('hidden');
-    }
-
-    if (jobTitleInput.value || companyInput.value || durationInput.value) {
-        previewJobTitle.textContent = jobTitleInput.value || 'Certificate Name';
-        previewCompanyDuration.textContent = (companyInput.value || 'Organization') + ' • ' + (durationInput.value || 'Date');
-        previewExperienceSection.classList.remove('hidden');
-    } else {
-        previewExperienceSection.classList.add('hidden');
     }
 
     if (degreeInput.value || schoolInput.value) {
@@ -1812,18 +1708,12 @@ function updatePreview() {
     } else {
         previewSkillsSection.classList.add('hidden');
     }
-
-    if (languagesInput.value) {
-        previewLanguages.textContent = languagesInput.value.split(',').map(s => s.trim()).filter(Boolean).join(' • ');
-        previewLanguagesSection.classList.remove('hidden');
-    } else {
-        previewLanguagesSection.classList.add('hidden');
-    }
 }
 
 // Color picker
 document.querySelectorAll('.color-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
         document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentColor = btn.dataset.color;
@@ -1844,23 +1734,16 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     html2pdf().set(opt).from(element).save();
 });
 
-// Live updates — only attach to inputs that actually exist on the page
-[fullNameInput, emailInput, phoneInput, locationInput, linkedInInput, summaryInput,
- jobTitleInput, companyInput, durationInput,
- degreeInput, schoolInput, graduationYearInput, skillsInput, languagesInput]
- .filter(Boolean)
- .forEach(input => {
-    input.addEventListener('input', updatePreview);
-});
+// Live updates
+[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, degreeInput, schoolInput, graduationYearInput, skillsInput]
+    .filter(Boolean)
+    .forEach(input => input.addEventListener('input', updatePreview));
 
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', () => {
-    auth.signOut().then(() => {
-        location.reload();
-    });
+    auth.signOut().then(() => location.reload());
 });
 
-// Initial
 updatePreview();
 resumeHeaderAccent.style.borderColor = currentColor;
 </script>
