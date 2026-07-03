@@ -702,6 +702,10 @@
             display: none;
         }
 
+        .form-section.tier-elite.hidden {
+            display: none;
+        }
+
         .section-title {
             font-size: 12px;
             font-weight: 700;
@@ -1402,6 +1406,37 @@
                     </div>
                 </div>
 
+                <!-- Board Experience - Elite+ -->
+                <div class="form-section tier-elite hidden" id="boardSection">
+                    <div class="section-title">Board Experience</div>
+                    
+                    <div class="builder-form-group">
+                        <label>Board Title</label>
+                        <input type="text" id="boardTitle" placeholder="Board Member">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Organization</label>
+                        <input type="text" id="boardOrg" placeholder="Company or Non-profit">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Year</label>
+                        <input type="text" id="boardYear" placeholder="2020 - Present">
+                    </div>
+                </div>
+
+                <div class="form-section hidden" id="boardLock">
+                    <div class="tier-lock">
+                        <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
+                        <div class="tier-lock-body">
+                            <div class="tier-lock-title">Board Experience</div>
+                            <div class="tier-lock-desc">Showcase board memberships and leadership roles. Available on Elite tier only.</div>
+                            <a href="#" class="tier-lock-btn" onclick="document.getElementById('signInBtn')?.click();return false;">Upgrade to Elite →</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Color Picker -->
                 <div class="form-section">
                     <div class="section-title">Design</div>
@@ -1454,6 +1489,14 @@
                 <div id="previewSkillsSection" class="hidden">
                     <div class="resume-section-title">Skills</div>
                     <div id="previewSkills" style="font-size: 12px; color: #404040; line-height: 1.6;"></div>
+                </div>
+
+                <div id="previewBoardSection" class="hidden">
+                    <div class="resume-section-title">Board Experience</div>
+                    <div class="resume-item">
+                        <div class="resume-item-title" id="previewBoardTitle">Board Title</div>
+                        <div class="resume-item-subtitle" id="previewBoardOrgYear">Organization • Year</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1531,6 +1574,15 @@ function showTierContent(tier) {
         document.querySelectorAll('.tier-luxury').forEach(el => el.classList.add('hidden'));
         document.getElementById('educationLock').classList.remove('hidden');
         document.getElementById('skillsLock').classList.remove('hidden');
+    }
+
+    // Board Experience (Elite only)
+    if (tierHierarchy[tier] >= tierHierarchy.elite) {
+        document.querySelectorAll('.tier-elite').forEach(el => el.classList.remove('hidden'));
+        document.getElementById('boardLock').classList.add('hidden');
+    } else {
+        document.querySelectorAll('.tier-elite').forEach(el => el.classList.add('hidden'));
+        document.getElementById('boardLock').classList.remove('hidden');
     }
 
     document.getElementById('tierBadge').textContent = tierNames[tier];
@@ -1682,6 +1734,9 @@ const degreeInput = document.getElementById('degree');
 const schoolInput = document.getElementById('school');
 const graduationYearInput = document.getElementById('graduationYear');
 const skillsInput = document.getElementById('skills');
+const boardTitleInput = document.getElementById('boardTitle');
+const boardOrgInput = document.getElementById('boardOrg');
+const boardYearInput = document.getElementById('boardYear');
 
 // PREVIEW ELEMENTS
 const resumeHeaderAccent = document.getElementById('resumeHeaderAccent');
@@ -1697,6 +1752,9 @@ const previewSkills = document.getElementById('previewSkills');
 const previewSummarySection = document.getElementById('previewSummarySection');
 const previewEducationSection = document.getElementById('previewEducationSection');
 const previewSkillsSection = document.getElementById('previewSkillsSection');
+const previewBoardSection = document.getElementById('previewBoardSection');
+const previewBoardTitle = document.getElementById('previewBoardTitle');
+const previewBoardOrgYear = document.getElementById('previewBoardOrgYear');
 
 function updatePreview() {
     previewName.textContent = fullNameInput.value || 'Your Name';
@@ -1725,6 +1783,14 @@ function updatePreview() {
     } else {
         previewSkillsSection.classList.add('hidden');
     }
+
+    if (boardTitleInput.value || boardOrgInput.value) {
+        previewBoardTitle.textContent = boardTitleInput.value || 'Board Title';
+        previewBoardOrgYear.textContent = (boardOrgInput.value || 'Organization') + ' • ' + (boardYearInput.value || 'Year');
+        previewBoardSection.classList.remove('hidden');
+    } else {
+        previewBoardSection.classList.add('hidden');
+    }
 }
 
 // Color picker
@@ -1752,7 +1818,7 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
 });
 
 // Live updates
-[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, degreeInput, schoolInput, graduationYearInput, skillsInput]
+[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
     .filter(Boolean)
     .forEach(input => input.addEventListener('input', updatePreview));
 
