@@ -804,6 +804,91 @@
         .color-btn.orange { background: #ff9800; }
         .color-btn.teal { background: #1abc9c; }
 
+        /* TEMPLATE STYLES */
+        .resume-preview {
+            background: white;
+            padding: 40px;
+            font-family: 'Garamond', 'Georgia', serif;
+            color: #1a1a1a;
+            line-height: 1.6;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+        }
+
+        /* Modern Template (default) */
+        .resume-preview.template-modern .builder-resume-header {
+            border-bottom: 3px solid;
+            padding-bottom: 16px;
+        }
+
+        /* Professional Template */
+        .resume-preview.template-professional {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            color: #2c3e50;
+            background: #fafbfc;
+        }
+
+        .resume-preview.template-professional .builder-resume-header {
+            border-bottom: 2px solid #2c3e50;
+            background: #ecf0f1;
+            padding: 20px;
+            margin: -40px -40px 20px -40px;
+            text-align: left;
+        }
+
+        .resume-preview.template-professional .resume-name {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .resume-preview.template-professional .resume-contact {
+            font-size: 10px;
+            margin-top: 8px;
+        }
+
+        .resume-preview.template-professional .resume-section-title {
+            background: #ecf0f1;
+            padding: 6px 8px;
+            margin: 16px -8px 8px -8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Creative Template */
+        .resume-preview.template-creative {
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+        }
+
+        .resume-preview.template-creative .builder-resume-header {
+            border-left: 6px solid;
+            padding-left: 20px;
+            border-bottom: none;
+            padding-bottom: 8px;
+        }
+
+        .resume-preview.template-creative .resume-name {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .resume-preview.template-creative .resume-section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+            margin: 18px 0 10px 0;
+            font-weight: 700;
+        }
+
+        .resume-preview.template-creative .resume-item {
+            margin-bottom: 14px;
+        }
+
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1440,6 +1525,26 @@
                 <!-- Color Picker -->
                 <div class="form-section">
                     <div class="section-title">Design</div>
+                    
+                    <p style="font-size: 12px; color: #5a6c7d; margin-bottom: 16px;">Choose your resume template:</p>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 10px;">
+                            <input type="radio" name="template" value="modern" checked style="margin-right: 8px;">
+                            <span style="font-weight: 500; color: #2c3e50;">Modern</span>
+                            <span style="font-size: 11px; color: #888;"> (included)</span>
+                        </label>
+                        <label style="display: block; margin-bottom: 10px;">
+                            <input type="radio" name="template" value="professional" disabled id="templateProfessional" style="margin-right: 8px;">
+                            <span style="font-weight: 500; color: #2c3e50;">Professional</span>
+                            <span style="font-size: 11px; color: #888;"> (Luxury+)</span>
+                        </label>
+                        <label style="display: block;">
+                            <input type="radio" name="template" value="creative" disabled id="templateCreative" style="margin-right: 8px;">
+                            <span style="font-weight: 500; color: #2c3e50;">Creative</span>
+                            <span style="font-size: 11px; color: #888;"> (Elite)</span>
+                        </label>
+                    </div>
+
                     <p style="font-size: 12px; color: #5a6c7d; margin-bottom: 12px;">Choose your resume accent color:</p>
                     <div class="color-picker">
                         <button class="color-btn blue active" data-color="#667eea" type="button"></button>
@@ -1463,7 +1568,7 @@
 
         <!-- Preview Panel -->
         <div class="preview-panel">
-            <div class="resume-preview" id="resumePreview">
+            <div class="resume-preview template-modern" id="resumePreview">
                 <div class="builder-resume-header" id="resumeHeaderAccent">
                     <div class="resume-name" id="previewName">Your Name</div>
                     <div class="resume-contact">
@@ -1570,19 +1675,25 @@ function showTierContent(tier) {
         document.querySelectorAll('.tier-luxury').forEach(el => el.classList.remove('hidden'));
         document.getElementById('educationLock').classList.add('hidden');
         document.getElementById('skillsLock').classList.add('hidden');
+        // Unlock Professional template
+        document.getElementById('templateProfessional').disabled = false;
     } else {
         document.querySelectorAll('.tier-luxury').forEach(el => el.classList.add('hidden'));
         document.getElementById('educationLock').classList.remove('hidden');
         document.getElementById('skillsLock').classList.remove('hidden');
+        document.getElementById('templateProfessional').disabled = true;
     }
 
     // Board Experience (Elite only)
     if (tierHierarchy[tier] >= tierHierarchy.elite) {
         document.querySelectorAll('.tier-elite').forEach(el => el.classList.remove('hidden'));
         document.getElementById('boardLock').classList.add('hidden');
+        // Unlock Creative template
+        document.getElementById('templateCreative').disabled = false;
     } else {
         document.querySelectorAll('.tier-elite').forEach(el => el.classList.add('hidden'));
         document.getElementById('boardLock').classList.remove('hidden');
+        document.getElementById('templateCreative').disabled = true;
     }
 
     document.getElementById('tierBadge').textContent = tierNames[tier];
@@ -1801,6 +1912,33 @@ document.querySelectorAll('.color-btn').forEach(btn => {
         btn.classList.add('active');
         currentColor = btn.dataset.color;
         resumeHeaderAccent.style.borderColor = currentColor;
+        
+        // Update section title colors in Creative template
+        document.querySelectorAll('.resume-preview.template-creative .resume-section-title').forEach(el => {
+            el.style.borderBottomColor = currentColor;
+        });
+        document.querySelectorAll('.resume-preview.template-creative .builder-resume-header').forEach(el => {
+            el.style.borderLeftColor = currentColor;
+        });
+    });
+});
+
+// Template selector
+document.querySelectorAll('input[name="template"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+        const resumePreview = document.getElementById('resumePreview');
+        resumePreview.classList.remove('template-modern', 'template-professional', 'template-creative');
+        resumePreview.classList.add(`template-${e.target.value}`);
+        
+        // Apply current color to new template
+        if (e.target.value === 'creative') {
+            document.querySelectorAll('.resume-preview.template-creative .resume-section-title').forEach(el => {
+                el.style.borderBottomColor = currentColor;
+            });
+            document.querySelectorAll('.resume-preview.template-creative .builder-resume-header').forEach(el => {
+                el.style.borderLeftColor = currentColor;
+            });
+        }
     });
 });
 
@@ -1829,6 +1967,10 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 
 updatePreview();
 resumeHeaderAccent.style.borderColor = currentColor;
+
+// Set default template
+document.querySelector('input[name="template"]:checked').value = 'modern';
+resumePreview.classList.add('template-modern');
 </script>
 
 </body>
