@@ -1493,10 +1493,17 @@ let currentColor = '#667eea';
 // Get user tier from Firestore
 async function getUserTier(email) {
     try {
-        const snapshot = await db.collection('licenseCodes').where('usedBy', '==', email).get();
+        const snapshot = await db.collection('licenseCodes')
+            .where('usedBy', '==', email)
+            .limit(1)
+            .get();
+        
         if (!snapshot.empty) {
-            return (snapshot.docs[0].data().tier || 'professional').toLowerCase().trim();
+            const tier = snapshot.docs[0].data().tier;
+            console.log('Tier found:', tier);
+            return (tier || 'professional').toLowerCase().trim();
         }
+        console.log('No tier found for email:', email);
         return 'professional';
     } catch (e) {
         console.error('Error fetching tier:', e);
@@ -1611,6 +1618,10 @@ signupForm.addEventListener('submit', async (e) => {
         await auth.createUserWithEmailAndPassword(email, password);
         await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
         
+        // Fetch tier immediately and show it
+        const tier = await getUserTier(email);
+        showTierContent(tier);
+        
         closeAuthModal();
     } catch (e) {
         showError('licenseCodeError', e.message);
@@ -1625,15 +1636,21 @@ signinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearError('signinEmailError');
 
+    const email = document.getElementById('signinEmail').value.trim();
     const submitBtn = signinForm.querySelector('.btn-submit');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Signing in...';
 
     try {
         await auth.signInWithEmailAndPassword(
-            document.getElementById('signinEmail').value.trim(),
+            email,
             document.getElementById('signinPassword').value
         );
+        
+        // Fetch tier immediately after signin
+        const tier = await getUserTier(email);
+        showTierContent(tier);
+        
         closeAuthModal();
     } catch (e) {
         showError('signinEmailError', e.message);
