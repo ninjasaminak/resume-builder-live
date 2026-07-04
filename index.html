@@ -8,1134 +8,157 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-        }
-
-        /* ========== LANDING PAGE STYLES ========== */
-        .landing-page {
-            background: #000;
-            color: #fff;
-        }
-
-        /* Header */
-        .header {
-            background: #000;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: #ffd700;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 50px;
-            flex: 1;
-            margin-left: 100px;
-        }
-
-        .nav-menu a {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .nav-menu a:hover {
-            color: #fff;
-        }
-
-        .sign-in-btn {
-            color: #fff;
-            background: transparent;
-            border: 1px solid #666;
-            padding: 8px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .sign-in-btn:hover {
-            border-color: #fff;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 60px;
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .hero-tag {
-            font-size: 12px;
-            color: #ffd700;
-            letter-spacing: 1px;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .hero-tag::before {
-            content: "●";
-            color: #ffd700;
-        }
-
-        .hero-title {
-            font-size: 72px;
-            font-weight: 300;
-            letter-spacing: -1px;
-            margin-bottom: 30px;
-            line-height: 1.2;
-        }
-
-        .hero-title .gold {
-            color: #ffd700;
-            font-style: italic;
-        }
-
-        .hero-desc {
-            font-size: 16px;
-            color: #aaa;
-            line-height: 1.8;
-            margin-bottom: 60px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 80px;
-            padding: 60px;
-            border-bottom: 1px solid #333;
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
-            flex: 1;
-        }
-
-        .stat-number {
-            font-size: 42px;
-            font-weight: 300;
-            margin-bottom: 12px;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Section Title */
-        .section-intro {
-            padding: 80px 60px 40px;
-            text-align: left;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            font-size: 11px;
-            color: #888;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-label::before {
-            content: "—";
-            color: #666;
-        }
-
-        .section-title {
-            font-size: 56px;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
-
-        .section-title .gold {
-            color: #ffd700;
-            font-style: italic;
-        }
-
-        /* Pricing Grid */
-        .pricing-section {
-            padding: 40px 60px 80px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 80px;
-        }
-
-        .pricing-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .pricing-card.elite {
-            border: 1px solid #ffd700;
-        }
-
-        .card-preview {
-            width: 100%;
-            height: 300px;
-            background: white;
-            padding: 18px 16px;
-            border-bottom: 1px solid #333;
-            overflow: hidden;
-            font-size: 10px;
-            color: #333;
-            font-family: 'Segoe UI', sans-serif;
-            line-height: 1.4;
-            position: relative;
-        }
-
-        .card-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: inherit;
-        }
-
-        .card-preview.professional::before {
-            background: #667eea;
-        }
-
-        .card-preview.premium::before {
-            background: #f5576c;
-        }
-
-        .card-preview.luxury::before {
-            background: #4facfe;
-        }
-
-        .card-preview.elite::before {
-            background: #ffa500;
-        }
-
-        .card-resume-header {
-            font-weight: 700;
-            font-size: 13px;
-            margin-bottom: 2px;
-            letter-spacing: 0.5px;
-            color: #222;
-        }
-
-        .card-preview.professional .card-resume-header {
-            color: #667eea;
-        }
-
-        .card-preview.premium .card-resume-header {
-            color: #f5576c;
-        }
-
-        .card-preview.luxury .card-resume-header {
-            color: #4facfe;
-        }
-
-        .card-preview.elite .card-resume-header {
-            color: #ffa500;
-        }
-
-        .resume-subtext {
-            font-size: 9px;
-            color: #888;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        .resume-section {
-            margin-top: 8px;
-            font-weight: 700;
-            font-size: 8px;
-            color: #666;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-top: 1px solid #e0e0e0;
-            padding-top: 5px;
-        }
-
-        .resume-line {
-            height: 2px;
-            background: #e0e0e0;
-            margin: 2px 0;
-            border-radius: 1px;
-        }
-
-        .resume-line.short {
-            width: 70%;
-        }
-
-        .card-content {
-            padding: 28px 20px;
-        }
-
-        .card-tier {
-            font-size: 10px;
-            color: #888;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-
-        .card-tier.elite {
-            color: #ffd700;
-        }
-
-        .card-price {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 4px;
-        }
-
-        .card-price-period {
-            font-size: 14px;
-            color: #888;
-        }
-
-        .card-desc {
-            font-size: 13px;
-            color: #aaa;
-            margin: 16px 0 24px;
-            line-height: 1.5;
-        }
-
-        .card-btn {
-            width: 100%;
-            padding: 12px;
-            background: white;
-            color: #000;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            margin-bottom: 20px;
-            transition: all 0.2s;
-            display: block;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .card-btn:hover {
-            background: #f0f0f0;
-        }
-
-        .card-btn.elite {
-            background: #ffd700;
-        }
-
-        .card-features {
-            border-top: 1px solid #333;
-            padding-top: 16px;
-        }
-
-        .feature {
-            font-size: 12px;
-            color: #aaa;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .feature::before {
-            content: "✓";
-            color: #ffd700;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        /* Rating Section */
-        .rating-section {
-            padding: 40px 60px;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .rating-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .stars {
-            color: #ffd700;
-            font-size: 16px;
-            letter-spacing: 2px;
-        }
-
-        .rating-text {
-            font-size: 13px;
-            color: #aaa;
-        }
-
-        .rating-right {
-            display: flex;
-            gap: 30px;
-            font-size: 13px;
-            color: #888;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 40px 60px;
-            text-align: center;
-            border-top: 1px solid #333;
-            font-size: 12px;
-            color: #666;
-        }
-
-        /* Auth Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .auth-box {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #aaa;
-        }
-
-        .auth-box h1 {
-            font-size: 28px;
-            margin-bottom: 12px;
-            font-weight: 400;
-        }
-
-        .auth-box p {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px 12px;
-            background: #0a0a0a;
-            border: 1px solid #333;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #ffd700;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background: #ffd700;
-            color: #000;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 12px;
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .error {
-            color: #ff6b6b;
-            font-size: 12px;
-            margin-top: 6px;
-        }
-
-        .toggle-form {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 13px;
-            color: #aaa;
-        }
-
-        .toggle-form button {
-            background: none;
-            border: none;
-            color: #ffd700;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* ========== BUILDER PAGE STYLES ========== */
-        .builder-page {
-            background: #f8f9fa;
-            color: #2c3e50;
-            display: none;
-        }
-
-        .builder-page.active {
-            display: block;
-        }
-
-        /* Builder Header */
-        .builder-header {
-            background: white;
-            border-bottom: 1px solid #e0e6ed;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        .builder-header-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .builder-logo {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1a1a1a;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .builder-logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #1a1a1a;
-        }
-
-        .tier-badge {
-            background: #f0f4f8;
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #5a6c7d;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .builder-header-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .user-info {
-            text-align: right;
-            font-size: 13px;
-        }
-
-        .user-email {
-            color: #5a6c7d;
-        }
-
-        .logout-btn {
-            padding: 8px 16px;
-            background: #ef4444;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-
-        .logout-btn:hover {
-            background: #dc2626;
-        }
-
-        /* Builder Container */
-        .builder-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: calc(100vh - 60px);
-            gap: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-        }
-
-        /* Form Panel */
-        .form-panel {
-            background: white;
-            border-radius: 12px;
-            overflow-y: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .form-header {
-            padding: 24px;
-            border-bottom: 2px solid #f0f4f8;
-            background: #fafbfc;
-        }
-
-        .form-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .form-subtitle {
-            font-size: 13px;
-            color: #5a6c7d;
-        }
-
-        .form-content {
-            padding: 24px;
-        }
-
-        .form-section {
-            margin-bottom: 32px;
-            padding: 0;
-        }
-
-        .form-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .form-section.hidden {
-            display: none;
-        }
-
-        .form-section.tier-elite.hidden {
-            display: none;
-        }
-
-        .section-title {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #5a6c7d;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 0;
-        }
-
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 3px;
-            height: 14px;
-            background: #ffd700;
-            border-radius: 2px;
-        }
-
-        .builder-form-group {
-            margin-bottom: 16px;
-        }
-
-        .builder-form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #2c3e50;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif; }
+        
+        /* LANDING PAGE */
+        .landing-page { background: #000; color: #fff; }
+        .header { background: #000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; }
+        .logo-icon { width: 32px; height: 32px; background: #ffd700; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700; font-size: 18px; }
+        .nav-menu { display: flex; gap: 50px; flex: 1; margin-left: 100px; }
+        .nav-menu a { color: #aaa; text-decoration: none; font-size: 14px; cursor: pointer; }
+        .nav-menu a:hover { color: #fff; }
+        .sign-in-btn { color: #fff; background: transparent; border: 1px solid #666; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+        .sign-in-btn:hover { border-color: #fff; }
+        
+        .hero { padding: 80px 60px; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .hero-tag { font-size: 12px; color: #ffd700; letter-spacing: 1px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .hero-tag::before { content: "●"; color: #ffd700; }
+        .hero-title { font-size: 72px; font-weight: 300; letter-spacing: -1px; margin-bottom: 30px; line-height: 1.2; }
+        .hero-title .gold { color: #ffd700; font-style: italic; }
+        .hero-desc { font-size: 16px; color: #aaa; line-height: 1.8; margin-bottom: 60px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 80px; padding: 60px; border-bottom: 1px solid #333; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .stat-number { font-size: 42px; font-weight: 300; margin-bottom: 12px; }
+        .stat-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .section-intro { padding: 80px 60px 40px; text-align: left; max-width: 1400px; margin: 0 auto; }
+        .section-label { font-size: 11px; color: #888; letter-spacing: 2px; margin-bottom: 30px; }
+        .section-label::before { content: "—"; color: #666; margin-right: 10px; }
+        .section-title { font-size: 56px; font-weight: 300; margin-bottom: 10px; }
+        .section-title .gold { color: #ffd700; font-style: italic; }
+        
+        .pricing-section { padding: 40px 60px 80px; max-width: 1400px; margin: 0 auto; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 80px; }
+        .pricing-card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; overflow: hidden; }
+        .pricing-card.elite { border: 1px solid #ffd700; }
+        
+        .card-preview { width: 100%; height: 300px; background: white; padding: 18px 16px; border-bottom: 1px solid #333; overflow: hidden; font-size: 10px; color: #333; font-family: 'Segoe UI', sans-serif; line-height: 1.4; }
+        .card-resume-header { font-weight: 700; font-size: 13px; margin-bottom: 2px; letter-spacing: 0.5px; }
+        .resume-subtext { font-size: 9px; color: #888; margin-bottom: 8px; line-height: 1.3; }
+        .resume-section { margin-top: 8px; font-weight: 700; font-size: 8px; color: #666; letter-spacing: 1px; text-transform: uppercase; border-top: 1px solid #e0e0e0; padding-top: 5px; }
+        
+        .card-content { padding: 28px 20px; }
+        .card-tier { font-size: 10px; color: #888; letter-spacing: 1px; margin-bottom: 12px; }
+        .card-tier.elite { color: #ffd700; }
+        .card-price { font-size: 48px; font-weight: 300; margin-bottom: 4px; }
+        .card-price-period { font-size: 14px; color: #888; }
+        .card-desc { font-size: 13px; color: #aaa; margin: 16px 0 24px; line-height: 1.5; }
+        .card-btn { width: 100%; padding: 12px; background: white; color: #000; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; margin-bottom: 20px; display: block; text-align: center; text-decoration: none; transition: all 0.2s; }
+        .card-btn:hover { background: #f0f0f0; }
+        .card-btn.elite { background: #ffd700; }
+        
+        .card-features { border-top: 1px solid #333; padding-top: 16px; }
+        .feature { font-size: 12px; color: #aaa; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .feature::before { content: "✓"; color: #ffd700; font-weight: bold; font-size: 14px; }
+        
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; z-index: 1000; }
+        .modal-overlay.active { display: flex; }
+        .auth-box { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 40px; width: 100%; max-width: 400px; }
+        .close-modal { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #aaa; }
+        .auth-box h1 { font-size: 28px; margin-bottom: 12px; font-weight: 400; }
+        .auth-box p { color: #aaa; font-size: 14px; margin-bottom: 28px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; margin-bottom: 8px; font-weight: 500; }
+        .form-group input { width: 100%; padding: 10px 12px; background: #0a0a0a; border: 1px solid #333; border-radius: 4px; color: #fff; font-size: 14px; }
+        .form-group input:focus { outline: none; border-color: #ffd700; }
+        .btn-submit { width: 100%; padding: 12px; background: #ffd700; color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 12px; }
+        .error { color: #ff6b6b; font-size: 12px; margin-top: 6px; }
+        .toggle-form { text-align: center; margin-top: 20px; font-size: 13px; color: #aaa; }
+        .toggle-form button { background: none; border: none; color: #ffd700; cursor: pointer; text-decoration: underline; }
+        .hidden { display: none; }
+        
+        /* BUILDER PAGE */
+        .builder-page { background: #f8f9fa; color: #2c3e50; display: none; }
+        .builder-page.active { display: block; }
+        .builder-header { background: white; border-bottom: 1px solid #e0e6ed; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .builder-header-left { display: flex; align-items: center; gap: 16px; }
+        .builder-logo { font-size: 18px; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: 8px; }
+        .builder-logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #1a1a1a; }
+        .tier-badge { background: #f0f4f8; border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: #5a6c7d; text-transform: uppercase; letter-spacing: 0.5px; }
+        .builder-header-right { display: flex; align-items: center; gap: 16px; }
+        .user-info { text-align: right; font-size: 13px; }
+        .user-email { color: #5a6c7d; }
+        .logout-btn { padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; transition: background 0.2s; }
+        .logout-btn:hover { background: #dc2626; }
+        
+        .builder-container { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 60px); gap: 20px; padding: 20px; background: #f8f9fa; }
+        .form-panel { background: white; border-radius: 12px; overflow-y: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .form-header { padding: 24px; border-bottom: 2px solid #f0f4f8; background: #fafbfc; }
+        .form-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .form-subtitle { font-size: 13px; color: #5a6c7d; }
+        .form-content { padding: 24px; }
+        .form-section { margin-bottom: 32px; padding: 0; }
+        .form-section:last-child { margin-bottom: 0; }
+        .form-section.hidden { display: none; }
+        
+        .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #5a6c7d; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .section-title::before { content: ''; display: inline-block; width: 3px; height: 14px; background: #ffd700; border-radius: 2px; }
+        
+        .builder-form-group { margin-bottom: 16px; }
+        .builder-form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #2c3e50; }
         .builder-form-group input,
-        .builder-form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #d1dce6;
-            border-radius: 6px;
-            font-size: 13px;
-            font-family: inherit;
-            color: #2c3e50;
-            background: #ffffff;
-            transition: border-color 0.2s, background 0.2s;
-        }
-
-        .builder-form-group input::placeholder,
-        .builder-form-group textarea::placeholder {
-            color: #9ca3af;
-        }
-
+        .builder-form-group textarea { width: 100%; padding: 12px; border: 1px solid #d1dce6; border-radius: 6px; font-size: 13px; font-family: inherit; color: #2c3e50; background: #ffffff; }
         .builder-form-group input:focus,
-        .builder-form-group textarea:focus {
-            outline: none;
-            border-color: #ffd700;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
-        }
-
-        .builder-form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .color-picker {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .color-btn {
-            width: 100%;
-            aspect-ratio: 1;
-            border: 3px solid transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .color-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .color-btn.active {
-            border-color: #1a1a1a;
-            box-shadow: 0 0 0 2px white, 0 0 0 4px #1a1a1a;
-        }
-
+        .builder-form-group textarea:focus { outline: none; border-color: #ffd700; box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1); }
+        .builder-form-group textarea { resize: vertical; min-height: 80px; }
+        
+        .color-picker { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+        .color-btn { width: 100%; aspect-ratio: 1; border: 3px solid transparent; border-radius: 8px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        .color-btn:hover { transform: scale(1.05); }
+        .color-btn.active { border-color: #1a1a1a; box-shadow: 0 0 0 2px white, 0 0 0 4px #1a1a1a; }
         .color-btn.blue { background: #667eea; }
         .color-btn.pink { background: #e91e63; }
         .color-btn.orange { background: #ff9800; }
         .color-btn.teal { background: #1abc9c; }
-
-        /* TEMPLATE STYLES */
-        .resume-preview {
-            background: white;
-            padding: 40px;
-            font-family: 'Garamond', 'Georgia', serif;
-            color: #1a1a1a;
-            line-height: 1.6;
-            border: 1px solid #e0e6ed;
-            border-radius: 8px;
-        }
-
-        /* Modern Template (default) */
-        .resume-preview.template-modern .builder-resume-header {
-            border-bottom: 3px solid;
-            padding-bottom: 16px;
-        }
-
-        /* Professional Template */
-        .resume-preview.template-professional {
-            font-family: 'Calibri', 'Arial', sans-serif;
-            color: #2c3e50;
-            background: #fafbfc;
-        }
-
-        .resume-preview.template-professional .builder-resume-header {
-            border-bottom: 2px solid #2c3e50;
-            background: #ecf0f1;
-            padding: 20px;
-            margin: -40px -40px 20px -40px;
-            text-align: left;
-        }
-
-        .resume-preview.template-professional .resume-name {
-            font-size: 20px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .resume-preview.template-professional .resume-contact {
-            font-size: 10px;
-            margin-top: 8px;
-        }
-
-        .resume-preview.template-professional .resume-section-title {
-            background: #ecf0f1;
-            padding: 6px 8px;
-            margin: 16px -8px 8px -8px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Creative Template */
-        .resume-preview.template-creative {
-            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-        }
-
-        .resume-preview.template-creative .builder-resume-header {
-            border-left: 6px solid;
-            padding-left: 20px;
-            border-bottom: none;
-            padding-bottom: 8px;
-        }
-
-        .resume-preview.template-creative .resume-name {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .resume-preview.template-creative .resume-section-title {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid;
-            margin: 18px 0 10px 0;
-            font-weight: 700;
-        }
-
-        .resume-preview.template-creative .resume-item {
-            margin-bottom: 14px;
-        }
-
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid #e0e6ed;
-        }
-
-        .btn {
-            padding: 12px 16px;
-            border: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: #1a1a1a;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-        }
-
-        .btn-secondary {
-            background: #f0f4f8;
-            color: #5a6c7d;
-            border: 1px solid #d1dce6;
-        }
-
-        .btn-secondary:hover {
-            background: #e6eef7;
-        }
-
-        /* Preview Panel */
-        .preview-panel {
-            background: white;
-            border-radius: 12px;
-            padding: 32px;
-            overflow-y: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            position: sticky;
-            top: 20px;
-            height: fit-content;
-        }
-
-        .resume-preview {
-            background: white;
-            padding: 40px;
-            font-family: 'Garamond', 'Georgia', serif;
-            color: #1a1a1a;
-            line-height: 1.6;
-            border: 1px solid #e0e6ed;
-            border-radius: 8px;
-        }
-
-        .builder-resume-header {
-            text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 3px solid;
-            padding-bottom: 16px;
-        }
-
-        .resume-name {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .resume-contact {
-            font-size: 11px;
-            color: #5a6c7d;
-            letter-spacing: 0.5px;
-        }
-
-        .resume-section-title {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 16px;
-            margin-bottom: 8px;
-            color: #1a1a1a;
-        }
-
-        .resume-item {
-            margin-bottom: 12px;
-            font-size: 12px;
-        }
-
-        .resume-item-title {
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .resume-item-subtitle {
-            font-size: 11px;
-            color: #5a6c7d;
-            font-style: italic;
-        }
-
-        .resume-item-desc {
-            font-size: 11px;
-            color: #404040;
-            margin-top: 4px;
-            line-height: 1.4;
-        }
-
-        .tier-lock {
-            background: linear-gradient(135deg, #fff9ec 0%, #fef3e2 100%);
-            border: 1px solid #fcd34d;
-            border-radius: 10px;
-            padding: 20px;
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-        }
-
-        .tier-lock-icon {
-            width: 34px;
-            height: 34px;
-            min-width: 34px;
-            border-radius: 8px;
-            background: #ffd700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            color: #1a1a1a;
-        }
-
-        .tier-lock-body {
-            flex: 1;
-        }
-
-        .tier-lock-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #7c4a03;
-            margin-bottom: 4px;
-        }
-
-        .tier-lock-desc {
-            font-size: 12px;
-            color: #92400e;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        .tier-lock-btn {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 700;
-            color: #1a1a1a;
-            background: #ffd700;
-            padding: 6px 14px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: transform 0.15s;
-        }
-
-        .tier-lock-btn:hover {
-            transform: translateY(-1px);
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f0f4f8;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #c9d3df;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b0b8c4;
-        }
-
-        @media (max-width: 1024px) {
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .builder-container {
-                grid-template-columns: 1fr;
-            }
-
-            .preview-panel {
-                position: relative;
-                top: 0;
-                height: auto;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .header {
-                padding: 16px 20px;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .hero {
-                padding: 50px 20px;
-            }
-
-            .hero-title {
-                font-size: 38px;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-                padding: 40px 20px;
-            }
-
-            .section-intro {
-                padding: 50px 20px 20px;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .rating-section {
-                flex-direction: column;
-                gap: 16px;
-                padding: 30px 20px;
-                text-align: center;
-            }
-        }
+        
+        .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #e0e6ed; }
+        .btn { padding: 12px 16px; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-primary { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #1a1a1a; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3); }
+        .btn-secondary { background: #f0f4f8; color: #5a6c7d; border: 1px solid #d1dce6; }
+        .btn-secondary:hover { background: #e6eef7; }
+        
+        .preview-panel { background: white; border-radius: 12px; padding: 32px; overflow-y: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 20px; height: fit-content; }
+        
+        .resume-preview { background: white; padding: 40px; font-family: 'Garamond', 'Georgia', serif; color: #1a1a1a; line-height: 1.6; border: 1px solid #e0e6ed; border-radius: 8px; }
+        .builder-resume-header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid; padding-bottom: 16px; }
+        .resume-name { font-size: 24px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .resume-contact { font-size: 11px; color: #5a6c7d; letter-spacing: 0.5px; }
+        .resume-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin: 16px 0 8px 0; color: #1a1a1a; }
+        .resume-item { margin-bottom: 12px; font-size: 12px; }
+        .resume-item-title { font-weight: 600; margin-bottom: 2px; }
+        .resume-item-subtitle { font-size: 11px; color: #5a6c7d; font-style: italic; }
+        .resume-item-desc { font-size: 11px; color: #404040; margin-top: 4px; line-height: 1.4; }
+        
+        .tier-lock { background: linear-gradient(135deg, #fff9ec 0%, #fef3e2 100%); border: 1px solid #fcd34d; border-radius: 10px; padding: 20px; display: flex; align-items: flex-start; gap: 14px; }
+        .tier-lock-icon { width: 34px; height: 34px; min-width: 34px; border-radius: 8px; background: #ffd700; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #1a1a1a; }
+        .tier-lock-body { flex: 1; }
+        .tier-lock-title { font-size: 13px; font-weight: 700; color: #7c4a03; margin-bottom: 4px; }
+        .tier-lock-desc { font-size: 12px; color: #92400e; line-height: 1.5; margin-bottom: 10px; }
+        .tier-lock-btn { display: inline-block; font-size: 12px; font-weight: 700; color: #1a1a1a; background: #ffd700; padding: 6px 14px; border-radius: 20px; text-decoration: none; transition: transform 0.15s; }
+        .tier-lock-btn:hover { transform: translateY(-1px); }
+        
+        .template-modern .builder-resume-header { border-bottom-color: currentColor; }
+        .template-professional { font-family: 'Calibri', 'Arial', sans-serif; color: #2c3e50; }
+        .template-professional .builder-resume-header { border-bottom-color: #2c3e50; background: #ecf0f1; padding: 20px; margin: -40px -40px 20px -40px; text-align: left; }
+        .template-professional .resume-name { font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .template-professional .resume-section-title { background: #ecf0f1; padding: 6px 8px; margin: 16px -8px 8px -8px; }
+        .template-creative { font-family: 'Segoe UI', 'Helvetica Neue', sans-serif; }
+        .template-creative .builder-resume-header { border-left: 6px solid; padding-left: 20px; border-bottom: none; padding-bottom: 8px; }
+        .template-creative .resume-name { font-size: 26px; margin-bottom: 4px; }
+        .template-creative .resume-section-title { border-bottom: 2px solid; margin: 18px 0 10px 0; padding-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -1151,8 +174,6 @@
             <a>Tiers</a>
             <a>Templates</a>
             <a>Examples</a>
-            <a>Journal</a>
-            <a>Help</a>
         </div>
         <button class="sign-in-btn" id="signInBtn">Sign in</button>
     </div>
@@ -1160,7 +181,7 @@
     <div class="hero">
         <div class="hero-tag">EST. 2019 - TRUSTED BY 40,000+ PROFESSIONALS</div>
         <h1 class="hero-title">Résumés worth <span class="gold">reading.</span></h1>
-        <p class="hero-desc">A small studio for considered career documents. Pick a tier, build in minutes, and export a recruiter-ready PDF set in editorial typography — quietly engineered to pass every ATS.</p>
+        <p class="hero-desc">A small studio for considered career documents. Pick a tier, build in minutes, and export a recruiter-ready PDF set in editorial typography.</p>
     </div>
 
     <div class="stats">
@@ -1195,24 +216,18 @@
                     <div class="card-resume-header">JANE SMITH</div>
                     <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
                     <div class="resume-section">SUMMARY</div>
-                    <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
-                    <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">Professional tier • Name, Email, Phone, Location, Summary</div>
-                    <div class="card-resume-header">JANE SMITH</div>
-                    <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
-                    <div class="resume-section">SUMMARY</div>
-                    <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
-                    <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">⊘ Certifications, education, skills locked</div>
+                    <div style="font-size: 9px; color: #555; line-height: 1.3;">Full-stack developer with 6+ years building web products.</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PROFESSIONAL / I</div>
                     <div class="card-price">$<span class="card-price-period">6/month</span></div>
                     <div class="card-desc">Clean, ATS-friendly templates for the early-career professional.</div>
-                    <a href="https://saminak.gumroad.com/l/ojoere" target="_blank" rel="noopener" class="card-btn">Begin subscription →</a>
+                    <a href="https://saminak.gumroad.com/l/ojoere" target="_blank" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Name, email, phone</div>
+                        <div class="feature">Name, email, phone, location</div>
                         <div class="feature">Professional summary</div>
+                        <div class="feature">Work experience</div>
                         <div class="feature">PDF download</div>
-                        <div class="feature">Live preview</div>
                     </div>
                 </div>
             </div>
@@ -1220,23 +235,22 @@
             <!-- Premium -->
             <div class="pricing-card">
                 <div class="card-preview premium">
-                    <div class="card-resume-header">ALEX JOHNSON</div>
+                    <div class="card-resume-header" style="color: #f5576c;">ALEX JOHNSON</div>
                     <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York</div>
                     <div class="resume-section">CERTIFICATIONS</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #f5576c;">AWS Certified Architect</div>
-                    <div style="font-size: 8px; color: #999; margin-bottom: 2px;">2023</div>
-                    <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">⊘ Education, skills locked</div>
+                    <div style="font-weight: 600; font-size: 10px; color: #f5576c;">AWS Certified Architect</div>
+                    <div style="font-size: 8px; color: #999;">Amazon Web Services • 2023</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PREMIUM / II</div>
                     <div class="card-price">$<span class="card-price-period">9/month</span></div>
-                    <div class="card-desc">Modern layouts with refined typography for mid-career operators.</div>
-                    <a href="https://saminak.gumroad.com/l/nrdaz" target="_blank" rel="noopener" class="card-btn">Begin subscription →</a>
+                    <div class="card-desc">Modern layouts for mid-career professionals.</div>
+                    <a href="https://saminak.gumroad.com/l/nrdaz" target="_blank" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Professional</div>
                         <div class="feature">Certifications & awards</div>
                         <div class="feature">Colour picker</div>
-                        <div class="feature">Live preview</div>
+                        <div class="feature">3 template designs</div>
                     </div>
                 </div>
             </div>
@@ -1244,10 +258,10 @@
             <!-- Luxury -->
             <div class="pricing-card">
                 <div class="card-preview luxury">
-                    <div class="card-resume-header">MORGAN CHEN</div>
-                    <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco, CA</div>
+                    <div class="card-resume-header" style="color: #4facfe;">MORGAN CHEN</div>
+                    <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco</div>
                     <div class="resume-section">EDUCATION</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #4facfe;">Bachelor of Science</div>
+                    <div style="font-weight: 600; font-size: 10px; color: #4facfe;">Bachelor of Science</div>
                     <div style="font-size: 8px; color: #999;">Stanford University • 2015</div>
                     <div class="resume-section">SKILLS</div>
                     <div style="font-size: 9px; color: #666;">Product Strategy • Leadership • Data Analysis</div>
@@ -1255,13 +269,13 @@
                 <div class="card-content">
                     <div class="card-tier">LUXURY / III</div>
                     <div class="card-price">$<span class="card-price-period">12/month</span></div>
-                    <div class="card-desc">Editorial-grade templates for senior leaders and specialists.</div>
-                    <a href="https://saminak.gumroad.com/l/eqnsrx" target="_blank" rel="noopener" class="card-btn">Begin subscription →</a>
+                    <div class="card-desc">Editorial-grade templates for senior leaders.</div>
+                    <a href="https://saminak.gumroad.com/l/eqnsrx" target="_blank" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Premium</div>
                         <div class="feature">Education section</div>
                         <div class="feature">Skills & expertise</div>
-                        <div class="feature">Advanced themes</div>
+                        <div class="feature">Professional + Modern + Creative</div>
                     </div>
                 </div>
             </div>
@@ -1269,43 +283,31 @@
             <!-- Elite -->
             <div class="pricing-card elite">
                 <div class="card-preview elite">
-                    <div class="card-resume-header">CHRISTOPHER ELITE</div>
-                    <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York, NY</div>
+                    <div class="card-resume-header" style="color: #ffa500;">CHRISTOPHER ELITE</div>
+                    <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York</div>
+                    <div class="resume-section">PROFESSIONAL SUMMARY</div>
+                    <div style="font-size: 9px; color: #555;">C-suite executive with 15+ years scaling high-growth companies.</div>
                     <div class="resume-section">EDUCATION</div>
-                    <div style="font-weight: 600; font-size: 10px; margin-top: 3px; color: #ffa500;">MBA</div>
+                    <div style="font-weight: 600; font-size: 10px; color: #ffa500;">MBA</div>
                     <div style="font-size: 8px; color: #999;">Harvard Business School • 2012</div>
-                    <div class="resume-section">SKILLS & HONORS</div>
-                    <div style="font-size: 9px; color: #666;">Executive Leadership • 2x Founder • Strategic Vision</div>
+                    <div class="resume-section">BOARD EXPERIENCE</div>
+                    <div style="font-weight: 600; font-size: 10px; color: #ffa500;">Board Member</div>
+                    <div style="font-size: 8px; color: #999;">TechStartup Inc. • 2020 - Present</div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier elite">ELITE / IV</div>
                     <div class="card-price">$<span class="card-price-period">16/month</span></div>
-                    <div class="card-desc">Bespoke executive templates crafted for board-level presentation.</div>
-                    <a href="https://saminak.gumroad.com/l/mdpcz" target="_blank" rel="noopener" class="card-btn elite">Begin subscription →</a>
+                    <div class="card-desc">Bespoke executive templates for board-level presentation.</div>
+                    <a href="https://saminak.gumroad.com/l/mdpcz" target="_blank" class="card-btn elite">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Luxury</div>
-                        <div class="feature">All fields unlocked</div>
+                        <div class="feature">Board experience section</div>
+                        <div class="feature">All 3 template designs</div>
                         <div class="feature">Premium design system</div>
-                        <div class="feature">Priority support</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="rating-section">
-        <div class="rating-left">
-            <div class="stars">★ ★ ★ ★ ★</div>
-            <div class="rating-text">4.9 average from 6,200+ reviews</div>
-        </div>
-        <div class="rating-right">
-            <span>Secure checkout</span>
-            <span>Cancel anytime</span>
-        </div>
-    </div>
-
-    <div class="footer">
-        Atelier Résumé · Considered career documents · © 2025
     </div>
 </div>
 
@@ -1327,12 +329,11 @@
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" id="signupPassword" required minlength="6">
-                <div id="signupPasswordError" class="error hidden"></div>
             </div>
 
             <div class="form-group">
                 <label>Gumroad License Code</label>
-                <input type="text" id="licenseCode" placeholder="e.g., PROF-GUMROAD-001" required>
+                <input type="text" id="licenseCode" placeholder="e.g., ELITE-TEST-003" required>
                 <div id="licenseCodeError" class="error hidden"></div>
             </div>
 
@@ -1356,7 +357,6 @@
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" id="signinPassword" required>
-                <div id="signinPasswordError" class="error hidden"></div>
             </div>
 
             <button type="submit" class="btn-submit">Sign In</button>
@@ -1407,6 +407,11 @@
                     </div>
 
                     <div class="builder-form-group">
+                        <label>Target Job Title</label>
+                        <input type="text" id="targetTitle" placeholder="Senior Product Designer">
+                    </div>
+
+                    <div class="builder-form-group">
                         <label>Email Address *</label>
                         <input type="email" id="email" placeholder="jane@example.com" required>
                     </div>
@@ -1420,6 +425,11 @@
                         <label>Location</label>
                         <input type="text" id="location" placeholder="Brooklyn, NY">
                     </div>
+
+                    <div class="builder-form-group">
+                        <label>LinkedIn / Portfolio URL</label>
+                        <input type="text" id="linkedIn" placeholder="linkedin.com/in/janesmith">
+                    </div>
                 </div>
 
                 <!-- Professional Summary -->
@@ -1432,7 +442,51 @@
                     </div>
                 </div>
 
-                <!-- Certifications - Premium+ (NO INPUT FIELDS) -->
+                <!-- Work Experience - base tier, everyone -->
+                <div class="form-section" id="experienceSection">
+                    <div class="section-title">Work Experience</div>
+
+                    <div class="builder-form-group">
+                        <label>Job Title</label>
+                        <input type="text" id="jobTitle" placeholder="Software Engineer">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Company</label>
+                        <input type="text" id="company" placeholder="Company Name">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Dates</label>
+                        <input type="text" id="jobDates" placeholder="2021 - Present">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Description</label>
+                        <textarea id="jobDesc" placeholder="What did you do in this role? Focus on results and impact..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Certifications - Premium+ -->
+                <div class="form-section tier-premium hidden" id="certsSection">
+                    <div class="section-title">Certifications & Awards</div>
+
+                    <div class="builder-form-group">
+                        <label>Certificate / Award Name</label>
+                        <input type="text" id="certName" placeholder="AWS Certified Solutions Architect">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Issuing Organization</label>
+                        <input type="text" id="certOrg" placeholder="Amazon Web Services">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Date</label>
+                        <input type="text" id="certDate" placeholder="2023">
+                    </div>
+                </div>
+
                 <div class="form-section hidden" id="experienceLock">
                     <div class="tier-lock">
                         <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
@@ -1527,7 +581,7 @@
                     </div>
                 </div>
 
-                <!-- Color Picker -->
+                <!-- Design & Templates -->
                 <div class="form-section">
                     <div class="section-title">Design</div>
                     
@@ -1576,16 +630,39 @@
             <div class="resume-preview template-modern" id="resumePreview">
                 <div class="builder-resume-header" id="resumeHeaderAccent">
                     <div class="resume-name" id="previewName">Your Name</div>
-                    <div class="resume-contact">
+                    <div id="previewTargetTitleWrap" class="hidden" style="font-size: 13px; color: #5a6c7d; margin-top: 2px;">
+                        <span id="previewTargetTitle"></span>
+                    </div>
+                    <div class="resume-contact" style="margin-top: 6px;">
                         <span id="previewEmail">your@email.com</span> • 
                         <span id="previewPhone">(555) 123-4567</span> • 
                         <span id="previewLocation">City, State</span>
+                    </div>
+                    <div id="previewLinkedInWrap" class="resume-contact hidden" style="margin-top: 3px;">
+                        <span id="previewLinkedIn"></span>
                     </div>
                 </div>
 
                 <div id="previewSummarySection" class="hidden">
                     <div class="resume-section-title">Professional Summary</div>
                     <div id="previewSummary" style="font-size: 12px; color: #404040; line-height: 1.5;"></div>
+                </div>
+
+                <div id="previewExperienceSection" class="hidden">
+                    <div class="resume-section-title">Work Experience</div>
+                    <div class="resume-item">
+                        <div class="resume-item-title" id="previewJobTitle">Job Title</div>
+                        <div class="resume-item-subtitle" id="previewCompanyDates">Company • Dates</div>
+                        <div class="resume-item-desc" id="previewJobDesc"></div>
+                    </div>
+                </div>
+
+                <div id="previewCertsSection" class="hidden">
+                    <div class="resume-section-title">Certifications</div>
+                    <div class="resume-item">
+                        <div class="resume-item-title" id="previewCertName">Certificate Name</div>
+                        <div class="resume-item-subtitle" id="previewCertOrgDate">Organization • Date</div>
+                    </div>
                 </div>
 
                 <div id="previewEducationSection" class="hidden">
@@ -1631,19 +708,16 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// PAGE STATE
 const landingPage = document.getElementById('landingPage');
 const builderPage = document.getElementById('builderPage');
 const authModal = document.getElementById('authModal');
 
-// TIER LOGIC
 const tierHierarchy = { professional: 0, premium: 1, luxury: 2, elite: 3 };
 const tierNames = { professional: 'Professional', premium: 'Premium', luxury: 'Luxury', elite: 'Elite' };
 
 let currentTier = 'professional';
 let currentColor = '#667eea';
 
-// Get user tier from Firestore
 async function getUserTier(email) {
     try {
         const snapshot = await db.collection('licenseCodes')
@@ -1653,10 +727,8 @@ async function getUserTier(email) {
         
         if (!snapshot.empty) {
             const tier = snapshot.docs[0].data().tier;
-            console.log('Tier found:', tier);
             return (tier || 'professional').toLowerCase().trim();
         }
-        console.log('No tier found for email:', email);
         return 'professional';
     } catch (e) {
         console.error('Error fetching tier:', e);
@@ -1664,23 +736,21 @@ async function getUserTier(email) {
     }
 }
 
-// Show tier content
 function showTierContent(tier) {
     currentTier = tier;
     
-    // Certifications (Premium+)
     if (tierHierarchy[tier] >= tierHierarchy.premium) {
+        document.querySelectorAll('.tier-premium').forEach(el => el.classList.remove('hidden'));
         document.getElementById('experienceLock').classList.add('hidden');
     } else {
+        document.querySelectorAll('.tier-premium').forEach(el => el.classList.add('hidden'));
         document.getElementById('experienceLock').classList.remove('hidden');
     }
 
-    // Education & Skills (Luxury+)
     if (tierHierarchy[tier] >= tierHierarchy.luxury) {
         document.querySelectorAll('.tier-luxury').forEach(el => el.classList.remove('hidden'));
         document.getElementById('educationLock').classList.add('hidden');
         document.getElementById('skillsLock').classList.add('hidden');
-        // Unlock Professional template
         document.getElementById('templateProfessional').disabled = false;
     } else {
         document.querySelectorAll('.tier-luxury').forEach(el => el.classList.add('hidden'));
@@ -1689,11 +759,9 @@ function showTierContent(tier) {
         document.getElementById('templateProfessional').disabled = true;
     }
 
-    // Board Experience (Elite only)
     if (tierHierarchy[tier] >= tierHierarchy.elite) {
         document.querySelectorAll('.tier-elite').forEach(el => el.classList.remove('hidden'));
         document.getElementById('boardLock').classList.add('hidden');
-        // Unlock Creative template
         document.getElementById('templateCreative').disabled = false;
     } else {
         document.querySelectorAll('.tier-elite').forEach(el => el.classList.add('hidden'));
@@ -1716,7 +784,6 @@ function showBuilder() {
 
 showLanding();
 
-// AUTH MODAL
 const signupForm = document.getElementById('signupForm');
 const signinForm = document.getElementById('signinForm');
 const signInBtn = document.getElementById('signInBtn');
@@ -1765,7 +832,6 @@ function showError(id, message) {
     }
 }
 
-// SIGNUP
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearError('licenseCodeError');
@@ -1785,21 +851,16 @@ signupForm.addEventListener('submit', async (e) => {
         const codeData = q.docs[0].data();
         const isTestCode = code.includes('TEST');
         
-        // Don't mark test codes as used
         if (codeData.isUsed && !isTestCode) throw new Error('Code already used');
 
         await auth.createUserWithEmailAndPassword(email, password);
         
-        // Mark code as used in Firestore (all codes, test and real)
-        // But only set isUsed=true for non-test codes
         if (!isTestCode) {
             await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
         } else {
-            // For TEST codes, just record who used it but keep isUsed false
             await db.collection('licenseCodes').doc(q.docs[0].id).update({ usedBy: email });
         }
         
-        // Fetch tier immediately and show it
         const tier = await getUserTier(email);
         showTierContent(tier);
         
@@ -1812,7 +873,6 @@ signupForm.addEventListener('submit', async (e) => {
     }
 });
 
-// SIGNIN
 signinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearError('signinEmailError');
@@ -1823,12 +883,8 @@ signinForm.addEventListener('submit', async (e) => {
     submitBtn.textContent = 'Signing in...';
 
     try {
-        await auth.signInWithEmailAndPassword(
-            email,
-            document.getElementById('signinPassword').value
-        );
+        await auth.signInWithEmailAndPassword(email, document.getElementById('signinPassword').value);
         
-        // Fetch tier immediately after signin
         const tier = await getUserTier(email);
         showTierContent(tier);
         
@@ -1841,7 +897,6 @@ signinForm.addEventListener('submit', async (e) => {
     }
 });
 
-// AUTH STATE
 auth.onAuthStateChanged(async user => {
     if (user) {
         document.getElementById('userEmail').textContent = user.email;
@@ -1853,12 +908,20 @@ auth.onAuthStateChanged(async user => {
     }
 });
 
-// FORM INPUTS
 const fullNameInput = document.getElementById('fullName');
+const targetTitleInput = document.getElementById('targetTitle');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
 const locationInput = document.getElementById('location');
+const linkedInInput = document.getElementById('linkedIn');
 const summaryInput = document.getElementById('summary');
+const jobTitleInput = document.getElementById('jobTitle');
+const companyInput = document.getElementById('company');
+const jobDatesInput = document.getElementById('jobDates');
+const jobDescInput = document.getElementById('jobDesc');
+const certNameInput = document.getElementById('certName');
+const certOrgInput = document.getElementById('certOrg');
+const certDateInput = document.getElementById('certDate');
 const degreeInput = document.getElementById('degree');
 const schoolInput = document.getElementById('school');
 const graduationYearInput = document.getElementById('graduationYear');
@@ -1867,23 +930,33 @@ const boardTitleInput = document.getElementById('boardTitle');
 const boardOrgInput = document.getElementById('boardOrg');
 const boardYearInput = document.getElementById('boardYear');
 
-// PREVIEW ELEMENTS
 const resumeHeaderAccent = document.getElementById('resumeHeaderAccent');
 const previewName = document.getElementById('previewName');
+const previewTargetTitle = document.getElementById('previewTargetTitle');
+const previewTargetTitleWrap = document.getElementById('previewTargetTitleWrap');
 const previewEmail = document.getElementById('previewEmail');
 const previewPhone = document.getElementById('previewPhone');
 const previewLocation = document.getElementById('previewLocation');
+const previewLinkedIn = document.getElementById('previewLinkedIn');
+const previewLinkedInWrap = document.getElementById('previewLinkedInWrap');
 const previewSummary = document.getElementById('previewSummary');
+const previewJobTitle = document.getElementById('previewJobTitle');
+const previewCompanyDates = document.getElementById('previewCompanyDates');
+const previewJobDesc = document.getElementById('previewJobDesc');
+const previewCertName = document.getElementById('previewCertName');
+const previewCertOrgDate = document.getElementById('previewCertOrgDate');
 const previewDegree = document.getElementById('previewDegree');
 const previewSchoolYear = document.getElementById('previewSchoolYear');
 const previewSkills = document.getElementById('previewSkills');
+const previewBoardTitle = document.getElementById('previewBoardTitle');
+const previewBoardOrgYear = document.getElementById('previewBoardOrgYear');
 
 const previewSummarySection = document.getElementById('previewSummarySection');
+const previewExperienceSection = document.getElementById('previewExperienceSection');
+const previewCertsSection = document.getElementById('previewCertsSection');
 const previewEducationSection = document.getElementById('previewEducationSection');
 const previewSkillsSection = document.getElementById('previewSkillsSection');
 const previewBoardSection = document.getElementById('previewBoardSection');
-const previewBoardTitle = document.getElementById('previewBoardTitle');
-const previewBoardOrgYear = document.getElementById('previewBoardOrgYear');
 
 function updatePreview() {
     previewName.textContent = fullNameInput.value || 'Your Name';
@@ -1891,11 +964,42 @@ function updatePreview() {
     previewPhone.textContent = phoneInput.value || '(555) 123-4567';
     previewLocation.textContent = locationInput.value || 'City, State';
 
+    if (targetTitleInput.value) {
+        previewTargetTitle.textContent = targetTitleInput.value;
+        previewTargetTitleWrap.classList.remove('hidden');
+    } else {
+        previewTargetTitleWrap.classList.add('hidden');
+    }
+
+    if (linkedInInput.value) {
+        previewLinkedIn.textContent = linkedInInput.value;
+        previewLinkedInWrap.classList.remove('hidden');
+    } else {
+        previewLinkedInWrap.classList.add('hidden');
+    }
+
     if (summaryInput.value) {
         previewSummary.textContent = summaryInput.value;
         previewSummarySection.classList.remove('hidden');
     } else {
         previewSummarySection.classList.add('hidden');
+    }
+
+    if (jobTitleInput.value || companyInput.value || jobDescInput.value) {
+        previewJobTitle.textContent = jobTitleInput.value || 'Job Title';
+        previewCompanyDates.textContent = (companyInput.value || 'Company') + ' • ' + (jobDatesInput.value || 'Dates');
+        previewJobDesc.textContent = jobDescInput.value || '';
+        previewExperienceSection.classList.remove('hidden');
+    } else {
+        previewExperienceSection.classList.add('hidden');
+    }
+
+    if (certNameInput.value || certOrgInput.value) {
+        previewCertName.textContent = certNameInput.value || 'Certificate Name';
+        previewCertOrgDate.textContent = (certOrgInput.value || 'Organization') + ' • ' + (certDateInput.value || 'Date');
+        previewCertsSection.classList.remove('hidden');
+    } else {
+        previewCertsSection.classList.add('hidden');
     }
 
     if (degreeInput.value || schoolInput.value) {
@@ -1922,7 +1026,6 @@ function updatePreview() {
     }
 }
 
-// Color picker
 document.querySelectorAll('.color-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1930,37 +1033,17 @@ document.querySelectorAll('.color-btn').forEach(btn => {
         btn.classList.add('active');
         currentColor = btn.dataset.color;
         resumeHeaderAccent.style.borderColor = currentColor;
-        
-        // Update section title colors in Creative template
-        document.querySelectorAll('.resume-preview.template-creative .resume-section-title').forEach(el => {
-            el.style.borderBottomColor = currentColor;
-        });
-        document.querySelectorAll('.resume-preview.template-creative .builder-resume-header').forEach(el => {
-            el.style.borderLeftColor = currentColor;
-        });
     });
 });
 
-// Template selector
 document.querySelectorAll('input[name="template"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
         const resumePreview = document.getElementById('resumePreview');
         resumePreview.classList.remove('template-modern', 'template-professional', 'template-creative');
         resumePreview.classList.add(`template-${e.target.value}`);
-        
-        // Apply current color to new template
-        if (e.target.value === 'creative') {
-            document.querySelectorAll('.resume-preview.template-creative .resume-section-title').forEach(el => {
-                el.style.borderBottomColor = currentColor;
-            });
-            document.querySelectorAll('.resume-preview.template-creative .builder-resume-header').forEach(el => {
-                el.style.borderLeftColor = currentColor;
-            });
-        }
     });
 });
 
-// PDF Download
 document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     const element = document.getElementById('resumePreview');
     const opt = {
@@ -1973,22 +1056,19 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     html2pdf().set(opt).from(element).save();
 });
 
-// Live updates
-[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
+[fullNameInput, targetTitleInput, emailInput, phoneInput, locationInput, linkedInInput, summaryInput,
+ jobTitleInput, companyInput, jobDatesInput, jobDescInput,
+ certNameInput, certOrgInput, certDateInput,
+ degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
     .filter(Boolean)
     .forEach(input => input.addEventListener('input', updatePreview));
 
-// Logout
 document.getElementById('logoutBtn').addEventListener('click', () => {
     auth.signOut().then(() => location.reload());
 });
 
 updatePreview();
 resumeHeaderAccent.style.borderColor = currentColor;
-
-// Set default template
-document.querySelector('input[name="template"]:checked').value = 'modern';
-resumePreview.classList.add('template-modern');
 </script>
 
 </body>
