@@ -1196,6 +1196,11 @@
                     <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
                     <div class="resume-section">SUMMARY</div>
                     <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
+                    <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">Professional tier • Name, Email, Phone, Location, Summary</div>
+                    <div class="card-resume-header">JANE SMITH</div>
+                    <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
+                    <div class="resume-section">SUMMARY</div>
+                    <div style="font-size: 9px; color: #555; line-height: 1.3; margin: 3px 0;">Full-stack developer with 6+ years building web products. Focused on performance and clean code.</div>
                     <div style="padding: 8px 0; border-top: 1px solid #ddd; margin-top: 8px; font-size: 8px; color: #999; font-style: italic;">⊘ Certifications, education, skills locked</div>
                 </div>
                 <div class="card-content">
@@ -1776,10 +1781,19 @@ signupForm.addEventListener('submit', async (e) => {
     try {
         const q = await db.collection('licenseCodes').where('code', '==', code).get();
         if (q.empty) throw new Error('Invalid license code');
-        if (q.docs[0].data().isUsed) throw new Error('Code already used');
+        
+        const codeData = q.docs[0].data();
+        const isTestCode = code.includes('TEST');
+        
+        // Don't mark test codes as used
+        if (codeData.isUsed && !isTestCode) throw new Error('Code already used');
 
         await auth.createUserWithEmailAndPassword(email, password);
-        await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
+        
+        // Only mark non-test codes as used
+        if (!isTestCode) {
+            await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
+        }
         
         // Fetch tier immediately and show it
         const tier = await getUserTier(email);
