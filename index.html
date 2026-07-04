@@ -1790,9 +1790,13 @@ signupForm.addEventListener('submit', async (e) => {
 
         await auth.createUserWithEmailAndPassword(email, password);
         
-        // Only mark non-test codes as used
+        // Mark code as used in Firestore (all codes, test and real)
+        // But only set isUsed=true for non-test codes
         if (!isTestCode) {
             await db.collection('licenseCodes').doc(q.docs[0].id).update({ isUsed: true, usedBy: email });
+        } else {
+            // For TEST codes, just record who used it but keep isUsed false
+            await db.collection('licenseCodes').doc(q.docs[0].id).update({ usedBy: email });
         }
         
         // Fetch tier immediately and show it
