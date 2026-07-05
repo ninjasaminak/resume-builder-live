@@ -40,7 +40,7 @@
         .section-title .gold { color: #ffd700; font-style: italic; }
         
         .pricing-section { padding: 40px 60px 80px; max-width: 1400px; margin: 0 auto; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 80px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 80px; }
         .pricing-card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; overflow: hidden; }
         .pricing-card.elite { border: 1px solid #ffd700; }
         
@@ -51,7 +51,7 @@
         
         .card-content { padding: 28px 20px; }
         .card-tier { font-size: 10px; color: #888; letter-spacing: 1px; margin-bottom: 12px; }
-        .card-tier.elite { color: #ffd700; }
+        .card-tier.elite { color: #ffa500; }
         .card-price { font-size: 48px; font-weight: 300; margin-bottom: 4px; }
         .card-price-period { font-size: 14px; color: #888; }
         .card-desc { font-size: 13px; color: #aaa; margin: 16px 0 24px; line-height: 1.5; }
@@ -210,47 +210,26 @@
 
     <div class="pricing-section">
         <div class="pricing-grid">
-            <!-- Professional -->
-            <div class="pricing-card">
-                <div class="card-preview professional">
-                    <div class="card-resume-header">JANE SMITH</div>
-                    <div class="resume-subtext">jane@email.com | (555) 123-4567 | Brooklyn, NY</div>
-                    <div class="resume-section">SUMMARY</div>
-                    <div style="font-size: 9px; color: #555; line-height: 1.3;">Full-stack developer with 6+ years building web products.</div>
-                </div>
-                <div class="card-content">
-                    <div class="card-tier">PROFESSIONAL / I</div>
-                    <div class="card-price">$<span class="card-price-period">6/month</span></div>
-                    <div class="card-desc">Clean, ATS-friendly templates for the early-career professional.</div>
-                    <a href="https://saminak.gumroad.com/l/ojoere" target="_blank" class="card-btn">Begin subscription →</a>
-                    <div class="card-features">
-                        <div class="feature">Name, email, phone, location</div>
-                        <div class="feature">Professional summary</div>
-                        <div class="feature">PDF download</div>
-                        <div class="feature">Live preview</div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Premium -->
             <div class="pricing-card">
                 <div class="card-preview premium">
                     <div class="card-resume-header" style="color: #f5576c;">ALEX JOHNSON</div>
                     <div class="resume-subtext">alex@email.com | (555) 123-4567 | New York</div>
-                    <div class="resume-section">CERTIFICATIONS</div>
-                    <div style="font-weight: 600; font-size: 10px; color: #f5576c;">AWS Certified Architect</div>
-                    <div style="font-size: 8px; color: #999;">Amazon Web Services • 2023</div>
+                    <div class="resume-section">WORK EXPERIENCE</div>
+                    <div style="font-weight: 600; font-size: 10px; color: #f5576c;">Senior Product Manager</div>
+                    <div style="font-size: 8px; color: #999;">Tech Corp • 2020 - Present</div>
+                    <div style="font-size: 9px; color: #666; margin-top: 2px;">Led product strategy for core platform.</div>
                 </div>
                 <div class="card-content">
-                    <div class="card-tier">PREMIUM / II</div>
+                    <div class="card-tier">PREMIUM / I</div>
                     <div class="card-price">$<span class="card-price-period">9/month</span></div>
-                    <div class="card-desc">Modern layouts for mid-career professionals.</div>
+                    <div class="card-desc">Modern layouts for professionals building their foundation.</div>
                     <a href="https://saminak.gumroad.com/l/nrdaz" target="_blank" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
-                        <div class="feature">Everything from Professional</div>
-                        <div class="feature">Certifications & awards</div>
-                        <div class="feature">Colour picker</div>
-                        <div class="feature">3 template designs</div>
+                        <div class="feature">Personal information</div>
+                        <div class="feature">Work experience</div>
+                        <div class="feature">Professional summary</div>
+                        <div class="feature">PDF download + Live preview</div>
                     </div>
                 </div>
             </div>
@@ -261,21 +240,21 @@
                     <div class="card-resume-header" style="color: #4facfe;">MORGAN CHEN</div>
                     <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco</div>
                     <div class="resume-section">EDUCATION</div>
-                    <div style="font-weight: 600; font-size: 10px; color: #4facfe;">Bachelor of Science</div>
+                    <div style="font-weight: 600; font-size: 10px; color: #4facfe;">Bachelor of Science, Computer Science</div>
                     <div style="font-size: 8px; color: #999;">Stanford University • 2015</div>
                     <div class="resume-section">SKILLS</div>
-                    <div style="font-size: 9px; color: #666;">Product Strategy • Leadership • Data Analysis</div>
+                    <div style="font-size: 9px; color: #666;">Product Strategy • Leadership • Data Analysis • System Design</div>
                 </div>
                 <div class="card-content">
-                    <div class="card-tier">LUXURY / III</div>
+                    <div class="card-tier">LUXURY / II</div>
                     <div class="card-price">$<span class="card-price-period">12/month</span></div>
-                    <div class="card-desc">Editorial-grade templates for senior leaders.</div>
+                    <div class="card-desc">Editorial-grade templates for senior leaders and specialists.</div>
                     <a href="https://saminak.gumroad.com/l/eqnsrx" target="_blank" class="card-btn">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Premium</div>
                         <div class="feature">Education section</div>
                         <div class="feature">Skills & expertise</div>
-                        <div class="feature">Professional + Modern + Creative</div>
+                        <div class="feature">2-3 template designs</div>
                     </div>
                 </div>
             </div>
@@ -284,20 +263,20 @@
             <div class="pricing-card elite">
                 <div class="card-preview elite">
                     <div class="card-resume-header" style="color: #ffa500;">CHRISTOPHER ELITE</div>
-                    <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York</div>
+                    <div class="resume-subtext">christopher@elite.com | (555) 123-4567 | New York, NY</div>
                     <div class="resume-section">PROFESSIONAL SUMMARY</div>
-                    <div style="font-size: 9px; color: #555;">C-suite executive with 15+ years scaling high-growth companies.</div>
+                    <div style="font-size: 9px; color: #555;">C-suite executive with 15+ years scaling high-growth companies. Board advisor and serial entrepreneur focused on strategic vision.</div>
                     <div class="resume-section">EDUCATION</div>
-                    <div style="font-weight: 600; font-size: 10px; color: #ffa500;">MBA</div>
+                    <div style="font-weight: 600; font-size: 10px; color: #ffa500;">MBA, Business Administration</div>
                     <div style="font-size: 8px; color: #999;">Harvard Business School • 2012</div>
                     <div class="resume-section">BOARD EXPERIENCE</div>
-                    <div style="font-weight: 600; font-size: 10px; color: #ffa500;">Board Member</div>
+                    <div style="font-weight: 600; font-size: 10px; color: #ffa500;">Board Member, Advisory Council</div>
                     <div style="font-size: 8px; color: #999;">TechStartup Inc. • 2020 - Present</div>
                 </div>
                 <div class="card-content">
-                    <div class="card-tier elite">ELITE / IV</div>
+                    <div class="card-tier elite">ELITE / III</div>
                     <div class="card-price">$<span class="card-price-period">16/month</span></div>
-                    <div class="card-desc">Bespoke executive templates for board-level presentation.</div>
+                    <div class="card-desc">Bespoke executive templates crafted for board-level presentation.</div>
                     <a href="https://saminak.gumroad.com/l/mdpcz" target="_blank" class="card-btn elite">Begin subscription →</a>
                     <div class="card-features">
                         <div class="feature">Everything from Luxury</div>
@@ -376,7 +355,7 @@
                 <div class="builder-logo-icon">A</div>
                 <span>Atelier Résumé</span>
             </div>
-            <div class="tier-badge" id="tierBadge">Professional</div>
+            <div class="tier-badge" id="tierBadge">Premium</div>
         </div>
         <div class="builder-header-right">
             <div class="user-info">
@@ -428,19 +407,32 @@
                     
                     <div class="builder-form-group">
                         <label>Summary</label>
-                        <textarea id="summary" placeholder="A brief overview of your professional background and goals..."></textarea>
+                        <textarea id="summary" placeholder="Experienced professional with 5+ years in [field]. Proven track record of [key achievement]. Seeking roles that involve [specific focus area]."></textarea>
                     </div>
                 </div>
 
-                <!-- Certifications - Premium+ -->
-                <div class="form-section hidden" id="experienceLock">
-                    <div class="tier-lock">
-                        <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
-                        <div class="tier-lock-body">
-                            <div class="tier-lock-title">Certifications & Awards</div>
-                            <div class="tier-lock-desc">Unlock certifications, licenses, and honors. Available on Premium and above.</div>
-                            <a href="#" class="tier-lock-btn" onclick="document.getElementById('signInBtn')?.click();return false;">Upgrade to Premium →</a>
-                        </div>
+                <!-- Work Experience - Premium+ -->
+                <div class="form-section">
+                    <div class="section-title">Work Experience</div>
+                    
+                    <div class="builder-form-group">
+                        <label>Job Title</label>
+                        <input type="text" id="jobTitle" placeholder="Senior Product Manager">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Company</label>
+                        <input type="text" id="company" placeholder="Tech Corp">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Duration</label>
+                        <input type="text" id="jobDuration" placeholder="2020 - Present">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Description</label>
+                        <textarea id="jobDescription" placeholder="Led product strategy for core platform..."></textarea>
                     </div>
                 </div>
 
@@ -588,6 +580,15 @@
                     <div id="previewSummary" style="font-size: 12px; color: #404040; line-height: 1.5;"></div>
                 </div>
 
+                <div id="previewWorkSection" class="hidden">
+                    <div class="resume-section-title">Work Experience</div>
+                    <div class="resume-item">
+                        <div class="resume-item-title" id="previewJobTitle">Job Title</div>
+                        <div class="resume-item-subtitle" id="previewCompanyDuration">Company • Duration</div>
+                        <div class="resume-item-desc" id="previewJobDesc"></div>
+                    </div>
+                </div>
+
                 <div id="previewEducationSection" class="hidden">
                     <div class="resume-section-title">Education</div>
                     <div class="resume-item">
@@ -635,10 +636,10 @@ const landingPage = document.getElementById('landingPage');
 const builderPage = document.getElementById('builderPage');
 const authModal = document.getElementById('authModal');
 
-const tierHierarchy = { professional: 0, premium: 1, luxury: 2, elite: 3 };
-const tierNames = { professional: 'Professional', premium: 'Premium', luxury: 'Luxury', elite: 'Elite' };
+const tierHierarchy = { premium: 0, luxury: 1, elite: 2 };
+const tierNames = { premium: 'Premium', luxury: 'Luxury', elite: 'Elite' };
 
-let currentTier = 'professional';
+let currentTier = 'premium';
 let currentColor = '#667eea';
 
 async function getUserTier(email) {
@@ -650,23 +651,17 @@ async function getUserTier(email) {
         
         if (!snapshot.empty) {
             const tier = snapshot.docs[0].data().tier;
-            return (tier || 'professional').toLowerCase().trim();
+            return (tier || 'premium').toLowerCase().trim();
         }
-        return 'professional';
+        return 'premium';
     } catch (e) {
         console.error('Error fetching tier:', e);
-        return 'professional';
+        return 'premium';
     }
 }
 
 function showTierContent(tier) {
     currentTier = tier;
-    
-    if (tierHierarchy[tier] >= tierHierarchy.premium) {
-        document.getElementById('experienceLock').classList.add('hidden');
-    } else {
-        document.getElementById('experienceLock').classList.remove('hidden');
-    }
 
     if (tierHierarchy[tier] >= tierHierarchy.luxury) {
         document.querySelectorAll('.tier-luxury').forEach(el => el.classList.remove('hidden'));
@@ -834,6 +829,10 @@ const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
 const locationInput = document.getElementById('location');
 const summaryInput = document.getElementById('summary');
+const jobTitleInput = document.getElementById('jobTitle');
+const companyInput = document.getElementById('company');
+const jobDurationInput = document.getElementById('jobDuration');
+const jobDescriptionInput = document.getElementById('jobDescription');
 const degreeInput = document.getElementById('degree');
 const schoolInput = document.getElementById('school');
 const graduationYearInput = document.getElementById('graduationYear');
@@ -848,6 +847,9 @@ const previewEmail = document.getElementById('previewEmail');
 const previewPhone = document.getElementById('previewPhone');
 const previewLocation = document.getElementById('previewLocation');
 const previewSummary = document.getElementById('previewSummary');
+const previewJobTitle = document.getElementById('previewJobTitle');
+const previewCompanyDuration = document.getElementById('previewCompanyDuration');
+const previewJobDesc = document.getElementById('previewJobDesc');
 const previewDegree = document.getElementById('previewDegree');
 const previewSchoolYear = document.getElementById('previewSchoolYear');
 const previewSkills = document.getElementById('previewSkills');
@@ -855,6 +857,7 @@ const previewBoardTitle = document.getElementById('previewBoardTitle');
 const previewBoardOrgYear = document.getElementById('previewBoardOrgYear');
 
 const previewSummarySection = document.getElementById('previewSummarySection');
+const previewWorkSection = document.getElementById('previewWorkSection');
 const previewEducationSection = document.getElementById('previewEducationSection');
 const previewSkillsSection = document.getElementById('previewSkillsSection');
 const previewBoardSection = document.getElementById('previewBoardSection');
@@ -870,6 +873,15 @@ function updatePreview() {
         previewSummarySection.classList.remove('hidden');
     } else {
         previewSummarySection.classList.add('hidden');
+    }
+
+    if (jobTitleInput.value || companyInput.value) {
+        previewJobTitle.textContent = jobTitleInput.value || 'Job Title';
+        previewCompanyDuration.textContent = (companyInput.value || 'Company') + ' • ' + (jobDurationInput.value || 'Duration');
+        previewJobDesc.textContent = jobDescriptionInput.value || '';
+        previewWorkSection.classList.remove('hidden');
+    } else {
+        previewWorkSection.classList.add('hidden');
     }
 
     if (degreeInput.value || schoolInput.value) {
@@ -926,7 +938,7 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     html2pdf().set(opt).from(element).save();
 });
 
-[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
+[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, jobTitleInput, companyInput, jobDurationInput, jobDescriptionInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
     .filter(Boolean)
     .forEach(input => input.addEventListener('input', updatePreview));
 
