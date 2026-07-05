@@ -226,8 +226,8 @@
                     <div class="card-features">
                         <div class="feature">Name, email, phone, location</div>
                         <div class="feature">Professional summary</div>
-                        <div class="feature">Work experience</div>
                         <div class="feature">PDF download</div>
+                        <div class="feature">Live preview</div>
                     </div>
                 </div>
             </div>
@@ -407,11 +407,6 @@
                     </div>
 
                     <div class="builder-form-group">
-                        <label>Target Job Title</label>
-                        <input type="text" id="targetTitle" placeholder="Senior Product Designer">
-                    </div>
-
-                    <div class="builder-form-group">
                         <label>Email Address *</label>
                         <input type="email" id="email" placeholder="jane@example.com" required>
                     </div>
@@ -425,11 +420,6 @@
                         <label>Location</label>
                         <input type="text" id="location" placeholder="Brooklyn, NY">
                     </div>
-
-                    <div class="builder-form-group">
-                        <label>LinkedIn / Portfolio URL</label>
-                        <input type="text" id="linkedIn" placeholder="linkedin.com/in/janesmith">
-                    </div>
                 </div>
 
                 <!-- Professional Summary -->
@@ -442,51 +432,7 @@
                     </div>
                 </div>
 
-                <!-- Work Experience - base tier, everyone -->
-                <div class="form-section" id="experienceSection">
-                    <div class="section-title">Work Experience</div>
-
-                    <div class="builder-form-group">
-                        <label>Job Title</label>
-                        <input type="text" id="jobTitle" placeholder="Software Engineer">
-                    </div>
-
-                    <div class="builder-form-group">
-                        <label>Company</label>
-                        <input type="text" id="company" placeholder="Company Name">
-                    </div>
-
-                    <div class="builder-form-group">
-                        <label>Dates</label>
-                        <input type="text" id="jobDates" placeholder="2021 - Present">
-                    </div>
-
-                    <div class="builder-form-group">
-                        <label>Description</label>
-                        <textarea id="jobDesc" placeholder="What did you do in this role? Focus on results and impact..."></textarea>
-                    </div>
-                </div>
-
                 <!-- Certifications - Premium+ -->
-                <div class="form-section tier-premium hidden" id="certsSection">
-                    <div class="section-title">Certifications & Awards</div>
-
-                    <div class="builder-form-group">
-                        <label>Certificate / Award Name</label>
-                        <input type="text" id="certName" placeholder="AWS Certified Solutions Architect">
-                    </div>
-
-                    <div class="builder-form-group">
-                        <label>Issuing Organization</label>
-                        <input type="text" id="certOrg" placeholder="Amazon Web Services">
-                    </div>
-
-                    <div class="builder-form-group">
-                        <label>Date</label>
-                        <input type="text" id="certDate" placeholder="2023">
-                    </div>
-                </div>
-
                 <div class="form-section hidden" id="experienceLock">
                     <div class="tier-lock">
                         <div class="tier-lock-icon"><i class="fas fa-lock"></i></div>
@@ -630,39 +576,16 @@
             <div class="resume-preview template-modern" id="resumePreview">
                 <div class="builder-resume-header" id="resumeHeaderAccent">
                     <div class="resume-name" id="previewName">Your Name</div>
-                    <div id="previewTargetTitleWrap" class="hidden" style="font-size: 13px; color: #5a6c7d; margin-top: 2px;">
-                        <span id="previewTargetTitle"></span>
-                    </div>
-                    <div class="resume-contact" style="margin-top: 6px;">
+                    <div class="resume-contact">
                         <span id="previewEmail">your@email.com</span> • 
                         <span id="previewPhone">(555) 123-4567</span> • 
                         <span id="previewLocation">City, State</span>
-                    </div>
-                    <div id="previewLinkedInWrap" class="resume-contact hidden" style="margin-top: 3px;">
-                        <span id="previewLinkedIn"></span>
                     </div>
                 </div>
 
                 <div id="previewSummarySection" class="hidden">
                     <div class="resume-section-title">Professional Summary</div>
                     <div id="previewSummary" style="font-size: 12px; color: #404040; line-height: 1.5;"></div>
-                </div>
-
-                <div id="previewExperienceSection" class="hidden">
-                    <div class="resume-section-title">Work Experience</div>
-                    <div class="resume-item">
-                        <div class="resume-item-title" id="previewJobTitle">Job Title</div>
-                        <div class="resume-item-subtitle" id="previewCompanyDates">Company • Dates</div>
-                        <div class="resume-item-desc" id="previewJobDesc"></div>
-                    </div>
-                </div>
-
-                <div id="previewCertsSection" class="hidden">
-                    <div class="resume-section-title">Certifications</div>
-                    <div class="resume-item">
-                        <div class="resume-item-title" id="previewCertName">Certificate Name</div>
-                        <div class="resume-item-subtitle" id="previewCertOrgDate">Organization • Date</div>
-                    </div>
                 </div>
 
                 <div id="previewEducationSection" class="hidden">
@@ -740,10 +663,8 @@ function showTierContent(tier) {
     currentTier = tier;
     
     if (tierHierarchy[tier] >= tierHierarchy.premium) {
-        document.querySelectorAll('.tier-premium').forEach(el => el.classList.remove('hidden'));
         document.getElementById('experienceLock').classList.add('hidden');
     } else {
-        document.querySelectorAll('.tier-premium').forEach(el => el.classList.add('hidden'));
         document.getElementById('experienceLock').classList.remove('hidden');
     }
 
@@ -909,19 +830,10 @@ auth.onAuthStateChanged(async user => {
 });
 
 const fullNameInput = document.getElementById('fullName');
-const targetTitleInput = document.getElementById('targetTitle');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
 const locationInput = document.getElementById('location');
-const linkedInInput = document.getElementById('linkedIn');
 const summaryInput = document.getElementById('summary');
-const jobTitleInput = document.getElementById('jobTitle');
-const companyInput = document.getElementById('company');
-const jobDatesInput = document.getElementById('jobDates');
-const jobDescInput = document.getElementById('jobDesc');
-const certNameInput = document.getElementById('certName');
-const certOrgInput = document.getElementById('certOrg');
-const certDateInput = document.getElementById('certDate');
 const degreeInput = document.getElementById('degree');
 const schoolInput = document.getElementById('school');
 const graduationYearInput = document.getElementById('graduationYear');
@@ -932,19 +844,10 @@ const boardYearInput = document.getElementById('boardYear');
 
 const resumeHeaderAccent = document.getElementById('resumeHeaderAccent');
 const previewName = document.getElementById('previewName');
-const previewTargetTitle = document.getElementById('previewTargetTitle');
-const previewTargetTitleWrap = document.getElementById('previewTargetTitleWrap');
 const previewEmail = document.getElementById('previewEmail');
 const previewPhone = document.getElementById('previewPhone');
 const previewLocation = document.getElementById('previewLocation');
-const previewLinkedIn = document.getElementById('previewLinkedIn');
-const previewLinkedInWrap = document.getElementById('previewLinkedInWrap');
 const previewSummary = document.getElementById('previewSummary');
-const previewJobTitle = document.getElementById('previewJobTitle');
-const previewCompanyDates = document.getElementById('previewCompanyDates');
-const previewJobDesc = document.getElementById('previewJobDesc');
-const previewCertName = document.getElementById('previewCertName');
-const previewCertOrgDate = document.getElementById('previewCertOrgDate');
 const previewDegree = document.getElementById('previewDegree');
 const previewSchoolYear = document.getElementById('previewSchoolYear');
 const previewSkills = document.getElementById('previewSkills');
@@ -952,8 +855,6 @@ const previewBoardTitle = document.getElementById('previewBoardTitle');
 const previewBoardOrgYear = document.getElementById('previewBoardOrgYear');
 
 const previewSummarySection = document.getElementById('previewSummarySection');
-const previewExperienceSection = document.getElementById('previewExperienceSection');
-const previewCertsSection = document.getElementById('previewCertsSection');
 const previewEducationSection = document.getElementById('previewEducationSection');
 const previewSkillsSection = document.getElementById('previewSkillsSection');
 const previewBoardSection = document.getElementById('previewBoardSection');
@@ -964,42 +865,11 @@ function updatePreview() {
     previewPhone.textContent = phoneInput.value || '(555) 123-4567';
     previewLocation.textContent = locationInput.value || 'City, State';
 
-    if (targetTitleInput.value) {
-        previewTargetTitle.textContent = targetTitleInput.value;
-        previewTargetTitleWrap.classList.remove('hidden');
-    } else {
-        previewTargetTitleWrap.classList.add('hidden');
-    }
-
-    if (linkedInInput.value) {
-        previewLinkedIn.textContent = linkedInInput.value;
-        previewLinkedInWrap.classList.remove('hidden');
-    } else {
-        previewLinkedInWrap.classList.add('hidden');
-    }
-
     if (summaryInput.value) {
         previewSummary.textContent = summaryInput.value;
         previewSummarySection.classList.remove('hidden');
     } else {
         previewSummarySection.classList.add('hidden');
-    }
-
-    if (jobTitleInput.value || companyInput.value || jobDescInput.value) {
-        previewJobTitle.textContent = jobTitleInput.value || 'Job Title';
-        previewCompanyDates.textContent = (companyInput.value || 'Company') + ' • ' + (jobDatesInput.value || 'Dates');
-        previewJobDesc.textContent = jobDescInput.value || '';
-        previewExperienceSection.classList.remove('hidden');
-    } else {
-        previewExperienceSection.classList.add('hidden');
-    }
-
-    if (certNameInput.value || certOrgInput.value) {
-        previewCertName.textContent = certNameInput.value || 'Certificate Name';
-        previewCertOrgDate.textContent = (certOrgInput.value || 'Organization') + ' • ' + (certDateInput.value || 'Date');
-        previewCertsSection.classList.remove('hidden');
-    } else {
-        previewCertsSection.classList.add('hidden');
     }
 
     if (degreeInput.value || schoolInput.value) {
@@ -1056,10 +926,7 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     html2pdf().set(opt).from(element).save();
 });
 
-[fullNameInput, targetTitleInput, emailInput, phoneInput, locationInput, linkedInInput, summaryInput,
- jobTitleInput, companyInput, jobDatesInput, jobDescInput,
- certNameInput, certOrgInput, certDateInput,
- degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
+[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
     .filter(Boolean)
     .forEach(input => input.addEventListener('input', updatePreview));
 
