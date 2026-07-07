@@ -135,10 +135,17 @@
         .bold-toggle-wrap label { font-size: 13px; font-weight: 500; color: #2c3e50; cursor: pointer; display: flex; align-items: center; gap: 10px; }
         .bold-toggle-wrap input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
 
-        .resume-preview.bold-mode .resume-name,
-        .resume-preview.bold-mode .resume-section-title,
+        .resume-preview.bold-mode .resume-name {
+            font-weight: 700 !important;
+            text-shadow: 0.5px 0 0 currentColor, -0.5px 0 0 currentColor;
+        }
+        .resume-preview.bold-mode .resume-section-title {
+            font-weight: 700 !important;
+            text-shadow: 0.5px 0 0 currentColor, -0.5px 0 0 currentColor;
+        }
         .resume-preview.bold-mode .resume-item-title {
-            font-weight: 800 !important;
+            font-weight: 700 !important;
+            text-shadow: 0.4px 0 0 currentColor;
         }
         
         .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #e0e6ed; }
