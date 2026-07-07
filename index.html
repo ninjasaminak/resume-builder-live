@@ -1106,21 +1106,35 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
         return;
     }
 
-    const element = document.getElementById('resumePreview');
+    const original = document.getElementById('resumePreview');
+
+    // Clone into a clean, non-sticky, off-screen container to avoid rendering issues
+    const clone = original.cloneNode(true);
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'fixed';
+    wrapper.style.top = '0';
+    wrapper.style.left = '-9999px';
+    wrapper.style.width = original.offsetWidth + 'px';
+    wrapper.style.background = '#ffffff';
+    wrapper.appendChild(clone);
+    document.body.appendChild(wrapper);
+
     const opt = {
         margin: 10,
         filename: (fullNameInput.value || 'Resume') + '.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: true },
         jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
     };
 
-    html2pdf().set(opt).from(element).save().then(() => {
+    html2pdf().set(opt).from(clone).save().then(() => {
+        document.body.removeChild(wrapper);
         btn.innerHTML = originalText;
         btn.disabled = false;
     }).catch((err) => {
         console.error('PDF generation error:', err);
         alert('PDF generation failed: ' + err.message);
+        document.body.removeChild(wrapper);
         btn.innerHTML = originalText;
         btn.disabled = false;
     });
