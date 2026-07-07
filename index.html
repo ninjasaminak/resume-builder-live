@@ -139,7 +139,6 @@
         .resume-preview.bold-mode .resume-section-title,
         .resume-preview.bold-mode .resume-item-title {
             font-weight: 800 !important;
-            -webkit-text-stroke: 0.5px currentColor;
         }
         
         .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #e0e6ed; }
@@ -255,8 +254,8 @@
                     <div class="card-features">
                         <div class="feature">Personal information</div>
                         <div class="feature">Work experience</div>
-                        <div class="feature">Professional summary</div>
-                        <div class="feature">PDF download + Live preview</div>
+                        <div class="feature">Certifications & licenses</div>
+                        <div class="feature">Key projects</div>
                     </div>
                 </div>
             </div>
@@ -471,6 +470,41 @@
                     </div>
                 </div>
 
+                <!-- Certifications - Premium+ -->
+                <div class="form-section">
+                    <div class="section-title">Certifications & Licenses</div>
+
+                    <div class="builder-form-group">
+                        <label>Certificate / License Name</label>
+                        <input type="text" id="certName" placeholder="PMP Certification">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Issuing Organization</label>
+                        <input type="text" id="certOrg" placeholder="Project Management Institute">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Date</label>
+                        <input type="text" id="certDate" placeholder="2022">
+                    </div>
+                </div>
+
+                <!-- Key Projects - Premium+ -->
+                <div class="form-section">
+                    <div class="section-title">Key Projects</div>
+
+                    <div class="builder-form-group">
+                        <label>Project Title</label>
+                        <input type="text" id="projectTitle" placeholder="Platform Redesign">
+                    </div>
+
+                    <div class="builder-form-group">
+                        <label>Description</label>
+                        <textarea id="projectDesc" placeholder="Led a cross-functional redesign that increased user retention by 20%..."></textarea>
+                    </div>
+                </div>
+
                 <!-- Education - Luxury+ -->
                 <div class="form-section tier-luxury hidden" id="educationSection">
                     <div class="section-title">Education</div>
@@ -636,6 +670,22 @@
                         <div class="resume-item-title" id="previewJobTitle">Job Title</div>
                         <div class="resume-item-subtitle" id="previewCompanyDuration">Company • Duration</div>
                         <div class="resume-item-desc" id="previewJobDesc"></div>
+                    </div>
+                </div>
+
+                <div id="previewCertsSection" class="hidden">
+                    <div class="resume-section-title">Certifications & Licenses</div>
+                    <div class="resume-item">
+                        <div class="resume-item-title" id="previewCertName">Certificate Name</div>
+                        <div class="resume-item-subtitle" id="previewCertOrgDate">Organization • Date</div>
+                    </div>
+                </div>
+
+                <div id="previewProjectsSection" class="hidden">
+                    <div class="resume-section-title">Key Projects</div>
+                    <div class="resume-item">
+                        <div class="resume-item-title" id="previewProjectTitle">Project Title</div>
+                        <div class="resume-item-desc" id="previewProjectDesc"></div>
                     </div>
                 </div>
 
@@ -883,6 +933,11 @@ const jobTitleInput = document.getElementById('jobTitle');
 const companyInput = document.getElementById('company');
 const jobDurationInput = document.getElementById('jobDuration');
 const jobDescriptionInput = document.getElementById('jobDescription');
+const certNameInput = document.getElementById('certName');
+const certOrgInput = document.getElementById('certOrg');
+const certDateInput = document.getElementById('certDate');
+const projectTitleInput = document.getElementById('projectTitle');
+const projectDescInput = document.getElementById('projectDesc');
 const degreeInput = document.getElementById('degree');
 const schoolInput = document.getElementById('school');
 const graduationYearInput = document.getElementById('graduationYear');
@@ -900,6 +955,10 @@ const previewSummary = document.getElementById('previewSummary');
 const previewJobTitle = document.getElementById('previewJobTitle');
 const previewCompanyDuration = document.getElementById('previewCompanyDuration');
 const previewJobDesc = document.getElementById('previewJobDesc');
+const previewCertName = document.getElementById('previewCertName');
+const previewCertOrgDate = document.getElementById('previewCertOrgDate');
+const previewProjectTitle = document.getElementById('previewProjectTitle');
+const previewProjectDesc = document.getElementById('previewProjectDesc');
 const previewDegree = document.getElementById('previewDegree');
 const previewSchoolYear = document.getElementById('previewSchoolYear');
 const previewSkills = document.getElementById('previewSkills');
@@ -908,6 +967,8 @@ const previewBoardOrgYear = document.getElementById('previewBoardOrgYear');
 
 const previewSummarySection = document.getElementById('previewSummarySection');
 const previewWorkSection = document.getElementById('previewWorkSection');
+const previewCertsSection = document.getElementById('previewCertsSection');
+const previewProjectsSection = document.getElementById('previewProjectsSection');
 const previewEducationSection = document.getElementById('previewEducationSection');
 const previewSkillsSection = document.getElementById('previewSkillsSection');
 const previewBoardSection = document.getElementById('previewBoardSection');
@@ -932,6 +993,22 @@ function updatePreview() {
         previewWorkSection.classList.remove('hidden');
     } else {
         previewWorkSection.classList.add('hidden');
+    }
+
+    if (certNameInput.value || certOrgInput.value) {
+        previewCertName.textContent = certNameInput.value || 'Certificate Name';
+        previewCertOrgDate.textContent = (certOrgInput.value || 'Organization') + ' • ' + (certDateInput.value || 'Date');
+        previewCertsSection.classList.remove('hidden');
+    } else {
+        previewCertsSection.classList.add('hidden');
+    }
+
+    if (projectTitleInput.value || projectDescInput.value) {
+        previewProjectTitle.textContent = projectTitleInput.value || 'Project Title';
+        previewProjectDesc.textContent = projectDescInput.value || '';
+        previewProjectsSection.classList.remove('hidden');
+    } else {
+        previewProjectsSection.classList.add('hidden');
     }
 
     if (degreeInput.value || schoolInput.value) {
@@ -1012,7 +1089,7 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     html2pdf().set(opt).from(element).save();
 });
 
-[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, jobTitleInput, companyInput, jobDurationInput, jobDescriptionInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
+[fullNameInput, emailInput, phoneInput, locationInput, summaryInput, jobTitleInput, companyInput, jobDurationInput, jobDescriptionInput, certNameInput, certOrgInput, certDateInput, projectTitleInput, projectDescInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
     .filter(Boolean)
     .forEach(input => input.addEventListener('input', updatePreview));
 
