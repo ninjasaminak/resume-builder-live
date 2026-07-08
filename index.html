@@ -184,6 +184,23 @@
         .template-creative .builder-resume-header { border-left: 6px solid; padding-left: 20px; border-bottom: none; padding-bottom: 8px; }
         .template-creative .resume-name { font-size: 26px; margin-bottom: 4px; }
         .template-creative .resume-section-title { border-bottom: 2px solid; margin: 18px 0 10px 0; padding-bottom: 8px; }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #resumePreview, #resumePreview * {
+                visibility: visible;
+            }
+            #resumePreview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+                margin: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1094,50 +1111,8 @@ document.querySelectorAll('input[name="template"]').forEach(radio => {
 });
 
 document.getElementById('downloadPdfBtn').addEventListener('click', () => {
-    const btn = document.getElementById('downloadPdfBtn');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-    btn.disabled = true;
-
-    if (typeof html2pdf === 'undefined') {
-        alert('PDF library failed to load. Please check your internet connection and refresh the page.');
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-        return;
-    }
-
-    const original = document.getElementById('resumePreview');
-
-    // Clone into a clean, non-sticky, off-screen container to avoid rendering issues
-    const clone = original.cloneNode(true);
-    const wrapper = document.createElement('div');
-    wrapper.style.position = 'fixed';
-    wrapper.style.top = '0';
-    wrapper.style.left = '-9999px';
-    wrapper.style.width = original.offsetWidth + 'px';
-    wrapper.style.background = '#ffffff';
-    wrapper.appendChild(clone);
-    document.body.appendChild(wrapper);
-
-    const opt = {
-        margin: 10,
-        filename: (fullNameInput.value || 'Resume') + '.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: true },
-        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-    };
-
-    html2pdf().set(opt).from(clone).save().then(() => {
-        document.body.removeChild(wrapper);
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-    }).catch((err) => {
-        console.error('PDF generation error:', err);
-        alert('PDF generation failed: ' + err.message);
-        document.body.removeChild(wrapper);
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-    });
+    document.title = (fullNameInput.value || 'Resume') + ' - Resume';
+    window.print();
 });
 
 [fullNameInput, emailInput, phoneInput, locationInput, summaryInput, jobTitleInput, companyInput, jobDurationInput, jobDescriptionInput, certNameInput, certOrgInput, certDateInput, projectTitleInput, projectDescInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
