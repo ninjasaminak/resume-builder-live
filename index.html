@@ -137,15 +137,12 @@
 
         .resume-preview.bold-mode .resume-name {
             font-weight: 700 !important;
-            text-shadow: 0.5px 0 0 currentColor, -0.5px 0 0 currentColor;
         }
         .resume-preview.bold-mode .resume-section-title {
             font-weight: 700 !important;
-            text-shadow: 0.5px 0 0 currentColor, -0.5px 0 0 currentColor;
         }
         .resume-preview.bold-mode .resume-item-title {
             font-weight: 700 !important;
-            text-shadow: 0.4px 0 0 currentColor;
         }
         
         .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #e0e6ed; }
@@ -163,7 +160,7 @@
         .resume-contact { font-size: 12px; color: #5a6c7d; letter-spacing: 0.3px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
         .resume-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin: 16px 0 8px 0; color: #1a1a1a; }
         .resume-item { margin-bottom: 12px; font-size: 12px; }
-        .resume-item-title { font-weight: 600; margin-bottom: 2px; color: #999; }
+        .resume-item-title { font-weight: 600; margin-bottom: 2px; color: #1a1a1a; }
         .resume-item-subtitle { font-size: 12px; color: #5a6c7d; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
         .resume-item-desc { font-size: 12px; color: #404040; margin-top: 4px; line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
         
@@ -284,25 +281,20 @@
 
     <div class="pricing-section">
         <div class="pricing-grid">
-            <!-- Premium -->
+            <!-- Premium (Modern template look) -->
             <div class="pricing-card">
-                <div class="card-preview premium">
-                    <div style="font-weight: 700; font-size: 11px; color: #f5576c; margin-bottom: 2px;">FULL NAME</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 6px;">Alex Johnson</div>
-                    
-                    <div style="font-weight: 700; font-size: 11px; color: #f5576c; margin-bottom: 2px;">EMAIL & PHONE</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 6px;">alex@email.com | (555) 123-4567</div>
-                    
-                    <div style="font-weight: 700; font-size: 11px; color: #f5576c; margin-bottom: 2px;">LOCATION</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 8px;">New York, NY</div>
-                    
-                    <div style="font-weight: 700; font-size: 11px; color: #f5576c; margin-bottom: 2px; border-top: 1px solid #e0e0e0; padding-top: 6px;">PROFESSIONAL SUMMARY</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 8px; line-height: 1.3;">5+ years in product management. Proven track record of launching successful products and leading teams.</div>
-                    
-                    <div style="font-weight: 700; font-size: 11px; color: #f5576c; margin-bottom: 8px; border-top: 1px solid #e0e0e0; padding-top: 6px;">WORK EXPERIENCE</div>
-                    <div style="font-weight: 400; font-size: 10px; color: #999;">Senior Product Manager</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 3px;">Tech Corp • 2020 - Present</div>
-                    <div style="font-size: 9px; color: #999;">Led product strategy for core platform. Managed cross-functional team of 8.</div>
+                <div class="card-preview premium" style="text-align:center;">
+                    <div style="font-family: 'Garamond','Georgia',serif; font-weight:700; font-size:15px; color:#1a1a1a; margin-bottom:4px;">Alex Johnson</div>
+                    <div style="font-size:9px; color:#5a6c7d; margin-bottom:10px;">alex@email.com • (555) 123-4567 • New York, NY</div>
+                    <div style="border-bottom:3px solid #f5576c; margin-bottom:12px;"></div>
+                    <div style="text-align:left;">
+                        <div style="font-weight:700; font-size:10px; color:#f5576c; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:3px;">Professional Summary</div>
+                        <div style="font-size:9px; color:#404040; margin-bottom:8px; line-height:1.3;">5+ years in product management. Proven track record of launching successful products and leading teams.</div>
+                        <div style="font-weight:700; font-size:10px; color:#f5576c; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:3px;">Work Experience</div>
+                        <div style="font-weight:600; font-size:10px; color:#1a1a1a;">Senior Product Manager</div>
+                        <div style="font-size:9px; color:#5a6c7d; margin-bottom:4px;">Tech Corp • 2020 - Present</div>
+                        <div style="font-size:9px; color:#404040;">Led product strategy for core platform. Managed cross-functional team of 8.</div>
+                    </div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">PREMIUM / I</div>
@@ -318,24 +310,23 @@
                 </div>
             </div>
 
-            <!-- Luxury -->
+            <!-- Luxury (Professional template look) -->
             <div class="pricing-card">
-                <div class="card-preview luxury">
-                    <div class="card-resume-header" style="color: #4facfe;">MORGAN CHEN</div>
-                    <div class="resume-subtext">morgan@email.com | (555) 123-4567 | San Francisco</div>
-
-                    <div class="resume-section" style="color: #4facfe;">PROFESSIONAL SUMMARY</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 6px; line-height: 1.3;">5+ years in product management. Proven track record of launching successful products and leading teams.</div>
-
-                    <div class="resume-section" style="color: #4facfe;">WORK EXPERIENCE</div>
-                    <div style="font-weight: 400; font-size: 10px; color: #999;">Senior Product Manager</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 6px;">Tech Corp • 2020 - Present</div>
-
-                    <div class="resume-section" style="color: #4facfe;">EDUCATION</div>
-                    <div style="font-weight: 400; font-size: 10px; color: #999;">Bachelor of Science, Computer Science</div>
-                    <div style="font-size: 9px; color: #999;">Stanford University • 2015</div>
-                    <div class="resume-section" style="color: #4facfe;">SKILLS</div>
-                    <div style="font-size: 9px; color: #999;">Product Strategy • Leadership • Data Analysis • System Design</div>
+                <div class="card-preview luxury" style="padding:0;">
+                    <div style="background:#ecf0f1; padding:16px; text-align:left;">
+                        <div style="font-family: Calibri, Arial, sans-serif; font-weight:700; font-size:13px; color:#2c3e50; text-transform:uppercase; letter-spacing:1.5px;">Morgan Chen</div>
+                        <div style="font-size:9px; color:#5a6c7d; margin-top:4px;">morgan@email.com • (555) 123-4567 • San Francisco</div>
+                    </div>
+                    <div style="padding:12px 16px; text-align:left;">
+                        <div style="background:#ecf0f1; font-weight:700; font-size:9px; color:#4facfe; text-transform:uppercase; letter-spacing:0.6px; padding:4px 6px; margin:0 -6px 5px -6px;">Professional Summary</div>
+                        <div style="font-size:9px; color:#404040; margin-bottom:6px; line-height:1.3;">5+ years in product management. Proven track record of launching successful products and leading teams.</div>
+                        <div style="background:#ecf0f1; font-weight:700; font-size:9px; color:#4facfe; text-transform:uppercase; letter-spacing:0.6px; padding:4px 6px; margin:0 -6px 5px -6px;">Work Experience</div>
+                        <div style="font-weight:600; font-size:10px; color:#1a1a1a;">Senior Product Manager</div>
+                        <div style="font-size:8px; color:#5a6c7d; margin-bottom:6px;">Tech Corp • 2020 - Present</div>
+                        <div style="background:#ecf0f1; font-weight:700; font-size:9px; color:#4facfe; text-transform:uppercase; letter-spacing:0.6px; padding:4px 6px; margin:0 -6px 5px -6px;">Education</div>
+                        <div style="font-weight:600; font-size:10px; color:#1a1a1a;">Bachelor of Science, Computer Science</div>
+                        <div style="font-size:8px; color:#5a6c7d;">Stanford University • 2015</div>
+                    </div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier">LUXURY / II</div>
@@ -351,28 +342,34 @@
                 </div>
             </div>
 
-            <!-- Elite -->
+            <!-- Elite (Creative template look) -->
             <div class="pricing-card elite">
                 <div class="card-preview elite">
-                    <div style="font-weight: 700; font-size: 11px; color: #ffa500; margin-bottom: 2px;">FULL NAME</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 6px;">Christopher Elite</div>
-
-                    <div style="font-weight: 700; font-size: 11px; color: #ffa500; margin-bottom: 2px;">EMAIL & PHONE</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 6px;">christopher@elite.com | (555) 123-4567</div>
-
-                    <div style="font-weight: 700; font-size: 11px; color: #ffa500; margin-bottom: 2px;">LOCATION</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 8px;">New York, NY</div>
-
-                    <div style="font-weight: 700; font-size: 11px; color: #ffa500; margin-bottom: 2px; border-top: 1px solid #e0e0e0; padding-top: 6px;">PROFESSIONAL SUMMARY</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 6px; line-height: 1.3;">C-suite executive with 15+ years scaling high-growth companies. Board advisor and serial entrepreneur.</div>
-
-                    <div style="font-weight: 700; font-size: 11px; color: #ffa500; margin-bottom: 2px;">EDUCATION</div>
-                    <div style="font-weight: 400; font-size: 10px; color: #999;">MBA, Business Administration</div>
-                    <div style="font-size: 9px; color: #999; margin-bottom: 6px;">Harvard Business School • 2012</div>
-
-                    <div style="font-weight: 700; font-size: 11px; color: #ffa500; margin-bottom: 2px;">BOARD EXPERIENCE</div>
-                    <div style="font-weight: 400; font-size: 10px; color: #999;">Board Member, Advisory Council</div>
-                    <div style="font-size: 9px; color: #999;">TechStartup Inc. • 2020 - Present</div>
+                    <div style="border-left:4px solid #ffa500; padding-left:12px; margin-bottom:12px;">
+                        <div style="font-family: 'Segoe UI', 'Helvetica Neue', sans-serif; font-weight:700; font-size:16px; color:#1a1a1a; margin-bottom:3px;">Christopher Elite</div>
+                        <div style="font-size:9px; color:#5a6c7d;">christopher@elite.com • (555) 123-4567 • New York, NY</div>
+                    </div>
+                    <div>
+                        <div style="font-weight:700; font-size:10px; color:#ffa500; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid #ffa500; padding-bottom:4px; margin-bottom:6px;">Professional Summary</div>
+                        <div style="font-size:9px; color:#404040; margin-bottom:8px; line-height:1.3;">C-suite executive with 15+ years scaling high-growth companies. Board advisor and serial entrepreneur.</div>
+                        <div style="font-weight:700; font-size:10px; color:#ffa500; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid #ffa500; padding-bottom:4px; margin-bottom:6px;">Work Experience</div>
+                        <div style="font-weight:600; font-size:10px; color:#1a1a1a;">Chief Executive Officer</div>
+                        <div style="font-size:8px; color:#5a6c7d; margin-bottom:8px;">TechCorp Global • 2018 - Present</div>
+                        <div style="font-weight:700; font-size:10px; color:#ffa500; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid #ffa500; padding-bottom:4px; margin-bottom:6px;">Certifications & Licenses</div>
+                        <div style="font-weight:600; font-size:10px; color:#1a1a1a;">Executive Leadership Program</div>
+                        <div style="font-size:8px; color:#5a6c7d; margin-bottom:8px;">Wharton School • 2019</div>
+                        <div style="font-weight:700; font-size:10px; color:#ffa500; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid #ffa500; padding-bottom:4px; margin-bottom:6px;">Key Projects</div>
+                        <div style="font-weight:600; font-size:10px; color:#1a1a1a;">Global Market Expansion</div>
+                        <div style="font-size:8px; color:#5a6c7d; margin-bottom:8px;">Scaled operations into 12 new markets</div>
+                        <div style="font-weight:700; font-size:10px; color:#ffa500; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid #ffa500; padding-bottom:4px; margin-bottom:6px;">Education</div>
+                        <div style="font-weight:600; font-size:10px; color:#1a1a1a;">MBA, Business Administration</div>
+                        <div style="font-size:8px; color:#5a6c7d; margin-bottom:8px;">Harvard Business School • 2012</div>
+                        <div style="font-weight:700; font-size:10px; color:#ffa500; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid #ffa500; padding-bottom:4px; margin-bottom:6px;">Skills</div>
+                        <div style="font-size:9px; color:#404040; margin-bottom:8px;">Strategic Vision • M&A • Team Leadership</div>
+                        <div style="font-weight:700; font-size:10px; color:#ffa500; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid #ffa500; padding-bottom:4px; margin-bottom:6px;">Board Experience</div>
+                        <div style="font-weight:600; font-size:10px; color:#1a1a1a;">Board Member, Advisory Council</div>
+                        <div style="font-size:8px; color:#5a6c7d;">TechStartup Inc. • 2020 - Present</div>
+                    </div>
                 </div>
                 <div class="card-content">
                     <div class="card-tier elite">ELITE / III</div>
