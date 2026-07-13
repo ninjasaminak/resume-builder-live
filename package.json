@@ -1,0 +1,10 @@
+{
+  "name": "resume-builder-live",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "stripe": "^17.5.0",
+    "firebase-admin": "^13.0.2",
+    "resend": "^4.0.1"
+  }
+}
