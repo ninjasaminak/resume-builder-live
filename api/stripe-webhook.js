@@ -13,10 +13,6 @@ if (!admin.apps.length) {
 }
 const db = admin.firestore();
 
-// Vercel parses the body as JSON by default, which breaks Stripe's signature check —
-// this opts the function out so we can read the exact raw bytes Stripe signed.
-module.exports.config = { api: { bodyParser: false } };
-
 function readRawBody(readable) {
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -46,7 +42,7 @@ function generateLicenseCode(tier) {
   return `${prefix}-${random}`;
 }
 
-module.exports = async (req, res) => {
+const handler = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).send('Method Not Allowed');
     return;
@@ -126,3 +122,10 @@ module.exports = async (req, res) => {
     res.status(500).json({ error: 'Internal error' });
   }
 };
+
+// Vercel parses the body as JSON by default, which breaks Stripe's signature check —
+// this opts the function out so we can read the exact raw bytes Stripe signed.
+// Must be set directly on the exported handler, since reassigning module.exports
+// afterward would wipe out a config set on a separate object.
+handler.config = { api: { bodyParser: false } };
+module.exports = handler;
