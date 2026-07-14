@@ -49,12 +49,19 @@ const handler = async (req, res) => {
   }
 
   let event;
+  let rawBody;
   try {
-    const rawBody = await readRawBody(req);
+    rawBody = await readRawBody(req);
     const signature = req.headers['stripe-signature'];
     event = stripe.webhooks.constructEvent(rawBody, signature, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
+    console.error(
+      'Webhook signature verification failed:', err.message,
+      '| rawBody length:', rawBody ? rawBody.length : 'undefined',
+      '| has signature header:', Boolean(req.headers['stripe-signature']),
+      '| secret configured:', Boolean(process.env.STRIPE_WEBHOOK_SECRET),
+      '| secret length:', process.env.STRIPE_WEBHOOK_SECRET ? process.env.STRIPE_WEBHOOK_SECRET.length : 0
+    );
     res.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
