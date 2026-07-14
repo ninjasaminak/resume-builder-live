@@ -82,10 +82,13 @@ const handler = async (req, res) => {
     const debug = signature && rawBody
       ? debugSignatureMismatch(rawBody, signature, process.env.STRIPE_WEBHOOK_SECRET)
       : { note: 'missing signature header or empty body' };
+    const secret = process.env.STRIPE_WEBHOOK_SECRET || '';
     console.error(
       'Webhook signature verification failed:', err.message,
       '| rawBody length:', rawBody ? rawBody.length : 'undefined',
-      '| debug:', JSON.stringify(debug)
+      '| debug:', JSON.stringify(debug),
+      '| secret boundaries:', JSON.stringify({ start: secret.slice(0, 10), end: secret.slice(-6) }),
+      '| rawBody preview:', JSON.stringify({ start: rawBody ? rawBody.toString('utf8').slice(0, 60) : null, end: rawBody ? rawBody.toString('utf8').slice(-60) : null })
     );
     res.status(400).send(`Webhook Error: ${err.message}`);
     return;
