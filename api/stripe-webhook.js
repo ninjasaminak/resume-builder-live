@@ -1,6 +1,7 @@
-import Stripe from 'stripe';
-import admin from 'firebase-admin';
-import { Resend } from 'resend';
+const crypto = require('crypto');
+const Stripe = require('stripe');
+const admin = require('firebase-admin');
+const { Resend } = require('resend');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -12,6 +13,15 @@ if (!admin.apps.length) {
   admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 }
 const db = admin.firestore();
+
+function readRawBody(readable) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    readable.on('data', (chunk) => chunks.push(chunk));
+    readable.on('end', () => resolve(Buffer.concat(chunks)));
+    readable.on('error', reject);
+  });
+}
 
 const TIER_PREFIX = { premium: 'PREM', luxury: 'LUX', elite: 'ELITE' };
 
@@ -33,32 +43,57 @@ function generateLicenseCode(tier) {
   return `${prefix}-${random}`;
 }
 
-// Using the Web-standard Request/Response signature (rather than Node's req/res)
-// so the raw body comes straight from request.text() with no framework-level
-// JSON parsing in between — that parsing was silently mangling the bytes Stripe
-// signed, which broke signature verification under the (req, res) style handler.
-export default async function handler(request) {
-  if (request.method !== 'POST') {
-    return new Response('Method Not Allowed', { status: 405 });
+// Manually recomputes the HMAC Stripe should have sent, purely for diagnostics
+// when verification fails — lets us tell apart "wrong secret" from "wrong body"
+// without exposing the secret itself in logs.
+function debugSignatureMismatch(rawBody, signatureHeader, secret) {
+  try {
+    const parts = Object.fromEntries(
+      signatureHeader.split(',').map((p) => p.split('='))
+    );
+    const timestamp = parts.t;
+    const expectedSig = parts.v1;
+    const signedPayload = `${timestamp}.${rawBody.toString('utf8')}`;
+    const computedSig = crypto.createHmac('sha256', secret).update(signedPayload, 'utf8').digest('hex');
+    return {
+      timestamp,
+      expectedSigPrefix: expectedSig ? expectedSig.slice(0, 8) : null,
+      computedSigPrefix: computedSig.slice(0, 8),
+      match: computedSig === expectedSig,
+    };
+  } catch (e) {
+    return { debugError: e.message };
+  }
+}
+
+const handler = async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(405).send('Method Not Allowed');
+    return;
   }
 
-  const rawBody = await request.text();
-  const signature = request.headers.get('stripe-signature');
-
   let event;
+  let rawBody;
+  const signature = req.headers['stripe-signature'];
   try {
+    rawBody = await readRawBody(req);
     event = stripe.webhooks.constructEvent(rawBody, signature, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
+    const debug = signature && rawBody
+      ? debugSignatureMismatch(rawBody, signature, process.env.STRIPE_WEBHOOK_SECRET)
+      : { note: 'missing signature header or empty body' };
     console.error(
       'Webhook signature verification failed:', err.message,
-      '| rawBody length:', rawBody.length,
-      '| has signature header:', Boolean(signature)
+      '| rawBody length:', rawBody ? rawBody.length : 'undefined',
+      '| debug:', JSON.stringify(debug)
     );
-    return new Response(`Webhook Error: ${err.message}`, { status: 400 });
+    res.status(400).send(`Webhook Error: ${err.message}`);
+    return;
   }
 
   if (event.type !== 'checkout.session.completed') {
-    return Response.json({ received: true });
+    res.status(200).json({ received: true });
+    return;
   }
 
   const session = event.data.object;
@@ -75,12 +110,14 @@ export default async function handler(request) {
 
   if (!tier) {
     console.error(`Session ${session.id} price did not match any known tier`);
-    return Response.json({ received: true, warning: 'unrecognized tier' });
+    res.status(200).json({ received: true, warning: 'unrecognized tier' });
+    return;
   }
 
   if (!customerEmail) {
     console.error(`Session ${session.id} has no customer email`);
-    return Response.json({ received: true, warning: 'no customer email' });
+    res.status(200).json({ received: true, warning: 'no customer email' });
+    return;
   }
 
   try {
@@ -89,7 +126,8 @@ export default async function handler(request) {
     const docRef = db.collection('licenseCodes').doc(session.id);
     const existing = await docRef.get();
     if (existing.exists) {
-      return Response.json({ received: true, duplicate: true });
+      res.status(200).json({ received: true, duplicate: true });
+      return;
     }
 
     const code = generateLicenseCode(tier);
@@ -110,9 +148,16 @@ export default async function handler(request) {
              <p>Enter this code when creating your account at resume-builder-live-sepia.vercel.app</p>`,
     });
 
-    return Response.json({ received: true, code });
+    res.status(200).json({ received: true, code });
   } catch (err) {
     console.error('Error processing checkout.session.completed:', err);
-    return new Response(JSON.stringify({ error: 'Internal error' }), { status: 500 });
+    res.status(500).json({ error: 'Internal error' });
   }
-}
+};
+
+// Vercel parses the body as JSON by default, which breaks Stripe's signature check —
+// this opts the function out so we can read the exact raw bytes Stripe signed.
+// Must be set directly on the exported handler, since reassigning module.exports
+// afterward would wipe out a config set on a separate object.
+handler.config = { api: { bodyParser: false } };
+module.exports = handler;
