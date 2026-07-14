@@ -25,16 +25,14 @@ function readRawBody(readable) {
 
 const TIER_PREFIX = { premium: 'PREM', luxury: 'LUX', elite: 'ELITE' };
 
-// Payment Links don't expose a metadata field in the current Stripe dashboard UI,
-// so tiers are identified by which Price was purchased instead. Set these env vars
-// to the Price IDs (price_...) behind each tier's Payment Link.
-function priceIdToTier(priceId) {
-  const map = {
-    [process.env.STRIPE_PRICE_PREMIUM]: 'premium',
-    [process.env.STRIPE_PRICE_LUXURY]: 'luxury',
-    [process.env.STRIPE_PRICE_ELITE]: 'elite',
-  };
-  return map[priceId];
+// Payment Links don't expose a metadata field in the current Stripe dashboard UI, and
+// calling the Stripe API to look up line items was unreliable from this environment
+// (consistent connection errors), so tiers are identified by the amount actually
+// charged instead — amount_total is already in the webhook payload, no extra network
+// call needed. Cents, matching the $9/$12/$16 tier prices.
+function amountToTier(amountTotal) {
+  const map = { 900: 'premium', 1200: 'luxury', 1600: 'elite' };
+  return map[amountTotal];
 }
 
 function generateLicenseCode(tier) {
@@ -102,18 +100,10 @@ const handler = async (req, res) => {
 
   const session = event.data.object;
   const customerEmail = session.customer_details && session.customer_details.email;
-
-  let tier;
-  try {
-    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 1 });
-    const priceId = lineItems.data[0] && lineItems.data[0].price && lineItems.data[0].price.id;
-    tier = priceIdToTier(priceId);
-  } catch (err) {
-    console.error(`Failed to look up line items for session ${session.id}:`, err.message);
-  }
+  const tier = amountToTier(session.amount_total);
 
   if (!tier) {
-    console.error(`Session ${session.id} price did not match any known tier`);
+    console.error(`Session ${session.id} amount_total ${session.amount_total} did not match any known tier`);
     res.status(200).json({ received: true, warning: 'unrecognized tier' });
     return;
   }
