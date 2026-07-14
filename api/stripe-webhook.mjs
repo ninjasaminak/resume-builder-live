@@ -1,6 +1,6 @@
-const Stripe = require('stripe');
-const admin = require('firebase-admin');
-const { Resend } = require('resend');
+import Stripe from 'stripe';
+import admin from 'firebase-admin';
+import { Resend } from 'resend';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -12,15 +12,6 @@ if (!admin.apps.length) {
   admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 }
 const db = admin.firestore();
-
-function readRawBody(readable) {
-  return new Promise((resolve, reject) => {
-    const chunks = [];
-    readable.on('data', (chunk) => chunks.push(chunk));
-    readable.on('end', () => resolve(Buffer.concat(chunks)));
-    readable.on('error', reject);
-  });
-}
 
 const TIER_PREFIX = { premium: 'PREM', luxury: 'LUX', elite: 'ELITE' };
 
@@ -42,33 +33,32 @@ function generateLicenseCode(tier) {
   return `${prefix}-${random}`;
 }
 
-const handler = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.status(405).send('Method Not Allowed');
-    return;
+// Using the Web-standard Request/Response signature (rather than Node's req/res)
+// so the raw body comes straight from request.text() with no framework-level
+// JSON parsing in between — that parsing was silently mangling the bytes Stripe
+// signed, which broke signature verification under the (req, res) style handler.
+export default async function handler(request) {
+  if (request.method !== 'POST') {
+    return new Response('Method Not Allowed', { status: 405 });
   }
 
+  const rawBody = await request.text();
+  const signature = request.headers.get('stripe-signature');
+
   let event;
-  let rawBody;
   try {
-    rawBody = await readRawBody(req);
-    const signature = req.headers['stripe-signature'];
     event = stripe.webhooks.constructEvent(rawBody, signature, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     console.error(
       'Webhook signature verification failed:', err.message,
-      '| rawBody length:', rawBody ? rawBody.length : 'undefined',
-      '| has signature header:', Boolean(req.headers['stripe-signature']),
-      '| secret configured:', Boolean(process.env.STRIPE_WEBHOOK_SECRET),
-      '| secret length:', process.env.STRIPE_WEBHOOK_SECRET ? process.env.STRIPE_WEBHOOK_SECRET.length : 0
+      '| rawBody length:', rawBody.length,
+      '| has signature header:', Boolean(signature)
     );
-    res.status(400).send(`Webhook Error: ${err.message}`);
-    return;
+    return new Response(`Webhook Error: ${err.message}`, { status: 400 });
   }
 
   if (event.type !== 'checkout.session.completed') {
-    res.status(200).json({ received: true });
-    return;
+    return Response.json({ received: true });
   }
 
   const session = event.data.object;
@@ -85,14 +75,12 @@ const handler = async (req, res) => {
 
   if (!tier) {
     console.error(`Session ${session.id} price did not match any known tier`);
-    res.status(200).json({ received: true, warning: 'unrecognized tier' });
-    return;
+    return Response.json({ received: true, warning: 'unrecognized tier' });
   }
 
   if (!customerEmail) {
     console.error(`Session ${session.id} has no customer email`);
-    res.status(200).json({ received: true, warning: 'no customer email' });
-    return;
+    return Response.json({ received: true, warning: 'no customer email' });
   }
 
   try {
@@ -101,8 +89,7 @@ const handler = async (req, res) => {
     const docRef = db.collection('licenseCodes').doc(session.id);
     const existing = await docRef.get();
     if (existing.exists) {
-      res.status(200).json({ received: true, duplicate: true });
-      return;
+      return Response.json({ received: true, duplicate: true });
     }
 
     const code = generateLicenseCode(tier);
@@ -123,16 +110,9 @@ const handler = async (req, res) => {
              <p>Enter this code when creating your account at resume-builder-live-sepia.vercel.app</p>`,
     });
 
-    res.status(200).json({ received: true, code });
+    return Response.json({ received: true, code });
   } catch (err) {
     console.error('Error processing checkout.session.completed:', err);
-    res.status(500).json({ error: 'Internal error' });
+    return new Response(JSON.stringify({ error: 'Internal error' }), { status: 500 });
   }
-};
-
-// Vercel parses the body as JSON by default, which breaks Stripe's signature check —
-// this opts the function out so we can read the exact raw bytes Stripe signed.
-// Must be set directly on the exported handler, since reassigning module.exports
-// afterward would wipe out a config set on a separate object.
-handler.config = { api: { bodyParser: false } };
-module.exports = handler;
+}
