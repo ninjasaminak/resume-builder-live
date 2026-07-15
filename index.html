@@ -98,8 +98,11 @@
         .auth-box p { color: #aaa; font-size: 14px; margin-bottom: 28px; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-size: 13px; margin-bottom: 8px; font-weight: 500; }
-        .form-group input { width: 100%; padding: 10px 12px; background: #0a0a0a; border: 1px solid #333; border-radius: 4px; color: #fff; font-size: 14px; }
-        .form-group input:focus { outline: none; border-color: #ffd700; }
+        .form-group-hint { display: block; font-size: 12px; color: #999; margin-top: -4px; margin-bottom: 8px; }
+        .form-group input { width: 100%; padding: 10px 12px; background: #fff; border: 1px solid #444; border-radius: 4px; color: #1a1a1a; font-size: 14px; }
+        .form-group input::placeholder { color: #999; }
+        .form-group input:focus { outline: none; border-color: #ffd700; box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15); }
+        .form-group input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #fff inset; -webkit-text-fill-color: #1a1a1a; }
         .btn-submit { width: 100%; padding: 12px; background: #ffd700; color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 12px; }
         .error { color: #ff6b6b; font-size: 12px; margin-top: 6px; }
         .toggle-form { text-align: center; margin-top: 20px; font-size: 13px; color: #aaa; }
@@ -478,7 +481,8 @@
 
             <div class="form-group">
                 <label>License Code</label>
-                <input type="text" id="licenseCode" placeholder="e.g., ELITE-TEST-003" required>
+                <span class="form-group-hint">Sent to your email after you subscribe</span>
+                <input type="text" id="licenseCode" placeholder="e.g., LUX-A8X92K" required>
                 <div id="licenseCodeError" class="error hidden"></div>
             </div>
 
