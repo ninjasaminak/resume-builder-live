@@ -6,27 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atelier Résumé - Premium Resume Builder</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,400&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif; }
         
         /* LANDING PAGE */
         .landing-page { background: #000; color: #fff; }
         .header { background: #000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
-        .logo { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 500; font-family: 'Fraunces', 'Georgia', serif; letter-spacing: 0.2px; }
         .logo-icon { width: 32px; height: 32px; background: #ffd700; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700; font-size: 18px; }
         .nav-menu { display: flex; gap: 50px; flex: 1; margin-left: 100px; }
         .nav-menu a { color: #aaa; text-decoration: none; font-size: 14px; cursor: pointer; }
         .nav-menu a:hover { color: #fff; }
         .sign-in-btn { color: #fff; background: transparent; border: 1px solid #666; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
         .sign-in-btn:hover { border-color: #fff; }
+        .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 32px; height: 32px; background: none; border: none; cursor: pointer; margin-left: 12px; }
+        .nav-toggle span { display: block; width: 100%; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+        .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         
         .hero { padding: 80px 60px; text-align: center; max-width: 1000px; margin: 0 auto; }
         .hero-tag { font-size: 12px; color: #ffd700; letter-spacing: 1px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .hero-tag::before { content: "●"; color: #ffd700; }
-        .hero-title { font-size: 72px; font-weight: 300; letter-spacing: -1px; margin-bottom: 30px; line-height: 1.2; }
-        .hero-title .gold { color: #ffd700; font-style: italic; }
+        .hero-title { font-family: 'Fraunces', 'Georgia', serif; font-size: 72px; font-weight: 300; letter-spacing: -1px; margin-bottom: 30px; line-height: 1.15; }
+        .hero-title .gold { color: #ffd700; font-style: italic; font-weight: 400; }
         .hero-desc { font-size: 16px; color: #aaa; line-height: 1.8; margin-bottom: 60px; max-width: 700px; margin-left: auto; margin-right: auto; }
         
         .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 80px; padding: 60px; border-bottom: 1px solid #333; text-align: center; max-width: 1000px; margin: 0 auto; }
@@ -36,13 +45,15 @@
         .section-intro { padding: 80px 60px 40px; text-align: left; max-width: 1400px; margin: 0 auto; }
         .section-label { font-size: 11px; color: #888; letter-spacing: 2px; margin-bottom: 30px; }
         .section-label::before { content: "—"; color: #999; margin-right: 10px; }
-        .section-title { font-size: 56px; font-weight: 300; margin-bottom: 10px; }
-        .section-title .gold { color: #ffd700; font-style: italic; }
+        .section-title { font-family: 'Fraunces', 'Georgia', serif; font-size: 56px; font-weight: 300; margin-bottom: 10px; }
+        .section-title .gold { color: #ffd700; font-style: italic; font-weight: 400; }
         
         .pricing-section { padding: 40px 60px 80px; max-width: 1400px; margin: 0 auto; }
         .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 80px; }
-        .pricing-card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+        .pricing-card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+        .pricing-card:hover { transform: translateY(-6px); border-color: #ffd700; box-shadow: 0 16px 32px rgba(0,0,0,0.4); }
         .pricing-card.elite { border: 1px solid #ffd700; }
+        .pricing-card.elite:hover { box-shadow: 0 16px 32px rgba(255,215,0,0.15); }
         
         .card-preview { width: 100%; background: white; padding: 18px 16px; border-bottom: 1px solid #333; font-size: 9px; color: #333; font-family: 'Garamond', 'Georgia', serif; line-height: 1.3; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
         .card-resume-header { font-weight: 700; font-size: 13px; margin-bottom: 2px; letter-spacing: 0.5px; }
@@ -62,6 +73,22 @@
         .card-features { border-top: 1px solid #333; padding-top: 16px; }
         .feature { font-size: 12px; color: #aaa; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
         .feature::before { content: "✓"; color: #ffd700; font-weight: bold; font-size: 14px; }
+
+        .landing-footer { border-top: 1px solid #222; padding: 40px 60px; }
+        .landing-footer-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .landing-footer-links { display: flex; gap: 30px; }
+        .landing-footer-links a { color: #888; text-decoration: none; font-size: 13px; transition: color 0.2s; }
+        .landing-footer-links a:hover { color: #ffd700; }
+        .landing-footer-copy { color: #666; font-size: 12px; }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.revealed { opacity: 1; transform: translateY(0); }
+        .pricing-card.reveal { transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+        .pricing-card.reveal:hover { transform: translateY(-6px); }
+        .pricing-card.reveal.revealed:hover { transform: translateY(-6px); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
         
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; z-index: 1000; }
         .modal-overlay.active { display: flex; }
@@ -94,17 +121,18 @@
         .logout-btn:hover { background: #dc2626; }
         
         .builder-container { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 60px); gap: 20px; padding: 20px; background: #f8f9fa; }
-        .form-panel { background: white; border-radius: 12px; overflow-y: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .form-panel { background: white; border-radius: 12px; overflow-y: auto; box-shadow: 0 4px 20px rgba(20,30,45,0.08); }
         .form-header { padding: 24px; border-bottom: 2px solid #f0f4f8; background: #fafbfc; }
         .form-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
         .form-subtitle { font-size: 13px; color: #5a6c7d; }
         .form-content { padding: 24px; }
-        .form-section { margin-bottom: 32px; padding: 0; }
+        .form-section { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid #f0f4f8; }
+        .form-section:last-of-type { border-bottom: none; }
         .form-section:last-child { margin-bottom: 0; }
         .form-section.hidden { display: none; }
         
-        .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #5a6c7d; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .section-title::before { content: ''; display: inline-block; width: 3px; height: 14px; background: #ffd700; border-radius: 2px; }
+        .form-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #5a6c7d; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .form-section-title::before { content: ''; display: inline-block; width: 3px; height: 14px; background: #ffd700; border-radius: 2px; }
         
         .builder-form-group { margin-bottom: 16px; }
         .builder-form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #2c3e50; }
@@ -152,9 +180,13 @@
         .btn-secondary { background: #f0f4f8; color: #5a6c7d; border: 1px solid #d1dce6; }
         .btn-secondary:hover { background: #e6eef7; }
         
-        .preview-panel { background: white; border-radius: 12px; padding: 32px; overflow-y: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 20px; height: fit-content; }
-        
-        .resume-preview { background: white; padding: 40px; font-family: 'Garamond', 'Georgia', serif; color: #1a1a1a; line-height: 1.6; border: 1px solid #e0e6ed; border-radius: 8px; }
+        .preview-panel { background: white; border-radius: 12px; padding: 32px; overflow-y: auto; box-shadow: 0 4px 20px rgba(20,30,45,0.08); position: sticky; top: 20px; height: fit-content; }
+
+        .resume-preview { background: white; padding: 40px; font-family: 'Garamond', 'Georgia', serif; color: #1a1a1a; line-height: 1.6; border: 1px solid #e0e6ed; border-radius: 8px; transition: color 0.2s ease, border-color 0.2s ease; }
+        .resume-preview .builder-resume-header { transition: border-color 0.2s ease, background 0.2s ease; }
+        .resume-preview .resume-name,
+        .resume-preview .resume-item-title { transition: color 0.2s ease; }
+        .resume-preview .resume-section-title { transition: color 0.2s ease, background 0.2s ease; }
         .builder-resume-header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid; padding-bottom: 16px; }
         .resume-name { font-size: 24px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
         .resume-contact { font-size: 12px; color: #5a6c7d; letter-spacing: 0.3px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -164,13 +196,14 @@
         .resume-item-subtitle { font-size: 12px; color: #5a6c7d; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
         .resume-item-desc { font-size: 12px; color: #404040; margin-top: 4px; line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
         
-        .tier-lock { background: linear-gradient(135deg, #fff9ec 0%, #fef3e2 100%); border: 1px solid #fcd34d; border-radius: 10px; padding: 20px; display: flex; align-items: flex-start; gap: 14px; }
+        .tier-lock { background: linear-gradient(135deg, #fff9ec 0%, #fef3e2 100%); border: 1px solid #fcd34d; border-radius: 10px; padding: 20px; display: flex; align-items: flex-start; gap: 14px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+        .tier-lock:hover { border-color: #ffd700; box-shadow: 0 6px 16px rgba(255,215,0,0.15); }
         .tier-lock-icon { width: 34px; height: 34px; min-width: 34px; border-radius: 8px; background: #ffd700; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #1a1a1a; }
         .tier-lock-body { flex: 1; }
         .tier-lock-title { font-size: 13px; font-weight: 700; color: #7c4a03; margin-bottom: 4px; }
         .tier-lock-desc { font-size: 12px; color: #92400e; line-height: 1.5; margin-bottom: 10px; }
-        .tier-lock-btn { display: inline-block; font-size: 12px; font-weight: 700; color: #1a1a1a; background: #ffd700; padding: 6px 14px; border-radius: 20px; text-decoration: none; transition: transform 0.15s; }
-        .tier-lock-btn:hover { transform: translateY(-1px); }
+        .tier-lock-btn { display: inline-block; font-size: 12px; font-weight: 700; color: #1a1a1a; background: #ffd700; padding: 6px 14px; border-radius: 20px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+        .tier-lock-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(255,215,0,0.4); }
         
         .template-modern .builder-resume-header { border-bottom-color: currentColor; }
         .template-professional { font-family: 'Calibri', 'Arial', sans-serif; color: #2c3e50; }
@@ -182,8 +215,11 @@
         .template-creative .resume-name { font-size: 26px; margin-bottom: 4px; }
         .template-creative .resume-section-title { border-bottom: 2px solid; margin: 18px 0 10px 0; padding-bottom: 8px; }
         @media (max-width: 768px) {
-            .header { padding: 16px 20px; }
-            .nav-menu { display: none; }
+            .header { padding: 16px 20px; flex-wrap: wrap; }
+            .nav-menu { display: none; order: 3; width: 100%; flex-direction: column; gap: 0; margin: 0; margin-top: 16px; }
+            .nav-menu.active { display: flex; }
+            .nav-menu a { padding: 12px 0; border-top: 1px solid #222; }
+            .nav-toggle { display: flex; }
             .hero { padding: 40px 20px; }
             .hero-title { font-size: 36px; }
             .hero-desc { font-size: 14px; padding: 0 10px; }
@@ -193,6 +229,9 @@
             .section-title { font-size: 32px; }
             .pricing-section { padding: 20px 16px 40px; }
             .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
+            .landing-footer { padding: 30px 20px; }
+            .landing-footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .landing-footer-links { flex-wrap: wrap; gap: 16px; }
 
             .builder-header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px 16px; }
             .builder-header-right { width: 100%; justify-content: space-between; }
@@ -241,21 +280,22 @@
             <div class="logo-icon">A</div>
             <span>Atelier Résumé</span>
         </div>
-        <div class="nav-menu">
-            <a>Tiers</a>
-            <a>Templates</a>
-            <a>Examples</a>
+        <div class="nav-menu" id="navMenu">
+            <a href="#collection">Tiers</a>
+            <a href="#collection">Templates</a>
+            <a href="#collection">Examples</a>
         </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
         <button class="sign-in-btn" id="signInBtn">Sign in</button>
     </div>
 
-    <div class="hero">
+    <div class="hero reveal">
         <div class="hero-tag">EST. 2019 - TRUSTED BY 40,000+ PROFESSIONALS</div>
         <h1 class="hero-title">Résumés worth <span class="gold">reading.</span></h1>
         <p class="hero-desc">A small studio for considered career documents. Pick a tier, build in minutes, and export a recruiter-ready PDF set in editorial typography.</p>
     </div>
 
-    <div class="stats">
+    <div class="stats reveal">
         <div class="stat-item">
             <div class="stat-number">240+</div>
             <div class="stat-label">Templates</div>
@@ -274,7 +314,7 @@
         </div>
     </div>
 
-    <div class="section-intro">
+    <div class="section-intro" id="collection">
         <div class="section-label">SECTION I · THE COLLECTION</div>
         <h2 class="section-title">Choose your <span class="gold">tier</span></h2>
     </div>
@@ -282,7 +322,7 @@
     <div class="pricing-section">
         <div class="pricing-grid">
             <!-- Premium (Modern template look) -->
-            <div class="pricing-card">
+            <div class="pricing-card reveal">
                 <div class="card-preview premium" style="text-align:center;">
                     <div style="font-family: 'Garamond','Georgia',serif; font-weight:700; font-size:15px; color:#1a1a1a; margin-bottom:4px;">Alex Johnson</div>
                     <div style="font-size:9px; color:#5a6c7d; margin-bottom:10px;">alex@email.com • (555) 123-4567 • New York, NY</div>
@@ -316,7 +356,7 @@
             </div>
 
             <!-- Luxury (Professional template look) -->
-            <div class="pricing-card">
+            <div class="pricing-card reveal">
                 <div class="card-preview luxury" style="padding:0;">
                     <div style="background:#ecf0f1; padding:16px; text-align:left;">
                         <div style="font-family: Calibri, Arial, sans-serif; font-weight:700; font-size:13px; color:#2c3e50; text-transform:uppercase; letter-spacing:1.5px;">Morgan Chen</div>
@@ -356,7 +396,7 @@
             </div>
 
             <!-- Elite (Creative template look) -->
-            <div class="pricing-card elite">
+            <div class="pricing-card elite reveal">
                 <div class="card-preview elite">
                     <div style="border-left:4px solid #ffa500; padding-left:12px; margin-bottom:12px;">
                         <div style="font-family: 'Segoe UI', 'Helvetica Neue', sans-serif; font-weight:700; font-size:16px; color:#1a1a1a; margin-bottom:3px;">Christopher Elite</div>
@@ -397,6 +437,21 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="landing-footer">
+        <div class="landing-footer-inner">
+            <div class="logo">
+                <div class="logo-icon">A</div>
+                <span>Atelier Résumé</span>
+            </div>
+            <div class="landing-footer-links">
+                <a href="#collection">Tiers</a>
+                <a href="#collection">Templates</a>
+                <a href="#collection">Examples</a>
+            </div>
+            <div class="landing-footer-copy">© 2026 Atelier Résumé. All rights reserved.</div>
         </div>
     </div>
 </div>
@@ -489,7 +544,7 @@
             <div class="form-content">
                 <!-- Personal Section -->
                 <div class="form-section">
-                    <div class="section-title">Personal Information</div>
+                    <div class="form-section-title">Personal Information</div>
                     
                     <div class="builder-form-group">
                         <label>Full Name *</label>
@@ -514,7 +569,7 @@
 
                 <!-- Professional Summary -->
                 <div class="form-section">
-                    <div class="section-title">Professional Summary</div>
+                    <div class="form-section-title">Professional Summary</div>
                     
                     <div class="builder-form-group">
                         <label>Summary</label>
@@ -524,7 +579,7 @@
 
                 <!-- Work Experience - Premium+ -->
                 <div class="form-section">
-                    <div class="section-title">Work Experience</div>
+                    <div class="form-section-title">Work Experience</div>
                     
                     <div class="builder-form-group">
                         <label>Job Title</label>
@@ -549,7 +604,7 @@
 
                 <!-- Second Work Experience - Premium+ -->
                 <div class="form-section">
-                    <div class="section-title">Previous Position</div>
+                    <div class="form-section-title">Previous Position</div>
 
                     <div class="builder-form-group">
                         <label>Job Title</label>
@@ -574,7 +629,7 @@
 
                 <!-- Certifications - Premium+ -->
                 <div class="form-section">
-                    <div class="section-title">Certifications & Licenses</div>
+                    <div class="form-section-title">Certifications & Licenses</div>
 
                     <div class="builder-form-group">
                         <label>Certificate / License Name</label>
@@ -594,7 +649,7 @@
 
                 <!-- Key Projects - Premium+ -->
                 <div class="form-section">
-                    <div class="section-title">Key Projects</div>
+                    <div class="form-section-title">Key Projects</div>
 
                     <div class="builder-form-group">
                         <label>Project Title</label>
@@ -609,7 +664,7 @@
 
                 <!-- Education - Luxury+ -->
                 <div class="form-section tier-luxury hidden" id="educationSection">
-                    <div class="section-title">Education</div>
+                    <div class="form-section-title">Education</div>
                     
                     <div class="builder-form-group">
                         <label>Degree</label>
@@ -640,7 +695,7 @@
 
                 <!-- Skills - Luxury+ -->
                 <div class="form-section tier-luxury hidden" id="skillsSection">
-                    <div class="section-title">Skills & Expertise</div>
+                    <div class="form-section-title">Skills & Expertise</div>
                     
                     <div class="builder-form-group">
                         <label>Skills (comma separated)</label>
@@ -661,7 +716,7 @@
 
                 <!-- Board Experience - Elite+ -->
                 <div class="form-section tier-elite hidden" id="boardSection">
-                    <div class="section-title">Board Experience</div>
+                    <div class="form-section-title">Board Experience</div>
                     
                     <div class="builder-form-group">
                         <label>Board Title</label>
@@ -692,7 +747,7 @@
 
                 <!-- Design & Templates -->
                 <div class="form-section">
-                    <div class="section-title">Design</div>
+                    <div class="form-section-title">Design</div>
                     
                     <p style="font-size: 12px; color: #5a6c7d; margin-bottom: 16px;">Choose your resume template:</p>
                     <div style="margin-bottom: 20px;">
@@ -930,6 +985,29 @@ function closeAuthModal() {
 signInBtn.addEventListener('click', () => openModal('signin'));
 closeModal.addEventListener('click', closeAuthModal);
 authModal.addEventListener('click', (e) => e.target === authModal && closeAuthModal());
+
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 document.querySelectorAll('.toggle-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
