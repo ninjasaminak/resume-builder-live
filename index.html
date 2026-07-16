@@ -239,7 +239,7 @@
             .builder-header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px 16px; }
             .builder-header-right { width: 100%; justify-content: space-between; }
             .builder-container { grid-template-columns: 1fr; padding: 12px; gap: 12px; }
-            .preview-panel { position: static; padding: 16px; }
+            .preview-panel { position: static; padding: 16px; order: -1; }
             .form-content { padding: 16px; }
             .resume-preview { padding: 20px; }
             .resume-name { font-size: 18px; }
@@ -1309,8 +1309,14 @@ document.getElementById('previewBtn').addEventListener('click', () => {
 });
 
 document.getElementById('downloadPdfBtn').addEventListener('click', () => {
+    alert('DIAGNOSTIC: button tap received. Tapping OK will call window.print() next.');
     document.title = (fullNameInput.value || 'Resume') + ' - Resume';
-    window.print();
+    try {
+        window.print();
+        alert('DIAGNOSTIC: window.print() ran with no error.');
+    } catch (err) {
+        alert('DIAGNOSTIC: window.print() threw an error: ' + err.message);
+    }
 });
 
 [fullNameInput, emailInput, phoneInput, locationInput, summaryInput, jobTitleInput, companyInput, jobDurationInput, jobDescriptionInput, jobTitle2Input, company2Input, jobDuration2Input, jobDescription2Input, certNameInput, certOrgInput, certDateInput, projectTitleInput, projectDescInput, degreeInput, schoolInput, graduationYearInput, skillsInput, boardTitleInput, boardOrgInput, boardYearInput]
