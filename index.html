@@ -99,6 +99,9 @@
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-size: 13px; margin-bottom: 8px; font-weight: 500; }
         .form-group-hint { display: block; font-size: 12px; color: #999; margin-top: -4px; margin-bottom: 8px; }
+        .forgot-password-link { display: block; text-align: right; margin-top: -4px; margin-bottom: 8px; }
+        .forgot-password-link button { background: none; border: none; color: #ffd700; font-size: 12px; cursor: pointer; text-decoration: underline; padding: 0; }
+        .success { color: #4caf50; font-size: 12px; margin-top: 6px; }
         .form-group input { width: 100%; padding: 10px 12px; background: #fff; border: 1px solid #444; border-radius: 4px; color: #1a1a1a; font-size: 14px; }
         .form-group input::placeholder { color: #999; }
         .form-group input:focus { outline: none; border-color: #ffd700; box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15); }
@@ -511,8 +514,13 @@
                 <input type="password" id="signinPassword" required>
             </div>
 
+            <div class="forgot-password-link">
+                <button type="button" id="forgotPasswordBtn">Forgot password?</button>
+            </div>
+            <div id="resetPasswordMessage" class="error hidden"></div>
+
             <button type="submit" class="btn-submit">Sign In</button>
-            
+
             <div class="toggle-form">
                 Don't have an account? <button type="button" class="toggle-btn" data-form="signup">Sign Up</button>
             </div>
@@ -1102,6 +1110,31 @@ signinForm.addEventListener('submit', async (e) => {
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Sign In';
+    }
+});
+
+document.getElementById('forgotPasswordBtn').addEventListener('click', async () => {
+    const email = document.getElementById('signinEmail').value.trim();
+    const msgEl = document.getElementById('resetPasswordMessage');
+    clearError('signinEmailError');
+
+    if (!email) {
+        msgEl.classList.remove('success');
+        msgEl.classList.add('error');
+        showError('resetPasswordMessage', 'Enter your email above first, then tap "Forgot password?"');
+        return;
+    }
+
+    try {
+        await auth.sendPasswordResetEmail(email);
+        msgEl.classList.remove('error');
+        msgEl.classList.add('success');
+        msgEl.textContent = 'Password reset email sent. Check your inbox (and spam folder).';
+        msgEl.classList.remove('hidden');
+    } catch (e) {
+        msgEl.classList.remove('success');
+        msgEl.classList.add('error');
+        showError('resetPasswordMessage', e.message);
     }
 });
 
