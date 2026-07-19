@@ -251,8 +251,20 @@
         }
 
         @media print {
-            body * {
-                visibility: hidden;
+            /* Collapse everything outside the resume out of the layout
+               entirely (not just visibility:hidden) so the printed
+               document is only as tall as the resume itself, instead of
+               the full page's height in blank/invisible pages. */
+            #landingPage, #authModal, .builder-header, .form-panel {
+                display: none !important;
+            }
+            body, #builderPage, .builder-container, .preview-panel {
+                display: block !important;
+                min-height: 0 !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                position: static !important;
             }
             #resumePreview, #resumePreview * {
                 visibility: visible;
@@ -262,9 +274,7 @@
                 text-rendering: optimizeLegibility !important;
             }
             #resumePreview {
-                position: fixed !important;
-                left: 0 !important;
-                top: 0 !important;
+                position: static !important;
                 width: 100% !important;
                 max-width: 100% !important;
                 border: none !important;
