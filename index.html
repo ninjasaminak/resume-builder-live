@@ -1361,10 +1361,8 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     // which renders the real HTML/CSS and can't come out blank.
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     if (isIOS) {
-        const diagStart = performance.now();
         document.title = (fullNameInput.value || 'Resume') + ' - Resume';
         window.print();
-        alert('DIAGNOSTIC: window.print() returned after ' + Math.round(performance.now() - diagStart) + 'ms. If the print/share sheet only appears well after you dismiss THIS alert, the delay is happening inside iOS itself, not this page.');
         return;
     }
 
