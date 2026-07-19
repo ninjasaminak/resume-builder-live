@@ -1345,30 +1345,35 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     const resumePreview = document.getElementById('resumePreview');
     const fileName = (fullNameInput.value || 'Resume').trim().replace(/\s+/g, '_') + '_Resume.pdf';
 
-    // iOS Safari blocks window.open() once it's no longer inside the
-    // synchronous click handler, so open the tab now (while the tap still
-    // counts as a user gesture) and fill it in once the PDF is ready.
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    const pdfWindow = isIOS ? window.open('', '_blank') : null;
-
     html2pdf().set({
         margin: 0,
         filename: fileName,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    }).from(resumePreview).outputPdf('blob').then(blob => {
-        const blobUrl = URL.createObjectURL(blob);
-        if (isIOS && pdfWindow) {
-            pdfWindow.location.href = blobUrl;
-        } else {
-            const link = document.createElement('a');
-            link.href = blobUrl;
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+    }).from(resumePreview).outputPdf('blob').then(async blob => {
+        const file = new File([blob], fileName, { type: 'application/pdf' });
+
+        // On iOS, opening a blob PDF in a new tab reliably renders blank.
+        // Handing the file to the native share sheet (Save to Files) avoids
+        // that broken code path entirely.
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+                await navigator.share({ files: [file], title: fileName });
+                return;
+            } catch (err) {
+                if (err.name === 'AbortError') return; // user cancelled the share sheet
+            }
         }
+
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 30000);
     });
 });
 
