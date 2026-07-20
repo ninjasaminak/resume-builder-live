@@ -254,7 +254,7 @@
                entirely (not just visibility:hidden) so the printed
                document is only as tall as the resume itself, instead of
                the full page's height in blank/invisible pages. */
-            #landingPage, #authModal, .builder-header, .form-panel {
+            #landingPage, #authModal, .builder-header, .form-panel, #pdfPreparingOverlay {
                 display: none !important;
             }
             body, #builderPage, .builder-container, .preview-panel, #resumePreviewScaleWrapper {
@@ -1369,6 +1369,7 @@ document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     // from here, so show a waiting message instead of looking broken.
     // The system sheet steals window focus the moment it actually opens.
     const overlay = document.createElement('div');
+    overlay.id = 'pdfPreparingOverlay';
     overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;color:white;font-size:17px;text-align:center;padding:40px;';
     overlay.textContent = 'Preparing your PDF… this can take up to a minute on iPhone/iPad.';
     document.body.appendChild(overlay);
