@@ -1352,6 +1352,32 @@ document.getElementById('previewBtn').addEventListener('click', () => {
 
 document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     document.title = (fullNameInput.value || 'Resume') + ' - Resume';
+
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (!isIOS) {
+        window.print();
+        return;
+    }
+
+    // iOS's print sheet silently scans the network for AirPrint printers
+    // before it appears, which can take up to a minute with nothing on
+    // screen. That delay happens inside iOS itself and can't be sped up
+    // from here, so show a waiting message instead of looking broken.
+    // The system sheet steals window focus the moment it actually opens.
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;color:white;font-size:17px;text-align:center;padding:40px;';
+    overlay.textContent = 'Preparing your PDF… this can take up to a minute on iPhone/iPad.';
+    document.body.appendChild(overlay);
+
+    let removed = false;
+    const removeOverlay = () => {
+        if (removed) return;
+        removed = true;
+        overlay.remove();
+    };
+    window.addEventListener('blur', removeOverlay, { once: true });
+    setTimeout(removeOverlay, 90000);
+
     window.print();
 });
 
