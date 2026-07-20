@@ -241,10 +241,10 @@
             .builder-header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px 16px; }
             .builder-header-right { width: 100%; justify-content: space-between; }
             .builder-container { padding: 12px; gap: 12px; }
-            .preview-panel { padding: 16px; }
+            .preview-panel { padding: 16px; overflow-x: hidden; }
             .form-content { padding: 16px; }
-            .resume-preview { padding: 20px; }
-            .resume-name { font-size: 18px; }
+            #resumePreviewScaleWrapper { overflow: hidden; }
+            #resumePreview { width: 380px; transform-origin: top left; }
             .color-picker { grid-template-columns: repeat(4, 1fr); gap: 8px; }
             .action-buttons { grid-template-columns: 1fr; }
         }
@@ -257,13 +257,14 @@
             #landingPage, #authModal, .builder-header, .form-panel {
                 display: none !important;
             }
-            body, #builderPage, .builder-container, .preview-panel {
+            body, #builderPage, .builder-container, .preview-panel, #resumePreviewScaleWrapper {
                 display: block !important;
                 min-height: 0 !important;
                 height: auto !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 position: static !important;
+                overflow: visible !important;
             }
             #resumePreview, #resumePreview * {
                 visibility: visible;
@@ -276,6 +277,7 @@
                 position: static !important;
                 width: 100% !important;
                 max-width: 100% !important;
+                transform: none !important;
                 border: none !important;
                 box-shadow: none !important;
                 margin: 0 !important;
@@ -830,6 +832,7 @@
 
         <!-- Preview Panel -->
         <div class="preview-panel">
+            <div id="resumePreviewScaleWrapper">
             <div class="resume-preview template-modern" id="resumePreview">
                 <div class="builder-resume-header" id="resumeHeaderAccent">
                     <div class="resume-name" id="previewName">Your Name</div>
@@ -895,6 +898,7 @@
                         <div class="resume-item-subtitle" id="previewBoardOrgYear">Organization • Year</div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -1391,6 +1395,37 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 
 updatePreview();
 resumeHeaderAccent.style.borderColor = currentColor;
+
+// On mobile the preview panel is too narrow to show the resume at
+// readable proportions, so it's rendered at a fixed desktop-like width
+// and scaled down visually with transform (not the non-standard CSS
+// `zoom` property, which is unreliable on Safari). A ResizeObserver
+// recalculates the scale whenever the resume's natural height changes
+// (template swap, new content, etc).
+function applyPreviewScale() {
+    const wrapper = document.getElementById('resumePreviewScaleWrapper');
+    const resume = document.getElementById('resumePreview');
+    if (!wrapper || !resume) return;
+
+    if (window.innerWidth > 768) {
+        resume.style.transform = '';
+        wrapper.style.height = '';
+        return;
+    }
+
+    const naturalWidth = resume.offsetWidth;
+    const naturalHeight = resume.offsetHeight;
+    if (!naturalWidth || !naturalHeight) return;
+    const scale = wrapper.clientWidth / naturalWidth;
+    resume.style.transform = `scale(${scale})`;
+    wrapper.style.height = Math.ceil(naturalHeight * scale) + 'px';
+}
+
+if ('ResizeObserver' in window) {
+    new ResizeObserver(applyPreviewScale).observe(document.getElementById('resumePreview'));
+}
+window.addEventListener('resize', applyPreviewScale);
+applyPreviewScale();
 </script>
 
 </body>
