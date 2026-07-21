@@ -1,10 +1,10 @@
 const crypto = require('crypto');
 const Stripe = require('stripe');
 const admin = require('firebase-admin');
-const { Resend } = require('resend');
+const sgMail = require('@sendgrid/mail');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const resend = new Resend(process.env.RESEND_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 if (!admin.apps.length) {
   const serviceAccount = JSON.parse(
@@ -132,14 +132,14 @@ const handler = async (req, res) => {
       usedBy: 'unused',
     });
 
-    await resend.emails.send({
-      from: 'Atelier Resume <onboarding@resend.dev>',
+    await sgMail.send({
+      from: 'Atelier Resume <atelierresume.notify@gmail.com>',
       to: customerEmail,
       subject: 'Your Atelier Resume license code',
       html: `<p>Thanks for subscribing to the <strong>${tier}</strong> tier!</p>
              <p>Your license code is:</p>
              <p style="font-size:20px; font-weight:bold;">${code}</p>
-             <p>Enter this code when creating your account at resume-builder-live-sepia.vercel.app</p>`,
+             <p>Enter this code when creating your account at atelier-resume.vercel.app</p>`,
     });
 
     res.status(200).json({ received: true, code });
